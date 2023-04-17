@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "17551309484",
+    "project_id": "surfs-up-3437e",
+    "storage_bucket": "surfs-up-3437e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17551309484:android:3efb56aa3c3bbfb9fe3d09",
+        "android_client_info": {
+          "package_name": "com.project.surfs_up"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17551309484-11uaasmdi8ts7hjn0avfrb56jq5pfbk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.surfs_up",
+            "certificate_hash": "840b4aee20600dd1c2b19cc8e8ff9b189bd96c86"
+          }
+        },
+        {
+          "client_id": "17551309484-0ilcrs12imuirdj8umbo17dvr9dtqj0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRX_h0p2C04qdERC4IJRTj-cP3h8bP-X4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17551309484-0ilcrs12imuirdj8umbo17dvr9dtqj0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
