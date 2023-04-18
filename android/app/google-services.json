@@ -37,6 +37,13 @@
             {
               "client_id": "17551309484-0ilcrs12imuirdj8umbo17dvr9dtqj0f.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "17551309484-eqv25cb839nabmcrk9qkdh690e5a6r0b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.surfsUpApp"
+              }
             }
           ]
         }
