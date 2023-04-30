@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:surfs_up/services/authentication_service.dart';
-import 'package:surfs_up/shared/constants/constants.dart';
+import 'package:surfs_up/shared/constants/colors.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:surfs_up/shared/widgets/snack_bar_widget.dart';
+import 'package:surfs_up/shared/constants/text_input_decoration.dart';
 
 /// Class which displays the Sign in page, utilizing the [AuthenticationService] class.
 class SignInPage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:surfs_up/shared/constants/constants.dart';
+import 'package:surfs_up/shared/constants/colors.dart';
 
 /// Default snack-bar layout with a message parameter.
 SnackBar defaultSnackBar(String message) {
