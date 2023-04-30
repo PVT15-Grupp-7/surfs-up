@@ -101,7 +101,7 @@ class _SignUpPageState extends State<SignUpPage> {
               await _auth.registerWithEmailAndPassword(email, password);
           if (result == null) {
             setState(() => ScaffoldMessenger.of(context)
-                .showSnackBar(defaultSnackBar('Please supply a valid email')));
+                .showSnackBar(DefaultSnackBar(message: 'Please supply a valid email')));
           }
         }
       },

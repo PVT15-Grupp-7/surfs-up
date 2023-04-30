@@ -105,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
               await _auth.signInWithEmailAndPassword(email, password);
           if (result == null) {
             setState(() => ScaffoldMessenger.of(context)
-                .showSnackBar(defaultSnackBar('Invalid credentials')));
+                .showSnackBar(DefaultSnackBar(message: 'Invalid Credentials',)));
           }
         }
       },
