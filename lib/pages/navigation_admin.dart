@@ -43,6 +43,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: const Color(0xFF0C152D),
+          centerTitle: true,
           title: const Text('Surfs Up'),
           actions: [
             TextButton.icon(
