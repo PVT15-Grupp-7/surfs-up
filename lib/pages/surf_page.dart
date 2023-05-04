@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:surfs_up/shared/widgets/app_bar.dart';
 
 class SurfPage extends StatelessWidget {
   const SurfPage({super.key});
