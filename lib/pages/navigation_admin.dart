@@ -58,7 +58,6 @@ class _NavigationAdminState extends State<NavigationAdmin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0C152D),
         title: Text(_title),
       ),
       drawer: Drawer(

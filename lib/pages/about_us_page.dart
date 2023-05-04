@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
-import 'package:surfs_up/shared/widgets/app_bar_settings.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);
@@ -12,7 +11,7 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kSecondaryColor,
-      appBar: const AppBarSettings(title: 'Surf\'s Up'),
+      appBar: AppBar(title: const Text('About Us')),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(

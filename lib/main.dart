@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
         secondary: kSecondaryColor,
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: kDarkBlue,
+        centerTitle: true,
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: kPrimaryColor,
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      scaffoldBackgroundColor: kSecondaryColor,
     );
   }
 
