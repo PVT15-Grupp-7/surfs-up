@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/pages/about_us_page.dart';
 import 'package:surfs_up/pages/info_page.dart';
-import 'package:surfs_up/pages/menu_page.dart';
+import 'package:surfs_up/pages/preferences_page.dart';
 import 'package:surfs_up/pages/safety_page.dart';
-import 'package:surfs_up/pages/settings_page.dart';
 import 'package:surfs_up/pages/surf_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
 import 'package:surfs_up/services/authentication_service.dart';
@@ -69,12 +68,12 @@ class _NavigationAdminState extends State<NavigationAdmin> {
           children: [
             ListTile(
               leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
+              title: const Text('Preferences'),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SettingsPage(),
+                    builder: (context) => const PreferencesPage(),
                   ),
                 );
               },
@@ -104,6 +103,8 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               },
             ),
             ListTile(
+              iconColor: Colors.red,
+              textColor: Colors.red,
               leading: const Icon(Icons.logout),
               title: const Text('Sign out'),
               onTap: () async {
@@ -116,6 +117,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
       body: _selectedPage,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedTab,
+        showUnselectedLabels: true,
         onTap: (index) => _onItemTapped(index),
         selectedItemColor: kPrimaryColor,
         unselectedItemColor: Colors.white,
@@ -131,11 +133,11 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               label: "Weather",
               backgroundColor: kDarkBlue),
           BottomNavigationBarItem(
-              icon: Icon(Icons.warning_amber),
+              icon: Icon(Icons.heart_broken),
               label: "Safety",
               backgroundColor: kDarkBlue),
           BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline),
+              icon: Icon(Icons.info),
               label: "Info",
               backgroundColor: kDarkBlue),
         ],
