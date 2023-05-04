@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:surfs_up/shared/constants/colors.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 
-class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
+class AppBarSettings extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
-  const BaseAppBar({Key? key, required this.title}) : super(key: key);
+  const AppBarSettings({Key? key, required this.title}) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(130);
@@ -15,7 +15,7 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: kSecondaryColor,
       automaticallyImplyLeading: false,
-      flexibleSpace: Image.asset('assets/images/surfs_up_logo.png', scale: 2),
+      flexibleSpace: Image.asset('assets/images/surfs_up_logo.png', scale: 1.7),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(preferredSize.height),
         child: Stack(
