@@ -20,7 +20,8 @@ class _NavigationAdminState extends State<NavigationAdmin> {
 
   int _selectedTab = 0;
   Widget _selectedPage = const SurfPage();
-  String _title = "";
+  String _title = "Surf";
+  bool isSwitched = false;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -32,59 +33,72 @@ class _NavigationAdminState extends State<NavigationAdmin> {
         _selectedPage = const WeatherPage();
         _title = 'Weather';
       } else if (index == 2) {
-        _selectedPage = const InfoPage();
-        _title = 'Info';
-      } else if (index == 3) {
         _selectedPage = const SafetyPage();
         _title = 'Safety';
-      } else if (index == 4) {
-        _selectedPage = const SettingsPage();
-        _title = 'Settings';
-      } else if (index == 5) {
-        _selectedPage = const MenuPage();
-        _title = 'Menu';
+      } else if (index == 3) {
+        _selectedPage = const InfoPage();
+        _title = 'Info';
       }
     });
+  }
+
+  void toggleSwitch(bool value) {
+    if (isSwitched == false) {
+      setState(() {
+        isSwitched = true;
+      });
+    } else {
+      setState(() {
+        isSwitched = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: const Color(0xFF0C152D),
-          title: Text(_title),
-          actions: [
-            TextButton.icon(
-              onPressed: () async {
-                await _auth.signOut();
-              },
-              icon: const Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-              label: const Text(
-                'Logout',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ]),
+        backgroundColor: const Color(0xFF0C152D),
+        title: Text(_title),
+      ),
       drawer: Drawer(
-        width: 200,
-        backgroundColor: Color.fromARGB(255, 213, 215, 221).withOpacity(0.5),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        width: 250,
+        backgroundColor: kDarkBlue,
         child: ListView(
           children: [
-            const ListTile(
-              title: Text('Item 1'),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsPage(),
+                  ),
+                );
+              },
             ),
             ListTile(
-              title: const Text('Menu'),
-              selected: _selectedTab == 3,
-              onTap: () {
-                _onItemTapped(3);
-                Navigator.pop(context);
+              leading: const Icon(Icons.notifications),
+              title: const Text('Notifications'),
+              trailing: Switch(
+                value: isSwitched,
+                onChanged: toggleSwitch,
+                activeColor: kPrimaryColor,
+                activeTrackColor: kPrimaryColor,
+                inactiveThumbColor: Colors.red,
+                inactiveTrackColor: Colors.red,
+              ),
+            ),
+            const ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About us'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Sign out'),
+              onTap: () async {
+                await _auth.signOut();
               },
             )
           ],
@@ -114,10 +128,6 @@ class _NavigationAdminState extends State<NavigationAdmin> {
           BottomNavigationBarItem(
               icon: Icon(Icons.info_outline),
               label: "Info",
-              backgroundColor: kDarkBlue),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: "Settings",
               backgroundColor: kDarkBlue),
         ],
       ),
