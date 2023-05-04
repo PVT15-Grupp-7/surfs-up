@@ -26,6 +26,9 @@ class MyApp extends StatelessWidget {
   ThemeData themeData() {
     final ThemeData base = ThemeData.dark();
     return base.copyWith(
+      textTheme: ThemeData.dark().textTheme.apply(
+            fontFamily: 'Righteous',
+          ),
       colorScheme: const ColorScheme.dark().copyWith(
         primary: kPrimaryColor,
         secondary: kSecondaryColor,
@@ -59,7 +62,6 @@ class MyApp extends StatelessWidget {
     );
   }
  */
-  
 
   @override
   Widget build(BuildContext context) {
