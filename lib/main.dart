@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:surfs_up/pages/navigation_admin.dart';
 import 'package:surfs_up/pages/wrapper.dart';
 import 'package:surfs_up/services/authentication_service.dart';
 import 'data/app_user_data.dart';
@@ -52,16 +51,6 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
-/*
- @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const NavigationAdmin(),
-      theme: themeData(),
-    );
-  }
- */
 
   @override
   Widget build(BuildContext context) {
