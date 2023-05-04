@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/all_pages.dart';
+import 'package:surfs_up/pages/about_us_page.dart';
 import 'package:surfs_up/pages/info_page.dart';
 import 'package:surfs_up/pages/menu_page.dart';
 import 'package:surfs_up/pages/safety_page.dart';
@@ -90,9 +91,17 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                 inactiveTrackColor: Colors.red,
               ),
             ),
-            const ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About us'),
+            ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text('About us'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AboutUsPage(),
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: const Icon(Icons.logout),
