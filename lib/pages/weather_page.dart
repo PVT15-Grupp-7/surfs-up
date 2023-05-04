@@ -5,13 +5,9 @@ class WeatherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF132246),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF0C152D),
-        title: const Text('Weather Page'),
-      ),
-      body: const Center(
+    return const Scaffold(
+      backgroundColor: Color(0xFF132246),
+      body: Center(
         child: Text(
           'Weather Page',
           style: TextStyle(color: Colors.white),

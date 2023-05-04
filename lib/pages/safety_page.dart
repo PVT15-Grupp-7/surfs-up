@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class InfoPage extends StatelessWidget {
-  const InfoPage({super.key});
+class SafetyPage extends StatelessWidget {
+  const SafetyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class InfoPage extends StatelessWidget {
       backgroundColor: Color(0xFF132246),
       body: Center(
         child: Text(
-          'Info Page',
+          'Safety Page',
           style: TextStyle(color: Colors.white),
         ),
       ),

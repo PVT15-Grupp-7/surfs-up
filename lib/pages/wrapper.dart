@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/main.dart';
-import 'package:surfs_up/pages/authenticate/authenticate.dart';
+import 'package:surfs_up/pages/auth/authenticate.dart';
 import 'package:surfs_up/data/app_user_data.dart';
 import 'package:surfs_up/pages/navigation_admin.dart';
 

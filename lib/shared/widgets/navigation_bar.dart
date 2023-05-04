@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class BottomNavigationBarCustom extends StatefulWidget {
-  const BottomNavigationBarCustom({super.key});
+class NavigationBarCustom extends StatefulWidget {
+  const NavigationBarCustom({super.key});
 
   @override
-  State<BottomNavigationBarCustom> createState() => _BottomNavigationBarCustomState();
+  State<NavigationBarCustom> createState() => NavigationBarCustomState();
 }
 
-class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
+class NavigationBarCustomState extends State<NavigationBarCustom> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
