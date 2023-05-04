@@ -68,6 +68,10 @@ class AboutUsPage extends StatelessWidget {
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
+              Image(
+                image: AssetImage('assets/images/surfs_up_logo.png'),
+                height: 120,
+              ),
             ],
           ),
         ),
