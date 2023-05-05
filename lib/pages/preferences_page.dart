@@ -28,13 +28,11 @@ class _PreferencesPageState extends State<PreferencesPage> {
       setState(() {
         seconddropdownvalue = '10 m/s';
       });
-    }
-    if (firstdropdownvalue == '10 m/s') {
+    } else if (firstdropdownvalue == '10 m/s') {
       setState(() {
         seconddropdownvalue = '15 m/s';
       });
-    }
-    if (firstdropdownvalue == '15 m/s') {
+    } else if (firstdropdownvalue == '15 m/s') {
       setState(() {
         seconddropdownvalue = '> 15 m/s';
       });
