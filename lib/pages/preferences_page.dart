@@ -23,17 +23,41 @@ class _PreferencesPageState extends State<PreferencesPage> {
     '> 15 m/s',
   ];
 
+  void checkDropdownValues() {
+    if (firstdropdownvalue == '5 m/s') {
+      setState(() {
+        seconddropdownvalue = '10 m/s';
+      });
+    }
+    if (firstdropdownvalue == '10 m/s') {
+      setState(() {
+        seconddropdownvalue = '15 m/s';
+      });
+    }
+    if (firstdropdownvalue == '15 m/s') {
+      setState(() {
+        seconddropdownvalue = '> 15 m/s';
+      });
+    }
+  }
+
   Future<bool> _onBackPressed() {
     return showCupertinoDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(
                   backgroundColor: kDarkBlue,
                   elevation: 8,
-                  title: const Text('Do you want to save the changes?', style: CustomTextStyle.paragraph1,),
+                  title: const Text(
+                    'Do you want to save the changes?',
+                    style: CustomTextStyle.paragraph1,
+                  ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(true),
-                      child: const Text('No', style: TextStyle(color: Colors.red),),
+                      child: const Text(
+                        'No',
+                        style: TextStyle(color: Colors.red),
+                      ),
                     ),
                     TextButton(
                         onPressed: () => Navigator.of(context).pop(true),
@@ -113,6 +137,7 @@ class _PreferencesPageState extends State<PreferencesPage> {
                     onChanged: (String? newValue) {
                       setState(() {
                         firstdropdownvalue = newValue!;
+                        checkDropdownValues();
                       });
                     }),
                 const Text(
@@ -120,20 +145,21 @@ class _PreferencesPageState extends State<PreferencesPage> {
                   style: CustomTextStyle.paragraph1,
                 ),
                 DropdownButton(
-                    dropdownColor: kDarkBlue,
-                    value: seconddropdownvalue,
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: items.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        seconddropdownvalue = newValue!;
-                      });
-                    }),
+                  dropdownColor: kDarkBlue,
+                  value: seconddropdownvalue,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: items.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      seconddropdownvalue = newValue!;
+                    });
+                  },
+                ),
               ],
             ),
             const Padding(padding: EdgeInsets.all(10)),
