@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:surfs_up/data/location_data.dart';
 
 class InfoPage extends StatelessWidget {
-  const InfoPage({super.key});
+  final Location location;
+  const InfoPage({super.key, required this.location});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF132246),
+    return Scaffold(
+      backgroundColor: const Color(0xFF132246),
       body: Center(
         child: Text(
-          'Info Page',
-          style: TextStyle(color: Colors.white),
+          'adress${location.getadress()}',
         ),
       ),
     );
