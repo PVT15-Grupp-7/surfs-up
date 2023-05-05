@@ -21,21 +21,18 @@ class _NavigationAdminState extends State<NavigationAdmin> {
 
   int _selectedTab = 0;
   Widget _selectedPage = const SurfPage();
-  String _title = "Surf";
   bool isSwitched = false;
+  String firstdropdownvalue = 'Torö';
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedTab = index;
       if (index == 0) {
         _selectedPage = const SurfPage();
-        _title = 'Surf';
       } else if (index == 1) {
         _selectedPage = const WeatherPage();
-        _title = 'Weather';
       } else if (index == 2) {
         _selectedPage = const SafetyPage();
-        _title = 'Safety';
       } else if (index == 3) {
         _selectedPage = const InfoPage(location: ,);
         _title = 'Info';
@@ -55,11 +52,35 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     }
   }
 
+  var items = [
+    'Torö',
+    'Väddö',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_title),
+        title: Center(
+          child: Container(
+            margin: const EdgeInsets.only(right: 40),
+          child: DropdownButton(
+            borderRadius: BorderRadius.circular(20),
+                    dropdownColor: kDarkBlue,
+                    value: firstdropdownvalue,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    items: items.map((String items) {
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(items, style: const TextStyle(fontSize: 30),),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        firstdropdownvalue = newValue!;
+                      });
+                    }),),
+        ),
       ),
       drawer: Drawer(
         width: 250,
