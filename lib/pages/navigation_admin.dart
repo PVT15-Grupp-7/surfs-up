@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/all_pages.dart';
+import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/pages/about_us_page.dart';
 import 'package:surfs_up/pages/info_page.dart';
 import 'package:surfs_up/pages/preferences_page.dart';
@@ -36,7 +37,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
         _selectedPage = const SafetyPage();
         _title = 'Safety';
       } else if (index == 3) {
-        _selectedPage = const InfoPage();
+        _selectedPage = const InfoPage(location: ,);
         _title = 'Info';
       }
     });
