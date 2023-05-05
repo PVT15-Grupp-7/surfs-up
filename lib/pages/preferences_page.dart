@@ -27,14 +27,12 @@ class _PreferencesPageState extends State<PreferencesPage> {
     return showCupertinoDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(
-              
                   backgroundColor: kDarkBlue,
                   elevation: 8,
                   title: const Text('Do you want to save the changes?', style: CustomTextStyle.paragraph1,),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(true),
-                      //isDestructiveAction: true,
                       child: const Text('No', style: TextStyle(color: Colors.red),),
                     ),
                     TextButton(
