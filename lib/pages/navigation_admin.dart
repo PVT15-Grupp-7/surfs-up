@@ -22,6 +22,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
   Widget _selectedPage = const SurfPage();
   String _title = "Surf";
   bool isSwitched = false;
+  String firstdropdownvalue = 'Torö';
 
   void _onItemTapped(int index) {
     setState(() {
@@ -54,10 +55,17 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     }
   }
 
+  var items = [
+    'Torö',
+    'Väddö',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          DropdownButton(items: items, onChanged: onChanged)],
         title: Text(_title),
       ),
       drawer: Drawer(
