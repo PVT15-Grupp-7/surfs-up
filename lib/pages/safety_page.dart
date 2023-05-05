@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:surfs_up/pages/safety_page-emergency.dart';
+import 'package:surfs_up/pages/safety_page_defibrillator.dart';
 
 class SafetyPage extends StatefulWidget {
   const SafetyPage({Key? key}) : super(key: key);
@@ -8,75 +10,76 @@ class SafetyPage extends StatefulWidget {
 }
 
 class _SafetyPageState extends State<SafetyPage> {
-  // Variabel för att hålla koll på vilket menyval som är valt i DropdownButton
-  String _selectedItem = 'Torö';
-
-  // Lista med DropdownMenuItem-widgets som används i DropdownButton
-  List<DropdownMenuItem<String>> _dropdownMenuItems = [
-    DropdownMenuItem(child: Text('Torö'), value: 'Torö'), 
-    DropdownMenuItem(child: Text('Väddö'), value: 'Väddö'),
-  ]; 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Bakgrundsfärgen på skärmen
       backgroundColor: Color(0xFF132246),
       body: Column(
-        // MainAxisAlignment.start placerar innehållet längst upp på skärmen
+        // Placera innehållet längst upp på skärmen
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Padding-widget för att lägga till vertikalt mellanrum från toppen av skärmen
-          Padding(
-            padding: const EdgeInsets.only(top: 40.0),
-            child: DropdownButton<String>(
-              value: _selectedItem,
-              style: TextStyle(color: Colors.white, fontSize: 40),
-              items: _dropdownMenuItems,
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedItem = newValue!;
-                });
-              },
-            ),
-          ),
-          // Expanded-widget används för att placera knapparna i mitten av den återstående skärmytan
           Expanded(
             child: Center(
               child: Column(
+                // Centrera knapparna vertikalt
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Första knappen (Knapp 1)
+                  // Första knappen (Nödsituation)
                   ElevatedButton(
+                    // Navigera till SafetyPageEmergencyPage när knappen trycks
                     onPressed: () {
-                      // Lägg till funktionalitet här
-                    }, style: ElevatedButton.styleFrom(
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const SafetyPageEmergencyPage()),
+                      );
+                    },
+                    // Stilen på knappen
+                    style: ElevatedButton.styleFrom(
                       primary: Colors.red,
-                      fixedSize: Size(250, 75),
-                      textStyle: TextStyle(fontSize: 30),
+                      // Fast storlek på knappen
+                      fixedSize: const Size(250, 75),
+                      // Stilen på texten inuti knappen
+                      textStyle: const TextStyle(fontSize: 30),
+                      // Formen på knappen
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40),
-                      ), 
-                    
-
+                      ),
                     ),
-                    child: Text('Emergency', style: TextStyle(color: Colors.white),) 
+                    // Texten inuti knappen
+                    child: const Text(
+                      'Emergency',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  // Lägger till ett horisontellt mellanrum mellan knapparna
-                  SizedBox(height: 15),
-                  // Andra knappen (Knapp 2)
+                  // Lägg till ett horisontellt mellanrum mellan knapparna
+                  const SizedBox(height: 15),
+                  // Andra knappen (Defibrillator)
                   ElevatedButton(
+                    // Navigera till SafetyPageDefibrillatorPage när knappen trycks
                     onPressed: () {
-                      // Lägg till funktionalitet här
-                    }, style: ElevatedButton.styleFrom(
-                       fixedSize: Size(250, 75),
-                       textStyle: TextStyle(fontSize: 30),
-                        shape: RoundedRectangleBorder(
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const SafetyPageDefibrillatorPage()),
+                      );
+                    },
+                    // Stilen på knappen
+                    style: ElevatedButton.styleFrom(
+                      // Fast storlek på knappen
+                      fixedSize: Size(250, 75),
+                      // Stilen på texten inuti knappen
+                      textStyle: TextStyle(fontSize: 30),
+                      // Formen på knappen
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40),
-                      ), 
+                      ),
                     ),
-                    child: Text('Defibrillator'),
-                    
+                    // Texten inuti knappen
+                    child: const Text('Defibrillator'),
                   ),
                 ],
               ),
