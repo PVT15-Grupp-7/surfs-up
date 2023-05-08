@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InfoPage extends StatelessWidget {
   final Location location;
@@ -24,7 +25,15 @@ class InfoPage extends StatelessWidget {
                     style: CustomTextStyle.paragraph1,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      String url = location.locationURL;
+                  final uri = Uri.parse(url);
+                  if (await canLaunchUrl(uri)) {
+                    await launchUrl(uri, mode: LaunchMode.externalApplication);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                    },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size.zero,
                       padding: const EdgeInsets.all(10),

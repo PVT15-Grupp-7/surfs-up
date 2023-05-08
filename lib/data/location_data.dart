@@ -6,6 +6,7 @@ class Location {
   final String seabed;
   final String defibrillatorURL;
   final String defibrillatorImagePath;
+  final String locationURL;
 
   Location(
       {required this.name,
@@ -15,6 +16,7 @@ class Location {
       required this.seabed,
       required this.defibrillatorURL,
       required this.defibrillatorImagePath,
+      required this.locationURL
       });
 }
 
@@ -27,6 +29,7 @@ final List<Location> locations = [
     seabed: 'Stone',
     defibrillatorURL: 'https://www.hjartstartarregistret.se/#/30499/',
     defibrillatorImagePath: 'assets/images/defibrillatorn_torö.png',
+    locationURL: 'https://goo.gl/maps/6RkroyiFBwDdANpJ6',
   ),
   Location(
     name: 'Väddö',
@@ -36,5 +39,6 @@ final List<Location> locations = [
     seabed: 'Sand',
     defibrillatorURL: 'https://www.hjartstartarregistret.se/#/82423/',
     defibrillatorImagePath: 'assets/images/defibrillatorn_väddö.png',
+    locationURL: 'https://goo.gl/maps/1eqv2iQ2VoW7pZnH8',
   ),
 ];
