@@ -42,7 +42,7 @@ class InfoPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
-                    image: AssetImage(location.imagePath),
+                    image: AssetImage(location.infoImagePath),
                   ),
                 ],
               ),

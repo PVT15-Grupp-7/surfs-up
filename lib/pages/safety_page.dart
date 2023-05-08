@@ -10,8 +10,6 @@ class SafetyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Bakgrundsfärgen på skärmen
-      backgroundColor: Color(0xFF132246),
       body: Column(
         // Placera innehållet längst upp på skärmen
         mainAxisAlignment: MainAxisAlignment.start,
