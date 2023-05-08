@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:surfs_up/shared/constants/custom_text_style.dart';
 
 class SafetyPageEmergencyPage extends StatelessWidget {
   const SafetyPageEmergencyPage({super.key});
@@ -11,49 +12,48 @@ class SafetyPageEmergencyPage extends StatelessWidget {
         title: const Text('Emergency'),
       ),
       body: Center(
-        child: Column(
-         
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-          Padding (padding: EdgeInsets.all(30.0)),
-
-            Text(
-              'Om en person är medvetslös ska du göra enligt följande:',
-              style: TextStyle(color: Colors.white, fontSize: 30),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 40),
-            Text(
-              '1. Kontrollera livstecken',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(height: 10),
-            Text(
-              '2. Kontrollera andningen',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(height: 10),
-            Text(
-              '3. Ring 112 (om personen inte är meveten och eller inte andas.)',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(height: 10),
-            Text(
-              '4. Om personen andas, placera denne i stabilt sidoläge. Om personen INTE andas, påbörja HLR omgående.',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(height: 15),
-            Text(
-              'Länk till ytterligare information om medvetslöshet och HLR: Link',
-              style: TextStyle(color: Colors.white, fontSize: 20),
-              textAlign: TextAlign.center,
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(15.0, 100.0, 15.0, 0.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Text(
+                'Om en person är medvetslös ska du göra enligt följande:',
+                style: CustomTextStyle.title2,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 40),
+              Text(
+                '1. Kontrollera livstecken',
+                style: CustomTextStyle.paragraph1,
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: 10),
+              Text(
+                '2. Kontrollera andningen',
+                style: CustomTextStyle.paragraph1,
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: 10),
+              Text(
+                '3. Ring 112 (om personen inte är meveten och eller inte andas.)',
+                style: CustomTextStyle.paragraph1,
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: 10),
+              Text(
+                '4. Om personen andas, placera denne i stabilt sidoläge. Om personen INTE andas, påbörja HLR omgående.',
+                style: CustomTextStyle.paragraph1,
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: 15),
+              Text(
+                'Länk till ytterligare information om medvetslöshet och HLR: Link',
+                style: CustomTextStyle.paragraph1,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );
