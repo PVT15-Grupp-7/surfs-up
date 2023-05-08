@@ -22,7 +22,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
   int _selectedTab = 0;
   Widget _selectedPage = const SurfPage();
   bool isSwitched = false;
-  String firstdropdownvalue = 'Torö';
+  Location _selectedLocation = locations[0];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -32,10 +32,9 @@ class _NavigationAdminState extends State<NavigationAdmin> {
       } else if (index == 1) {
         _selectedPage = const WeatherPage();
       } else if (index == 2) {
-        _selectedPage = const SafetyPage();
+        _selectedPage = SafetyPage(location: _selectedLocation,);
       } else if (index == 3) {
-        _selectedPage = const InfoPage(location: ,);
-        _title = 'Info';
+        _selectedPage = InfoPage(location: _selectedLocation);
       }
     });
   }
@@ -52,11 +51,6 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     }
   }
 
-  var items = [
-    'Torö',
-    'Väddö',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,22 +58,27 @@ class _NavigationAdminState extends State<NavigationAdmin> {
         title: Center(
           child: Container(
             margin: const EdgeInsets.only(right: 40),
-          child: DropdownButton(
-            borderRadius: BorderRadius.circular(20),
-                    dropdownColor: kDarkBlue,
-                    value: firstdropdownvalue,
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: items.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items, style: const TextStyle(fontSize: 30),),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        firstdropdownvalue = newValue!;
-                      });
-                    }),),
+            child: DropdownButton(
+                borderRadius: BorderRadius.circular(20),
+                dropdownColor: kDarkBlue,
+                value: _selectedLocation,
+                icon: const Icon(Icons.keyboard_arrow_down),
+                items: locations.map((location) {
+                  return DropdownMenuItem(
+                    value: location,
+                    child: Text(
+                      location.name,
+                      style: const TextStyle(fontSize: 30),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  setState(() {
+                    _selectedLocation = newValue as Location;
+                    _onItemTapped(_selectedTab);
+                  });
+                }),
+          ),
         ),
       ),
       drawer: Drawer(

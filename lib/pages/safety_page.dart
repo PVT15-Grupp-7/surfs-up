@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/pages/safety_page-emergency.dart';
 import 'package:surfs_up/pages/safety_page_defibrillator.dart';
 
-class SafetyPage extends StatefulWidget {
-  const SafetyPage({Key? key}) : super(key: key);
+class SafetyPage extends StatelessWidget {
+  final Location location;
+  const SafetyPage({Key? key, required this.location}) : super(key: key);
 
-  @override
-  _SafetyPageState createState() => _SafetyPageState();
-}
-
-class _SafetyPageState extends State<SafetyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +61,7 @@ class _SafetyPageState extends State<SafetyPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const SafetyPageDefibrillatorPage()),
+                                SafetyPageDefibrillatorPage(location: location,)),
                       );
                     },
                     // Stilen på knappen
