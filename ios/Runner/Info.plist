@@ -27,6 +27,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Google Sign-in Provider</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.17551309484-u1mi503bn8ug167p27srvieabb1e5uso</string>
