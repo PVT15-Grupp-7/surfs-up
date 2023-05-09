@@ -30,7 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: any
 
+  url_launcher: 6.0.9
+
+  http: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -41,10 +45,13 @@ dependencies:
   provider: ^6.0.5
   flutter_signin_button: ^2.0.0
   url_launcher: ^6.0.12
+  flutter_native_splash: ^2.2.19
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -63,6 +70,12 @@ flutter_launcher_icons:
   image_path_android: "assets/icons/surfs_up_icon_android.png"
   image_path_ios: "assets/icons/surfs_up_icon_ois.png"
   min_sdk_android: 21
+
+flutter_native_splash:
+  image: assets/images/surfs_up_logo_loadingscreen.png
+  color: "#132246"
+  android: true
+  ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
