@@ -120,7 +120,11 @@ class _SignInPageState extends State<SignInPage> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 10,
       onPressed: () async {
-        //TODO implement google sign in.
+        dynamic result = await _auth.signInWithGoogle();
+        // if (result == null) {
+        //   setState(() => ScaffoldMessenger.of(context)
+        //       .showSnackBar(DefaultSnackBar(message: 'Could not sign in with google',)));
+        // }
       },
     );
   }

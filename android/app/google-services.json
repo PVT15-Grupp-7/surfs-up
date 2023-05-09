@@ -22,7 +22,15 @@
           }
         },
         {
-          "client_id": "17551309484-0ilcrs12imuirdj8umbo17dvr9dtqj0f.apps.googleusercontent.com",
+          "client_id": "17551309484-6q3339b2s42c6mc68els0f0q2jse4hde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.surfs_up",
+            "certificate_hash": "b35343f4aa953a88af36e43a54d6c0022ad4d377"
+          }
+        },
+        {
+          "client_id": "17551309484-f6je7cr13ccff1iiodp8nf609rf2f3jl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

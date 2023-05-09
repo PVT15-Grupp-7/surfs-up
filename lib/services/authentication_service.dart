@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:surfs_up/data/app_user_data.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 /// Authentication Service class that handles all Firebase authentication related tasks.
 /// The different methods to sign in and sign out will transform a Firebase User into
@@ -49,6 +50,21 @@ class AuthenticationService {
       }
       return null;
     }
+  }
+
+  Future signInWithGoogle() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn(
+      scopes: <String>['email']).signIn();
+
+    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    final UserCredential result = await _auth.signInWithCredential(credential);
+    return _userFromFirebaseUser(result.user);
   }
 
   /// Method to register with email and password through FirebaseAuth.createUserWithEmailAndPassword().
