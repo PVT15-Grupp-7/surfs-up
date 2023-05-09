@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:surfs_up/data/app_user_data.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:surfs_up/firebase/firebase_options.dart';
 
 /// Authentication Service class that handles all Firebase authentication related tasks.
 /// The different methods to sign in and sign out will transform a Firebase User into
@@ -54,9 +55,11 @@ class AuthenticationService {
 
   Future signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn(
-      scopes: <String>['email']).signIn();
+        clientId: DefaultFirebaseOptions.currentPlatform.iosClientId,
+        scopes: <String>['email']).signIn();
 
-    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
 
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
