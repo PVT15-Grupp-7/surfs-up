@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/shared/widgets/weather_box.dart';
+import 'package:surfs_up/shared/widgets/expansion_panel.dart';
+import 'package:surfs_up/shared/widgets/row_widget.dart';
 
 class WeatherPage extends StatelessWidget {
   const WeatherPage({super.key});
@@ -17,12 +20,10 @@ class WeatherPage extends StatelessWidget {
               'Weather Page',
               style: TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 20),
-            WeatherBox(),
-            SizedBox(height: 20),
-            WeatherBox(),
-            SizedBox(height: 20),
-            WeatherBox(),
+            SizedBox(
+              height: 659,
+              child: MyHomePage(),
+            ),
           ],
         ),
       ),
