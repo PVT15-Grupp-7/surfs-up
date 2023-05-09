@@ -76,6 +76,10 @@ flutter_native_splash:
   color: "#132246"
   android: true
   ios: true
+  ios_content_mode: scaleAspectFit
+  android_12:
+    image: assets/images/loadingscreen.png
+    color: "#132246"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
