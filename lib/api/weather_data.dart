@@ -24,7 +24,7 @@ WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, thi
     this.surfConditions = surfConditions;
   }
   int getSurfConditions(){
-    return surfConditions!;
+    return surfConditions;
   }
 
   void setTemperature(dynamic temperature){
