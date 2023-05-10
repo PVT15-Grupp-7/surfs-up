@@ -9,7 +9,7 @@ class SurfPage extends StatelessWidget {
       backgroundColor: Color(0xFF132246),
       body: Center(
         child: Text(
-          'Surf Page',
+          'Surf Page Placeholder',
           style: TextStyle(color: Colors.white),
         ),
       ),
