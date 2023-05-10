@@ -1,33 +1,38 @@
-import 'package:surfs_up/api/WeatherData.dart';
-import 'CallAPIs.dart';
+import 'package:surfs_up/api/weather_data.dart';
+import 'get_api_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void callAPIs() async {
   print('------------------------Calling in Middleware----------------------- ');
 
-  List<List<WeatherData>> wether = [];
+  //List<List<WeatherData>> weather = [];
 
    // List<Day> toröData
   List<WeatherData> toroData = await getData(57.80, 18.80);
+  print("TORÖDATA EFTER GETDATA 1!! ${toroData.length}");
   List<WeatherData> vaddoData = await getData(59.98, 18.88);
+  print("TORÖDATA EFTER GETDATA 2!! ${toroData.length}");
 
-  wether.add(toroData);
-  wether.add(vaddoData);
+  //weather.add(toroData);
+  //weather.add(vaddoData);
 
-  print('_______________Print from middleware_______________');
+  //print('_______________Print from middleware_______________');
 
-  print('calling apis');
+  //print('calling apis');
 
-  print(toroData.length);
-  print(vaddoData.length);
+  //print(toroData.length);
+  //print(vaddoData.length);
 
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  print('kom jag hit ens?');
+  //print('kom jag hit ens?');
+  prefs.remove('toroData');
   final encodedData = WeatherData.encode(toroData);
+  final encodedVeddoData = WeatherData.encode(vaddoData);
   await prefs.setString('toroData', encodedData);
+  await prefs.setString('vaddoData', encodedVeddoData);
 
-  await prefs.setString('testar12345', 'hacker filip');
+  //await prefs.setString('testar12345', 'hacker filip');
 
   print('------------------------Encoded------------------------ ');
 

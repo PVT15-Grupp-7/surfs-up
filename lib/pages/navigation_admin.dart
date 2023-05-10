@@ -20,7 +20,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
   final AuthenticationService _auth = AuthenticationService();
 
   int _selectedTab = 0;
-  Widget _selectedPage = const SurfPage();
+  Widget _selectedPage = SurfPage(location: locations[0]);
   bool isSwitched = false;
   Location _selectedLocation = locations[0];
 
@@ -28,7 +28,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     setState(() {
       _selectedTab = index;
       if (index == 0) {
-        _selectedPage = const SurfPage();
+        _selectedPage = SurfPage(location: _selectedLocation,);
       } else if (index == 1) {
         _selectedPage = const WeatherPage();
       } else if (index == 2) {

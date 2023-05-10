@@ -1,14 +1,11 @@
 import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'WeatherData.dart';
+import 'weather_data.dart';
 import 'package:http/http.dart' as https;
 
-const int _sizeOfWeatherData = 2;
-List<WeatherData> yrweatherData = [];
+const int _sizeOfWeatherData = 48;
 
 Future<List<WeatherData>> getYR(double lat, double lon) async {
+  List<WeatherData> yrweatherData = [];
 
   print('------------------print from yr call------------------');
 
@@ -25,24 +22,24 @@ Future<List<WeatherData>> getYR(double lat, double lon) async {
 
     final st = await response.stream.bytesToString();
     final jsonRes = jsonDecode(st);
-    getValues(jsonRes);
+    yrweatherData = getValues(jsonRes);
   }
   else {
     print(response.reasonPhrase);
   }
 
   print('------------------yr call done------------------');
-  print(yrweatherData);
 
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  print('kom jag hit ens?');
-  final encodedData = WeatherData.encode(yrweatherData);
-  await prefs.setString('vaddoData', encodedData);
+  //final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //print('kom jag hit ens?');
+  //final encodedData = WeatherData.encode(yrweatherData);
+  //await prefs.setString('vaddoData', encodedData);
 
   return yrweatherData;
 }
 
-void getValues(var jsonRes) {
+List<WeatherData> getValues(var jsonRes) {
+  List<WeatherData> yrweatherData = [];
 
   var properties = jsonRes['properties'];
   var timeseries = properties['timeseries'];
@@ -60,4 +57,5 @@ void getValues(var jsonRes) {
 
     yrweatherData.add(weatherData);
   }
+  return yrweatherData;
 }

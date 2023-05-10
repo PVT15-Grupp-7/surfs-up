@@ -3,14 +3,15 @@ import 'dart:convert';
 class WeatherData{
 
   String date;
-  double temperature, windSpeed, gust;
-  dynamic windDirection;
+  dynamic windDirection, temperature, windSpeed, gust;
   //symbol to display the weather icon and surf conditions 0-3 or 5 dependig how we want it
   int weatherSymbol;
   int surfConditions = 0;
   bool surf = false;
 
-WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, this.gust, this.weatherSymbol, this.surfConditions);
+WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, this.gust, this.weatherSymbol, this.surfConditions){
+  this.gust = gust.round();
+}
 
   void setWeatherSymbol(int weatherSymbol){
     this.weatherSymbol = weatherSymbol;
@@ -26,10 +27,10 @@ WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, thi
     return surfConditions!;
   }
 
-  void setTemperature(double temperature){
+  void setTemperature(dynamic temperature){
     this.temperature = temperature;
   }
-  void setWindSpeed(double windSpeed){
+  void setWindSpeed(dynamic windSpeed){
     this.windSpeed = windSpeed;
   }
   void setWindDirection(dynamic wd){

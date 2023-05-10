@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Location {
   final String name;
   final String address;
@@ -7,6 +9,7 @@ class Location {
   final String defibrillatorURL;
   final String defibrillatorImagePath;
   final String locationURL;
+  final String sharedPreferences;
 
   Location(
       {required this.name,
@@ -16,7 +19,8 @@ class Location {
       required this.seabed,
       required this.defibrillatorURL,
       required this.defibrillatorImagePath,
-      required this.locationURL
+      required this.locationURL,
+      required this.sharedPreferences
       });
 }
 
@@ -30,6 +34,7 @@ final List<Location> locations = [
     defibrillatorURL: 'https://www.hjartstartarregistret.se/#/30499/',
     defibrillatorImagePath: 'assets/images/defibrillatorn_torö.png',
     locationURL: 'https://goo.gl/maps/6RkroyiFBwDdANpJ6',
+    sharedPreferences: 'toroData'
   ),
   Location(
     name: 'Väddö',
@@ -40,5 +45,6 @@ final List<Location> locations = [
     defibrillatorURL: 'https://www.hjartstartarregistret.se/#/82423/',
     defibrillatorImagePath: 'assets/images/defibrillatorn_väddö.png',
     locationURL: 'https://goo.gl/maps/1eqv2iQ2VoW7pZnH8',
+    sharedPreferences: 'vaddoData'
   ),
 ];
