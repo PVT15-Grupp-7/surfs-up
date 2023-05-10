@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/shared/widgets/app_bar.dart';
 import 'package:surfs_up/shared/constants/dynamic_content.dart';
+//import 'package:surfs_up/shared/widgets/surf_expansion_panel.dart';
 import 'package:surfs_up/shared/widgets/weather_box.dart';
+import 'package:surfs_up/shared/widgets/test_expansion.dart';
+
+
 
 //import 'package:surfs_up/shared/widgets/weather_box.dart';
 
-List<String> list = <String>[
-  'Torö',
-  'Väddö',
-];
+
+
+
 
 class SurfPage extends StatelessWidget {
   const SurfPage({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +25,15 @@ class SurfPage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            SizedBox(height: 50),
-            Text(
-              'Weather Page',
+          children: [
+            const SizedBox(height: 50),
+            const Text(
+              'Surf Page',
               style: TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 20),
-            WeatherBox(),
-            SizedBox(height: 20),
-            WeatherBox(),
-            SizedBox(height: 20),
-            WeatherBox(),
+            Expanded(
+              child: MyApp(),
+            ),
           ],
         ),
       ),

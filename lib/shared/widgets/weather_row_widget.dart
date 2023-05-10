@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class RowWidget extends StatelessWidget {
-  const RowWidget({Key? key}) : super(key: key);
+class WeatherRowWidget extends StatelessWidget {
+  const WeatherRowWidget({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -10,24 +10,24 @@ class RowWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.air_outlined),
-            Text('5 m/s'),
+            Icon(Icons.wb_sunny_outlined),
+            Text('8'),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.arrow_right_alt_outlined),
-            Text('E'),
+            Icon(Icons.umbrella),
+            Text('0,0mm'),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.waves_outlined),
-            Text('OK'),
+            Icon(Icons.sunny_snowing),
+            Text('04:56'),
           ],
         ),
       ],
