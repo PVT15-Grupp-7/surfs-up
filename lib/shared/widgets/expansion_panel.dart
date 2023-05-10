@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -107,178 +107,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
-                  children: [
+                  children: const [
                     ListTile(
-                      leading: Text('${DateTime.now().hour}:00'),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.wb_sunny_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('5 m/s'),
-                                Icon(Icons.air_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('E'),
-                                Icon(Icons.arrow_right_alt_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('OK'),
-                                Icon(Icons.waves_outlined),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      title: RowWidget(),
                     ),
                     ListTile(
-                      leading: Text('${DateTime.now().hour}:00'),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.wb_sunny_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('5 m/s'),
-                                Icon(Icons.air_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('E'),
-                                Icon(Icons.arrow_right_alt_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('OK'),
-                                Icon(Icons.waves_outlined),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      title: RowWidget(),
                     ),
                     ListTile(
-                      leading: Text('${DateTime.now().hour}:00'),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.wb_sunny_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('5 m/s'),
-                                Icon(Icons.air_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('E'),
-                                Icon(Icons.arrow_right_alt_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('OK'),
-                                Icon(Icons.waves_outlined),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      title: RowWidget(),
                     ),
                     ListTile(
-                      leading: Text('${DateTime.now().hour}:00'),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(Icons.wb_sunny_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('5 m/s'),
-                                Icon(Icons.air_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('E'),
-                                Icon(Icons.arrow_right_alt_outlined),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text('OK'),
-                                Icon(Icons.waves_outlined),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      title: RowWidget(),
+                    ),
+                    ListTile(
+                      title: RowWidget(),
                     ),
                   ],
                 ),

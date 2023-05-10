@@ -5,7 +5,7 @@ import 'package:surfs_up/shared/widgets/expansion_panel.dart';
 import 'package:surfs_up/shared/widgets/row_widget.dart';
 
 class WeatherPage extends StatelessWidget {
-  const WeatherPage({super.key});
+  const WeatherPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,7 @@ class WeatherPage extends StatelessWidget {
               'Weather Page',
               style: TextStyle(color: Colors.white),
             ),
-            SizedBox(
-              height: 659,
+            Expanded(
               child: MyHomePage(),
             ),
           ],
