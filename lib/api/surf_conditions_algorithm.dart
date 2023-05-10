@@ -1,4 +1,4 @@
-import 'package:surfs_up/api/WeatherData.dart';
+import 'package:surfs_up/api/weather_data.dart';
 
 int surfCount = 0;
 bool lastHourSurf = false;
