@@ -1,6 +1,6 @@
-import 'Middleware.dart';
+import 'middleware.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:surfs_up/api/WeatherData.dart';
+import 'package:surfs_up/api/weather_data.dart';
 
 void main() async{
   print('hej');

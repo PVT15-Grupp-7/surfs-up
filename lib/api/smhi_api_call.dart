@@ -1,14 +1,16 @@
 import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:surfs_up/api/WeatherData.dart';
+import 'package:surfs_up/api/weather_data.dart';
 import 'package:http/http.dart' as http;
 
-const int _sizeOfWeatherData = 10;
+// Variable that decides how many hours of weather data we want to get
+const int _sizeOfWeatherData = 48;
 
-List<WeatherData> listOfweather = [];
+// List that will contain all the weather data
 
 Future<List<WeatherData>> getSMHI(double lat, double lon) async{
+
+  List<WeatherData> listOfWeatherData = [];
+  print(listOfWeatherData.length);
 
 
   //creating the request
@@ -26,21 +28,19 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async{
 
     for(int i = 0; i < _sizeOfWeatherData; i++){
 
-      print(timeSeriveArr[0]);
-      print(timeSeriveArr.length);
+      //print(timeSeriveArr[0]);
+      //print(timeSeriveArr.length);
       double temp = 0, windSpeed = 0, gust = 0;
       dynamic windDirection;
       int weatherSymbol = 0;
 
       String dateTime = timeSeriveArr[i]['validTime'] as String;
-      print(dateTime);
+      //print(dateTime);
       //only 3 days of data
       // if (dateTime.day - DateTime.now().day > 3) {
       //   break;
       // }
       var parameters = timeSeriveArr[i]['parameters'];
-      print(parameters);
-      print(parameters.length);
       for (int j = 0; j < parameters.length; j++){
 
         var parameter = parameters[j];
@@ -58,25 +58,15 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async{
       }
 
       WeatherData weatherData = WeatherData(dateTime, temp, windSpeed, windDirection, gust, weatherSymbol, 0);
-      listOfweather.add(weatherData);
-
+      listOfWeatherData.add(weatherData);
+      print(i);
     }
 
   } else {
     print(response.reasonPhrase);
   }
 
-  print(listOfweather);
-
-
-  //the data is saved in the shared preferences in correct format
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  print('kom jag hit ens?');
-  final encodedData = WeatherData.encode(listOfweather);
-  await prefs.setString('toroData', encodedData);
-
-
-  return listOfweather;
+  return listOfWeatherData;
 }
 
 dynamic getValue(var parm) {

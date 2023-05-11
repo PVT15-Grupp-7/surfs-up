@@ -9,7 +9,7 @@ class WeatherPage extends StatelessWidget {
       backgroundColor: Color(0xFF132246),
       body: Center(
         child: Text(
-          'Weather Page',
+          'Weather Page Placeholder',
           style: TextStyle(color: Colors.white),
         ),
       ),
