@@ -25,27 +25,7 @@ class SurfPage extends StatelessWidget {
             ),
           ],
         ),
-    final String weatherData = AppPref.preferences.getString(location.sharedPreferences)!;
-    List<WeatherData> weatherList = WeatherData.decode(weatherData);
-    
-
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(weatherList.length.toString()),
-            const SizedBox(height: 50.0,),
-            for(int i = 0; i < weatherList.length; i++)
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  weatherList[i].toString(),
-                  style: CustomTextStyle.paragraph1,
-                ),
-              ),
-        ],
       ),
-      ),
-    );
+      );
   }
 }
