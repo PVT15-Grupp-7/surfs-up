@@ -18,10 +18,10 @@ class SurfPage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            SizedBox(height: 12),
+          children:  [
+            const SizedBox(height: 12),
             Expanded(
-              child: MyApp(),
+              child: SurfExpansionPage(location: location,),
             ),
           ],
         ),

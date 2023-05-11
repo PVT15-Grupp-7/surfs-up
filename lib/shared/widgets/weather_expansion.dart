@@ -5,32 +5,13 @@ import 'package:surfs_up/shared/constants/dynamic_content.dart';
 import 'package:surfs_up/shared/widgets/row_widget.dart';
 import 'package:surfs_up/shared/widgets/weather_row_widget.dart';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // Remove the debug banner
-        color: Colors.white,
-        theme: ThemeData(
-          textTheme: const TextTheme(
-              bodyMedium:
-                  TextStyle(color: Colors.white, fontFamily: 'Righteous')),
-        ),
-        home: const WeatherExpansionPage());
-  }
-}
 
 class WeatherExpansionPage extends StatefulWidget {
   const WeatherExpansionPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _WeatherExpansionPageState createState() => _WeatherExpansionPageState();
 }
 

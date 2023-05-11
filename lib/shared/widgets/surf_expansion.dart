@@ -1,36 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:surfs_up/all_pages.dart';
+import 'package:surfs_up/api/app_preferences.dart';
+import 'package:surfs_up/api/weather_data.dart';
+import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/shared/constants/dynamic_content.dart';
 import 'package:surfs_up/shared/widgets/row_widget.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class SurfExpansionPage extends StatefulWidget {
+  final Location location;
+  const SurfExpansionPage({Key? key, required this.location}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        // Remove the debug banner
-        color: Colors.white,
-        theme: ThemeData(
-          textTheme: const TextTheme(
-              bodyMedium:
-                  TextStyle(color: Colors.white, fontFamily: 'Righteous')),
-        ),
-        home: const HomePage());
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
+  // ignore: library_private_types_in_public_api
+  _SurfExpansionPageState createState() => _SurfExpansionPageState();
 }
 
 class Hour {
@@ -61,34 +44,30 @@ class HourItem {
   IconData surfIcon;
 }
 
-class _HomePageState extends State<HomePage> {
-  final List<Hour> hours = generateItems();
+class _SurfExpansionPageState extends State<SurfExpansionPage> {
+  List<Hour> hours = [];
   final List<Map<String, dynamic>> _items = [];
 
-  static List<Hour> generateItems() {
+  static List<Hour> generateItems(Location location) {
+    final List<Hour> hours = [];
     final now = DateTime.now();
-    return [
-      Hour(
-        hourItems: generateHourItems(),
-      ),
-      Hour(
-        hourItems: generateHourItems(),
-      ),
-      Hour(
-        hourItems: generateHourItems(),
-      ),
-      Hour(
-        hourItems: generateHourItems(),
-      ),
-      Hour(
-        hourItems: generateHourItems(),
-      ),
-    ];
+    final remainingHours = 24 - now.hour;
+    final currentDayItems = generateHourItems(location, remainingHours, startHour: now.hour);
+    hours.add(Hour(hourItems: currentDayItems));
+    
+
+    for (var i = 1; i <= 4; i++) {
+    final upcomingDate = now.add(Duration(days: i));
+    final upcomingDayItems = generateHourItems(location, 24, startHour: 0);
+    hours.add(Hour(hourItems: upcomingDayItems));
+  }
+  return hours;
   }
 
   @override
   void initState() {
     super.initState();
+    hours = generateItems(widget.location);
     final today = DateTime.now();
     _items.add({
       "date": today,
@@ -101,18 +80,19 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  static List<HourItem> generateHourItems() {
+  static List<HourItem> generateHourItems(Location location, int count, {int startHour = 0}) {
+    final String weatherString = AppPref.preferences.getString(location.sharedPreferences)!;
+    List<WeatherData> weatherData = WeatherData.decode(weatherString);
     final List<HourItem> hourItems = [];
-    final now = DateTime.now();
-    for (int i = 0; i < 5; i++) {
-      final hour = now.add(Duration(hours: i)).hour;
+    for (int i = 0; i < count; i++) {
+      final hour = (startHour + i) % 24;
       hourItems.add(
         HourItem(
           hour: hour,
           icon: Icons.wb_sunny_outlined,
-          windSpeed: '5 m/s',
+          windSpeed: weatherData[i + now.hour].windSpeed.toString(),
           windIcon: Icons.air_outlined,
-          windDirection: 'E',
+          windDirection: weatherData[i + now.hour].windDirection.toString(),
           surfStatus: 'OK',
           surfIcon: Icons.waves_outlined,
         ),
@@ -124,6 +104,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
+    
     return Scaffold(
         backgroundColor: kSecondaryColor,
         body: ListView.builder(
