@@ -6,6 +6,8 @@ import 'package:surfs_up/services/authentication_service.dart';
 import 'data/app_user_data.dart';
 import 'firebase/firebase_options.dart';
 import 'all_pages.dart';
+import 'api/MiddleWare.dart';
+import 'api/app_preferences.dart';
 
 /// Main entry point of the application.
 void main() async {
@@ -13,6 +15,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  AppPref.init();
+  callAPIs();
   runApp(const MyApp());
 }
 
@@ -33,7 +37,8 @@ class MyApp extends StatelessWidget {
         secondary: kSecondaryColor,
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: kDarkBlue,
+        centerTitle: true,
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: kPrimaryColor,
@@ -49,6 +54,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      scaffoldBackgroundColor: kSecondaryColor,
     );
   }
 

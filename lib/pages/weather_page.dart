@@ -17,6 +17,9 @@ class WeatherPage extends StatelessWidget {
               child: WeatherExpansionPage(),
             ),
           ],
+        child: Text(
+          'Weather Page Placeholder',
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );

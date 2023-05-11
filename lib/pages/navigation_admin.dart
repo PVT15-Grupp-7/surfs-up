@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/all_pages.dart';
+import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/pages/about_us_page.dart';
 import 'package:surfs_up/pages/info_page.dart';
 import 'package:surfs_up/pages/preferences_page.dart';
@@ -7,6 +8,7 @@ import 'package:surfs_up/pages/safety_page.dart';
 import 'package:surfs_up/pages/surf_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
 import 'package:surfs_up/services/authentication_service.dart';
+import 'package:surfs_up/pages/for_bigginers.dart';
 
 class NavigationAdmin extends StatefulWidget {
   const NavigationAdmin({Key? key}) : super(key: key);
@@ -19,25 +21,21 @@ class _NavigationAdminState extends State<NavigationAdmin> {
   final AuthenticationService _auth = AuthenticationService();
 
   int _selectedTab = 0;
-  Widget _selectedPage = const SurfPage();
-  String _title = "Surf";
+  Widget _selectedPage = SurfPage(location: locations[0]);
   bool isSwitched = false;
+  Location _selectedLocation = locations[0];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedTab = index;
       if (index == 0) {
-        _selectedPage = const SurfPage();
-        _title = 'Surf';
+        _selectedPage = SurfPage(location: _selectedLocation,);
       } else if (index == 1) {
         _selectedPage = const WeatherPage();
-        _title = 'Weather';
       } else if (index == 2) {
-        _selectedPage = const SafetyPage();
-        _title = 'Safety';
+        _selectedPage = SafetyPage(location: _selectedLocation,);
       } else if (index == 3) {
-        _selectedPage = const InfoPage();
-        _title = 'Info';
+        _selectedPage = InfoPage(location: _selectedLocation);
       }
     });
   }
@@ -58,8 +56,31 @@ class _NavigationAdminState extends State<NavigationAdmin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0C152D),
-        title: Text(_title),
+        title: Center(
+          child: Container(
+            margin: const EdgeInsets.only(right: 40),
+            child: DropdownButton(
+                borderRadius: BorderRadius.circular(20),
+                dropdownColor: kDarkBlue,
+                value: _selectedLocation,
+                icon: const Icon(Icons.keyboard_arrow_down),
+                items: locations.map((location) {
+                  return DropdownMenuItem(
+                    value: location,
+                    child: Text(
+                      location.name,
+                      style: const TextStyle(fontSize: 30),
+                    ),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  setState(() {
+                    _selectedLocation = newValue as Location;
+                    _onItemTapped(_selectedTab);
+                  });
+                }),
+          ),
+        ),
       ),
       drawer: Drawer(
         width: 250,
@@ -101,6 +122,17 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                   ),
                 );
               },
+            ),ListTile(
+              leading: const Icon(Icons.key),
+              title: const Text('For bigginers'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ForBeginnersPage(),
+                  ),
+                );
+              },
             ),
             ListTile(
               iconColor: Colors.red,
@@ -111,6 +143,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                 await _auth.signOut();
               },
             )
+            
           ],
         ),
       ),

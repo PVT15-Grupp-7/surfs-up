@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
-import 'package:surfs_up/shared/widgets/app_bar_settings.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);
@@ -12,7 +11,7 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kSecondaryColor,
-      appBar: const AppBarSettings(title: 'Surf\'s Up'),
+      appBar: AppBar(title: const Text('About Us')),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
@@ -20,7 +19,7 @@ class AboutUsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: const [
               Text(
-                'Our Team',
+                'Our Team 👨‍💻',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
@@ -31,7 +30,7 @@ class AboutUsPage extends StatelessWidget {
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'Our Data',
+                'API Data Usage ⛅',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
@@ -42,19 +41,19 @@ class AboutUsPage extends StatelessWidget {
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'History',
+                'Development History 🏛️',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
               Text(
-                'This application was created in april 2023 by nine students '
-                'in the PVT15 course at Stockholm University',
+                'This application was created in the period March-April 2023 by nine students '
+                'in the PVT15 course at the Computer- and System science  Stockholm University',
                 style: CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'Privacy',
+                'Privacy 🔒',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
@@ -68,6 +67,10 @@ class AboutUsPage extends StatelessWidget {
                 'Contact us\nsurfs-up@gmail.com',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
+              ),
+              Image(
+                image: AssetImage('assets/images/surfs_up_logo.png'),
+                height: 120,
               ),
             ],
           ),
