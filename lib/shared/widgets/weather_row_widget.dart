@@ -10,24 +10,24 @@ class WeatherRowWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.wb_sunny_outlined),
-            Text('8'),
+            Icon(Icons.wb_sunny_outlined, size: 30),
+            Text('8', style: TextStyle(fontSize: 18)),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.umbrella),
-            Text('0,0mm'),
+            Icon(Icons.umbrella, size: 30),
+            Text('0,0mm', style: TextStyle(fontSize: 18)),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.sunny_snowing),
-            Text('04:56'),
+            Icon(Icons.sunny_snowing, size: 30),
+            Text('04:56', style: TextStyle(fontSize: 18)),
           ],
         ),
       ],

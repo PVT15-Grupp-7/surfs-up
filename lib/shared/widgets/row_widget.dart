@@ -10,24 +10,36 @@ class RowWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.air_outlined),
-            Text('5 m/s'),
+            Icon(Icons.air_outlined, size: 30),
+            Text(
+              '5 m/s',
+              style: TextStyle(fontSize: 18),
+            ),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.arrow_right_alt_outlined),
-            Text('E'),
+            Icon(
+              Icons.arrow_right_alt_outlined,
+              size: 30,
+            ),
+            Text(
+              'E',
+              style: TextStyle(fontSize: 18),
+            ),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.waves_outlined),
-            Text('OK'),
+            Icon(Icons.waves_outlined, size: 30),
+            Text(
+              'OK',
+              style: TextStyle(fontSize: 18),
+            ),
           ],
         ),
       ],
