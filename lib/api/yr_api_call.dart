@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'weather_data.dart';
 import 'package:http/http.dart' as https;
 
-const int _sizeOfWeatherData = 48;
+const int _sizeOfWeatherData = 70;
 
 Future<List<WeatherData>> getYR(double lat, double lon) async {
   List<WeatherData> yrweatherData = [];

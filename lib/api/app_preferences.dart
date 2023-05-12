@@ -9,4 +9,8 @@ class AppPref {
     _init = true;
     return preferences;
   }
+
+  static getString(String key) {
+    return preferences.getString(key);
+  }
 }

@@ -30,4 +30,10 @@ class CustomTextStyle {
     fontWeight: FontWeight.normal,
     color: Colors.white,
   );
+
+  static const TextStyle tileTextStyle = TextStyle(
+    fontSize: 18.0,
+    fontWeight: FontWeight.normal,
+    color: Colors.white,
+  );
 }
