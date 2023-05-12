@@ -59,11 +59,12 @@ class SurfPage extends StatelessWidget {
                         children: [
                           ExpandedItem(
                             itemIcon: Icons.air_outlined,
-                            itemText: '${hourItem.windSpeed}m/s (${hourItem.gust})',
+                            itemText:
+                                '${hourItem.windSpeed}m/s (${hourItem.gust})',
                           ),
                           ExpandedItem(
-                            itemIcon: Icons.arrow_right_alt_outlined,
-                            itemText: hourItem.windDirection.toString(),
+                            itemIcon: hourItem.windIcon,
+                            itemText: hourItem.windDirectionSymbol,
                           ),
                           const ExpandedItem(
                             itemIcon: Icons.waves_outlined,

@@ -9,6 +9,7 @@ class RowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mostFrequentSymbol = getMostFrequentWindDirectionSymbol(dayData);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -22,9 +23,9 @@ class RowWidget extends StatelessWidget {
         const Padding(padding: EdgeInsets.all(10)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.arrow_right_alt_outlined, size: 30),
-            Text('E', style: CustomTextStyle.tileTextStyle),
+          children: [
+            Icon(dayData[0].windIcon, size: 30),
+            Text(mostFrequentSymbol, style: CustomTextStyle.tileTextStyle),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
@@ -45,5 +46,29 @@ class RowWidget extends StatelessWidget {
       sum += item.windSpeed;
     }
     return (sum / dayData.length).round().toString();
+  }
+
+  String getMostFrequentWindDirectionSymbol(List<WeatherData> dayData) {
+    // Create a map to count the occurrences of each wind direction symbol
+    final symbolCounts = <String, int>{};
+
+    // Count the occurrences of each wind direction symbol
+    for (var data in dayData) {
+      final symbol = data.windDirectionSymbol;
+      symbolCounts[symbol] = (symbolCounts[symbol] ?? 0) + 1;
+    }
+
+    // Find the wind direction symbol with the maximum count
+    String mostFrequentSymbol = '';
+    int maxCount = 0;
+
+    symbolCounts.forEach((symbol, count) {
+      if (count > maxCount) {
+        mostFrequentSymbol = symbol;
+        maxCount = count;
+      }
+    });
+
+    return mostFrequentSymbol;
   }
 }
