@@ -6,12 +6,12 @@ void main() {
   test('Test getMostFrequentWeatherIcon', () {
     // Sample data
     final List<WeatherData> dayData = [
-      WeatherData('2023-05-12', 25, 10, 180, 15, 1, 0),
-      WeatherData('2023-05-12', 24, 10, 180, 15, 1, 0),
-      WeatherData('2023-05-12', 23, 10, 180, 15, 2, 0),
-      WeatherData('2023-05-12', 22, 10, 180, 15, 2, 0),
-      WeatherData('2023-05-12', 21, 10, 180, 15, 2, 0),
-      WeatherData('2023-05-12', 20, 10, 180, 15, 3, 0),
+      WeatherData('2023-05-12', 25, 10, 180, 15, 1, 0, 0),
+      WeatherData('2023-05-12', 24, 10, 180, 15, 1, 0, 0),
+      WeatherData('2023-05-12', 23, 10, 180, 15, 2, 0, 0),
+      WeatherData('2023-05-12', 22, 10, 180, 15, 2, 0, 0),
+      WeatherData('2023-05-12', 21, 10, 180, 15, 2, 0, 0),
+      WeatherData('2023-05-12', 20, 10, 180, 15, 3, 0, 0),
     ];
 
     // Expected result

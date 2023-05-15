@@ -1,46 +1,151 @@
 import 'package:surfs_up/api/weather_data.dart';
 
-int surfCount = 0;
-bool lastHourSurf = false;
-final int MINIMUM_WIND_SPEED = 7;
-final int MAX_SOUTHWIND = 180;
-final int MAX_WESTWIND = 240;
+const int minWindToro = 7;
+const int optimalWindToro = 210;
 
+const int minWindVaddo = 13;
+const int optimalWindVaddo = 0;
 
-void cheackSurfConditions(List<WeatherData> weatherData) {
-  //wind 180g till 240
-  // speed > 7
-  // gust >10
-  // atleast 3 hours of this conditions for surf
+List<WeatherData> weatherData = [];
 
-for (int i = 0; i < weatherData.length; i++) {
- WeatherData hourData = weatherData[i];
+void cheackSurfConditions(List<WeatherData> weatherData, String spot) {
+  int minWind = 0;
 
- if(i - 3 < 0){
-   deeperSurfCheack(hourData);
-   print('Not enough data to check surf conditions');
- }else {
-    WeatherData hourData1 = weatherData[i - 1];
-    WeatherData hourData2 = weatherData[i - 2];
-    WeatherData hourData3 = weatherData[i - 3];
+  int optimalWind = 0;
 
-    deeperSurfCheack(hourData);
-
-    if (hourData1.surf && hourData2.surf && hourData3.surf) {
-      hourData.setSurfConditions(1);
-    } else {
-      hourData.setSurfConditions(0);
-    }
- }
-
-
-}
-}
-
-void deeperSurfCheack(WeatherData data) {
-  //cecka wind, gust and direcktion
-  if (data.windSpeed > MINIMUM_WIND_SPEED &&  MAX_WESTWIND > data.windDirection && data.windDirection > MAX_SOUTHWIND ){
-    data.setSurf(true);
+  if (spot == 'toro'){
+    minWind = minWindToro;
+    optimalWind = optimalWindToro;
+  }else if (spot == 'vaddo'){
+    minWind = minWindVaddo;
+    optimalWind = optimalWindVaddo;
   }
 
+print('$minWind  .....    $optimalWind');
+
+  weatherData = weatherData;
+  for (int i = 0; i < weatherData.length; i++) {
+    WeatherData hourData = weatherData[i];
+    deeperSurfCheack(hourData, minWind, optimalWind);
+
+    if (i == 0 || i == 1 || i == 2) {
+      //firstHourSurfCheack(hourData, i);
+      WeatherData firstHour;
+      WeatherData secondHour;
+      switch (i) {
+        case 0:
+          hourData.setSurfConditions(hourData.surf);
+          break;
+        case 1: //if the first hour is surfable
+          firstHour = weatherData[i - 1];
+          if (firstHour.surfConditions > 0) {
+            hourData.setSurfConditions(hourData.surf);
+          } else {
+            hourData.setSurfConditions(0);
+          }
+          break;
+        case 2:
+          firstHour = weatherData[i - 2];
+          secondHour = weatherData[i - 1];
+          if (firstHour.surfConditions > 0 && secondHour.surfConditions > 0) {
+            hourData.setSurfConditions(hourData.surf);
+          } else {
+            hourData.setSurfConditions(0);
+          }
+      }
+
+    } else {
+      //checkSurfeblehour(hourData, i);
+      int oneHourBack = weatherData[i - 1].surfConditions;
+      int twoHoursBack = weatherData[i - 2].surfConditions;
+      int threeHoursBack = weatherData[i - 3].surfConditions;
+
+      int currentHour = hourData.surf;
+
+      if (oneHourBack > 2 && twoHoursBack > 2 && threeHoursBack > 2 && currentHour < 1) {
+        hourData.setSurfConditions(3);
+      }else if( oneHourBack + twoHoursBack + threeHoursBack > 5) {
+        hourData.setSurfConditions(2);
+      } else if (oneHourBack + twoHoursBack + threeHoursBack > 3 && oneHourBack > 0 && twoHoursBack> 0 && currentHour > 0) {
+        hourData.setSurfConditions(1);
+      } else if (currentHour > 0 && oneHourBack > 0){
+        hourData.setSurfConditions(1);
+      } else {
+        hourData.setSurfConditions(0);
+      }
+    }
+  }
 }
+
+void deeperSurfCheack(WeatherData data, int minWind, int optimalWind) {
+  dynamic diffrens;
+  if (minWind == 13 && data.windDirection > 180){
+    diffrens = (optimalWind+360) - data.windDirection;
+  } else {
+    diffrens = optimalWind - data.windDirection;
+  }
+  print(diffrens);
+  //cecka wind, gust and direcktion
+  if (diffrens <= 35) {
+    dynamic windSpeed = data.windSpeed;
+    if (windSpeed < minWind+3 && windSpeed > minWind && data.gust > 10) {
+      data.setSurf(1);
+    } else if (windSpeed >= minWind+3 && windSpeed < minWind+6) {
+      data.setSurf(2);
+    } else if (windSpeed >= minWind+6) {
+      data.setSurf(3);
+    } else {
+      data.setSurf(0);
+    }
+  } else {
+    data.setSurf(0);
+  }
+}
+
+// void checkSurfeblehour(WeatherData data, int i) {
+//   int oneHourBack = weatherData[i - 1].surfConditions;
+//   int twoHoursBack = weatherData[i - 2].surfConditions;
+//   int threeHoursBack = weatherData[i - 3].surfConditions;
+//
+//   int currentHour = data.surf;
+//
+//   if (oneHourBack > 2 && twoHoursBack > 2 && threeHoursBack > 2 && currentHour < 1) {
+//     data.setSurfConditions(3);
+//   }else if( oneHourBack + twoHoursBack + threeHoursBack > 5) {
+//     data.setSurfConditions(2);
+//   } else if (oneHourBack + twoHoursBack + threeHoursBack > 3 && oneHourBack > 0 && twoHoursBack> 0 && currentHour > 0) {
+//     data.setSurfConditions(1);
+//   } else if (currentHour > 0 && oneHourBack > 0){
+//     data.setSurfConditions(1);
+//   } else {
+//     data.setSurfConditions(0);
+//   }
+// }
+
+// void firstHourSurfCheack(WeatherData data, int i) {
+//   WeatherData firstHour;
+//   WeatherData secondHour;
+//   switch (i) {
+//     case 0:
+//       data.setSurfConditions(data.surf);
+//       break;
+//     case 1: //if the first hour is surfable
+//       firstHour = weatherData[i - 1];
+//       if (firstHour.surfConditions > 0) {
+//         data.setSurfConditions(data.surf);
+//       } else {
+//         data.setSurfConditions(0);
+//       }
+//       break;
+//       case 2:
+//         firstHour = weatherData[i - 2];
+//         secondHour = weatherData[i - 1];
+//         if (firstHour.surfConditions > 0 && secondHour.surfConditions > 0) {
+//
+//         } else {
+//           data.setSurfConditions(data.surf);
+//         }
+//   }
+// }
+
+

@@ -12,10 +12,12 @@ class WeatherData {
   IconData windIcon = Icons.arrow_right_alt_outlined;
   String windDirectionSymbol = "";
   int surfConditions = 0;
-  bool surf = false;
+  int surf = 0;
+  double precipitation;
+
 
   WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection,
-      this.gust, this.weatherSymbol, this.surfConditions) {
+      this.gust, this.weatherSymbol, this.surfConditions,this.precipitation) {
     gust = gust.round();
     setWeatherIcon(weatherSymbol);
     setWindSymbol(windDirection);
@@ -50,7 +52,7 @@ class WeatherData {
     windDirection = wd;
   }
 
-  void setSurf(bool surf) {
+  void setSurf(int surf) {
     this.surf = surf;
   }
 
@@ -181,6 +183,7 @@ class WeatherData {
       json['gust'],
       json['weatherSymbol'],
       json['surfConditions'],
+      json['precipitation'],
     );
   }
 
@@ -213,14 +216,15 @@ class WeatherData {
   }
 
   static Map<String, dynamic> toMap(WeatherData weatherData) => {
-        'date': weatherData.date,
-        'temperature': weatherData.temperature,
-        'windSpeed': weatherData.windSpeed,
-        'windDirection': weatherData.windDirection,
-        'gust': weatherData.gust,
-        'weatherSymbol': weatherData.weatherSymbol,
-        'surfConditions': weatherData.surfConditions,
-      };
+    'date': weatherData.date,
+    'temperature': weatherData.temperature,
+    'windSpeed': weatherData.windSpeed,
+    'windDirection': weatherData.windDirection,
+    'gust': weatherData.gust,
+    'weatherSymbol': weatherData.weatherSymbol,
+    'surfConditions': weatherData.surfConditions,
+    'precipitation': weatherData.precipitation,
+  };
 
   static String encode(List<WeatherData> weatherData) => json.encode(
         weatherData
@@ -231,6 +235,6 @@ class WeatherData {
 
   @override
   String toString() {
-    return 'WeatherData date: $date , temperature: $temperature, windSpeed: $windSpeed, windDirection: $windDirection, gust: $gust, weatherSymbol: $weatherSymbol, surfConditions: $surfConditions';
+    return 'WeatherData date: $date , temperature: $temperature, windSpeed: $windSpeed, windDirection: $windDirection, gust: $gust, weatherSymbol: $weatherSymbol, surfConditions: $surfConditions, precipitation: $precipitation';
   }
 }
