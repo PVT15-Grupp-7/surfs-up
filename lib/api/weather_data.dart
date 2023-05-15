@@ -52,7 +52,7 @@ class WeatherData {
     windDirection = wd;
   }
 
-  void setSurf(bool surf) {
+  void setSurf(int surf) {
     this.surf = surf;
   }
 
