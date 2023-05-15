@@ -59,7 +59,6 @@ class _NavigationAdminState extends State<NavigationAdmin> {
             TextButton(
               child: const Text('Yes'),
               onPressed: () async {
-                await _auth.signOut();
                 Navigator.of(context).pop(); // Stänger dialogrutan
 
                 // Visa notifiering
@@ -70,6 +69,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                     duration:  Duration(seconds: 2),
                   ),
                 );
+                await _auth.signOut();
               },
             ),
           ],
@@ -117,6 +117,8 @@ class _NavigationAdminState extends State<NavigationAdmin> {
           child: Container(
             margin: const EdgeInsets.only(right: 40),
             child: DropdownButton(
+                alignment: Alignment.center,
+                underline: const SizedBox.shrink(),
                 borderRadius: BorderRadius.circular(20),
                 dropdownColor: kDarkBlue,
                 value: _selectedLocation,
@@ -183,7 +185,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
             ),
             ListTile(
               leading: const Icon(Icons.help),
-              title: const Text('For Begginers'),
+              title: const Text('For Beginners'),
               onTap: () {
                 Navigator.push(
                   context,

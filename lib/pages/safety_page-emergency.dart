@@ -93,8 +93,8 @@ class SafetyPageEmergencyPage extends StatelessWidget {
                 Navigator.of(context).pop(); // Stänger dialogrutan
 
                 final uri = Uri.parse(url);
-                if (await canLaunch(uri.toString())) {
-                  await launch(uri.toString(), forceSafariVC: false);
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
                 } else {
                   throw 'Could not launch $uri';
                 }

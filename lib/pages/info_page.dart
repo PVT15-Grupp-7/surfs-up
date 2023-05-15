@@ -22,7 +22,7 @@ class InfoPage extends StatelessWidget {
                 children: [
                   Text(
                     'Address:\n${location.address}',
-                    style: CustomTextStyle.paragraph1,
+                    style: CustomTextStyle.title3,
                   ),
                   ElevatedButton(
                     onPressed: () async {
@@ -38,9 +38,10 @@ class InfoPage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               Text(
-                'Seabed and Depth: \n\n${location.seabed}',
-                style: CustomTextStyle.paragraph1,
+                'Seabed and Depth: \n${location.seabed}',
+                style: CustomTextStyle.title3,
               ),
+              const SizedBox(height: 20),
               Center(
                 child: Image(
                   image: AssetImage(location.infoImagePath),
@@ -56,7 +57,7 @@ class InfoPage extends StatelessWidget {
                 },
                 child: RichText(
                   text: TextSpan(
-                    text: 'Link to website',
+                    text: 'Link to ${location.name} website',
                     style: CustomTextStyle.paragraph2.copyWith(
                       color: Colors.blue,
                       decoration: TextDecoration.underline,
@@ -68,7 +69,7 @@ class InfoPage extends StatelessWidget {
               const SizedBox(height: 30),
               const Text(
                 'General Information:',
-                style: CustomTextStyle.title2,
+                style: CustomTextStyle.title3,
               ),
               Text(
                 location.description,

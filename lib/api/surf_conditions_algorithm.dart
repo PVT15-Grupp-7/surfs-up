@@ -8,7 +8,7 @@ const int optimalWindVaddo = 0;
 
 List<WeatherData> weatherData = [];
 
-void cheackSurfConditions(List<WeatherData> weatherData, String spot) {
+void checkSurfConditions(List<WeatherData> weatherData, String spot) {
   int minWind = 0;
 
   int optimalWind = 0;
@@ -21,12 +21,12 @@ void cheackSurfConditions(List<WeatherData> weatherData, String spot) {
     optimalWind = optimalWindVaddo;
   }
 
-  print('$minWind  .....    $optimalWind');
+  print('MinWind - OptimalWind: $minWind  .....    $optimalWind');
 
   weatherData = weatherData;
   for (int i = 0; i < weatherData.length; i++) {
     WeatherData hourData = weatherData[i];
-    deeperSurfCheack(hourData, minWind, optimalWind);
+    deeperSurfCheck(hourData, minWind, optimalWind);
 
     if (i == 0 || i == 1 || i == 2) {
       //firstHourSurfCheack(hourData, i);
@@ -82,18 +82,20 @@ void cheackSurfConditions(List<WeatherData> weatherData, String spot) {
   }
 }
 
-void deeperSurfCheack(WeatherData data, int minWind, int optimalWind) {
-  dynamic diffrens = 0;
+void deeperSurfCheck(WeatherData data, int minWind, int optimalWind) {
+  dynamic difference = 0;
   if (minWind == 13 && data.windDirection > 180) {
-    diffrens = (optimalWind + 360) - data.windDirection;
+    difference = (optimalWind + 360) - data.windDirection;
   } else {
-    diffrens = optimalWind - data.windDirection;
+    difference = optimalWind - data.windDirection;
   }
 
-  print(data.windDirection);
-  print(diffrens);
+  ///prints for testing.
+  // print(data.windDirection);
+  // print(difference);
+
   //cecka wind, gust and direcktion
-  if (diffrens <= 45 && diffrens >= -45) {
+  if (difference <= 45 && difference >= -45) {
     dynamic windSpeed = data.windSpeed;
     if (windSpeed < minWind + 3 && windSpeed > minWind && data.gust > 10) {
       data.setSurf(1);
