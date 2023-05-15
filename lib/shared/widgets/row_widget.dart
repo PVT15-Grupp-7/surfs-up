@@ -17,7 +17,8 @@ class RowWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.air_outlined, size: 30),
-            Text(averageSpeed(), style: CustomTextStyle.tileTextStyle),
+            Text('${averageSpeed()}(${avarageGust()})',
+                style: CustomTextStyle.tileTextStyle),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
@@ -45,6 +46,15 @@ class RowWidget extends StatelessWidget {
     for (var item in dayData) {
       sum += item.windSpeed;
     }
+    return (sum / dayData.length).round().toString();
+  }
+
+  String avarageGust() {
+    double sum = 0;
+    for (var item in dayData) {
+      sum += item.gust;
+    }
+
     return (sum / dayData.length).round().toString();
   }
 
