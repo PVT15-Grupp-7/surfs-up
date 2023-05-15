@@ -23,7 +23,6 @@ class WeatherRowWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(getMostFrequentWeatherIcon(dayData)),
             const SizedBox(width: 4),
@@ -32,7 +31,6 @@ class WeatherRowWidget extends StatelessWidget {
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.umbrella, size: 30),
             Text('${averagePrecipitation()}mm',
@@ -41,7 +39,6 @@ class WeatherRowWidget extends StatelessWidget {
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Icon(CupertinoIcons.sunrise_fill, size: 30),
             SizedBox(height: 4),

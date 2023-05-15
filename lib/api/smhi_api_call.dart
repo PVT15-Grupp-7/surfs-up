@@ -9,7 +9,7 @@ const int _sizeOfWeatherData = 70;
 
 Future<List<WeatherData>> getSMHI(double lat, double lon) async {
   List<WeatherData> listOfWeatherData = [];
-  print(listOfWeatherData.length);
+  // print(listOfWeatherData.length);
 
   //creating the request
   var request = http.Request(
@@ -22,22 +22,19 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
   if (response.statusCode == 200) {
     final st = await response.stream.bytesToString();
     final jsonRes = jsonDecode(st);
-    var timeSeriveArr = jsonRes['timeSeries'];
+    var timeSeriesArr = jsonRes['timeSeries'];
 
     for (int i = 0; i < _sizeOfWeatherData; i++) {
-      //print(timeSeriveArr[0]);
-      //print(timeSeriveArr.length);
       double temp = 0, windSpeed = 0, gust = 0, precipitation = 0;
       dynamic windDirection;
       int weatherSymbol = 0;
 
-      String dateTime = timeSeriveArr[i]['validTime'] as String;
-      //print(dateTime);
+      String dateTime = timeSeriesArr[i]['validTime'] as String;
       //only 3 days of data
       // if (dateTime.day - DateTime.now().day > 3) {
       //   break;
       // }
-      var parameters = timeSeriveArr[i]['parameters'];
+      var parameters = timeSeriesArr[i]['parameters'];
       for (int j = 0; j < parameters.length; j++) {
         var parameter = parameters[j];
         if (parameter['name'] == 't') {
@@ -59,7 +56,6 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
       WeatherData weatherData = WeatherData(dateTime, temp, windSpeed, windDirection, gust, weatherSymbol, 0, precipitation);
 
       listOfWeatherData.add(weatherData);
-      print(i);
     }
   } else {
     print(response.reasonPhrase);

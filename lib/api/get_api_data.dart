@@ -10,9 +10,7 @@ Future<List<WeatherData>> getData(double lat, double lon) async{
   print('------------------print from smhi call------------------');
 
   List<WeatherData> smhiData = await getSMHI(lat, lon);
-  print ('smhiData length: ${smhiData.length}');
   List<WeatherData> yrData = await getYR(lat, lon);
-  print ('yrData length: ${yrData.length}');
 
   for(int i = 0; i <70; i++){
 

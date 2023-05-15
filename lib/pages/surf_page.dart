@@ -7,7 +7,7 @@ import 'package:surfs_up/pages/safety_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
-import 'package:surfs_up/shared/widgets/row_widget.dart';
+import 'package:surfs_up/shared/widgets/surf_row_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 class SurfPage extends StatelessWidget {
@@ -86,8 +86,7 @@ class SurfPage extends StatelessWidget {
                             ),
                             ExpandedItem(
                               itemIcon: hourItem.windIcon,
-                              itemText: hourItem.windDirectionSymbol +
-                                  hourItem.windDirection.toString(),
+                              itemText: hourItem.windDirectionSymbol,
                             ),
                             hourItem.surfIcon,
                           ],
