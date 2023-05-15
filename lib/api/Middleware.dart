@@ -4,12 +4,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'surf_conditions_algorithm.dart';
 
 void callAPIs() async {
-  print('------------------------Calling in Middleware----------------------- ');
+  print(
+      '------------------------Calling in Middleware----------------------- ');
 
   //List<List<WeatherData>> weather = [];
 
-   // List<Day> toröData
-  List<WeatherData> toroData = await getData(57.80, 18.80);
+  // List<Day> toröData
+  List<WeatherData> toroData = await getData(58.80, 17.80);
   print("TORÖDATA EFTER GETDATA 1!! ${toroData.length}");
   List<WeatherData> vaddoData = await getData(59.98, 18.88);
   print("TORÖDATA EFTER GETDATA 2!! ${toroData.length}");
@@ -27,9 +28,6 @@ void callAPIs() async {
   cheackSurfConditions(vaddoData, 'vaddo');
   cheackSurfConditions(toroData, 'toro');
 
-
-
-
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   //print('kom jag hit ens?');
   prefs.remove('toroData');
@@ -41,5 +39,4 @@ void callAPIs() async {
   //await prefs.setString('testar12345', 'hacker filip');
 
   print('------------------------Encoded------------------------ ');
-
 }

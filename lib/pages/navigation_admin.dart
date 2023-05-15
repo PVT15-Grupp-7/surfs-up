@@ -49,7 +49,10 @@ class _NavigationAdminState extends State<NavigationAdmin> {
       if (index == 0) {
         _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
       } else if (index == 1) {
-        _selectedPage = WeatherPage(listOfDayWeatherData: _weatherData,);
+        _selectedPage = WeatherPage(
+          listOfDayWeatherData: _weatherData,
+          location: _selectedLocation,
+        );
       } else if (index == 2) {
         _selectedPage = SafetyPage(
           location: _selectedLocation,

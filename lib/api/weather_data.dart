@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class WeatherData {
   String date;
-  dynamic windDirection, temperature, windSpeed, gust, precipitation;
+  dynamic windDirection, temperature, windSpeed, gust;
 
   //symbol to display the weather icon and surf conditions 0-3 or 5 depending how we want it
   int weatherSymbol;
@@ -14,15 +14,15 @@ class WeatherData {
   int surfConditions = 0;
   int surf = 0;
   double precipitation;
-
+  Row surfIcon = Row();
 
   WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection,
       this.gust, this.weatherSymbol, this.surfConditions, this.precipitation) {
-
     gust = gust.round();
     setWeatherIcon(weatherSymbol);
     setWindSymbol(windDirection);
     setWindSymbolOne(windDirection);
+    setSurfIcon(surfConditions);
   }
 
   void setWeatherSymbol(int weatherSymbol) {
@@ -57,8 +57,65 @@ class WeatherData {
     this.surf = surf;
   }
 
-  void setPrecipitation(dynamic precipitation) {
+  void setPrecipitation(double precipitation) {
     this.precipitation = precipitation;
+  }
+
+  void setSurfIcon(int surfConditions) {
+    switch (surfConditions) {
+      case 0:
+        surfIcon = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              CupertinoIcons.star,
+            ),
+            SizedBox(width: 4),
+            Icon(CupertinoIcons.star),
+            SizedBox(width: 4),
+            Icon(CupertinoIcons.star),
+          ],
+        );
+        break;
+      case 1:
+        surfIcon = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(CupertinoIcons.star_fill),
+            SizedBox(width: 4),
+            Icon(CupertinoIcons.star),
+            SizedBox(width: 4),
+            Icon(CupertinoIcons.star),
+          ],
+        );
+        break;
+      case 2:
+        surfIcon = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(CupertinoIcons.star_fill),
+            SizedBox(width: 4),
+            Icon(CupertinoIcons.star_fill),
+            SizedBox(width: 4),
+            Icon(CupertinoIcons.star),
+          ],
+        );
+        break;
+      case 3:
+        surfIcon = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(CupertinoIcons.star_fill),
+            SizedBox(width: 4),
+            Icon(CupertinoIcons.star_fill),
+            SizedBox(width: 4),
+            Icon(CupertinoIcons.star_fill),
+          ],
+        );
+        break;
+      default:
+        surfIcon = Row();
+    }
   }
 
   void setWeatherIcon(dynamic weatherSymbol) {
@@ -151,14 +208,14 @@ class WeatherData {
 
     // Define the wind direction symbols and their corresponding values
     final symbols = {
-      CupertinoIcons.arrow_up: 0,
-      CupertinoIcons.arrow_up_right: 45,
-      CupertinoIcons.arrow_right: 90,
-      CupertinoIcons.arrow_down_right: 135,
-      CupertinoIcons.arrow_down: 180,
-      CupertinoIcons.arrow_down_left: 225,
-      CupertinoIcons.arrow_left: 270,
-      CupertinoIcons.arrow_up_left: 315,
+      CupertinoIcons.arrow_down: 0,
+      CupertinoIcons.arrow_down_left: 45,
+      CupertinoIcons.arrow_left: 90,
+      CupertinoIcons.arrow_up_left: 135,
+      CupertinoIcons.arrow_up: 180,
+      CupertinoIcons.arrow_up_right: 225,
+      CupertinoIcons.arrow_right: 270,
+      CupertinoIcons.arrow_down_right: 315,
     };
 
     // Calculate the closest symbol
@@ -221,7 +278,6 @@ class WeatherData {
   }
 
   static Map<String, dynamic> toMap(WeatherData weatherData) => {
-
         'date': weatherData.date,
         'temperature': weatherData.temperature,
         'windSpeed': weatherData.windSpeed,

@@ -2,13 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:surfs_up/api/weather_data.dart';
+import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/shared/constants/colors.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
 import 'package:surfs_up/shared/widgets/weather_row_widget.dart';
 
 class WeatherPage extends StatelessWidget {
-  const WeatherPage({super.key, required this.listOfDayWeatherData});
+  final Location location;
+  const WeatherPage(
+      {super.key, required this.listOfDayWeatherData, required this.location});
 
   final List<List<WeatherData>> listOfDayWeatherData;
 
@@ -39,8 +42,8 @@ class WeatherPage extends StatelessWidget {
                   isToday ? "Today, avg" : '${dateFormat.format(date)}, avg',
                   style: CustomTextStyle.title3,
                 ),
-                subtitle:
-                    WeatherRowWidget(dayData: listOfDayWeatherData[index]),
+                subtitle: WeatherRowWidget(
+                    dayData: listOfDayWeatherData[index], location: location),
                 tilePadding: const EdgeInsets.all(11),
                 textColor: Colors.white,
                 children: item.map((WeatherData hourItem) {
@@ -60,15 +63,11 @@ class WeatherPage extends StatelessWidget {
                         children: [
                           ExpandedItem(
                             itemIcon: hourItem.weatherIcon,
-                            itemText: hourItem.temperature.toString(),
+                            itemText: ' ${hourItem.temperature}',
                           ),
                           ExpandedItem(
                             itemIcon: Icons.umbrella,
-                            itemText: hourItem.precipitation.toString(),
-                          ),
-                          ExpandedItem(
-                            itemIcon: CupertinoIcons.sunrise_fill,
-                            itemText: hourItem.weatherSymbol.toString(),
+                            itemText: '${hourItem.precipitation}mm',
                           ),
                         ],
                       ),
