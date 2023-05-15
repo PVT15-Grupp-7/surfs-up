@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WeatherData {
-  String date;
+  DateTime date;
   dynamic windDirection, temperature, windSpeed, gust;
 
   //symbol to display the weather icon and surf conditions 0-3 or 5 depending how we want it
@@ -238,7 +238,7 @@ class WeatherData {
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
     return WeatherData(
-      json['date'],
+      DateTime.parse(json['date']),
       json['temperature'],
       json['windSpeed'],
       json['windDirection'],
@@ -256,29 +256,26 @@ class WeatherData {
   }
 
   static List<List<WeatherData>> getWeatherData(String text) {
-    List<List<WeatherData>> weatherData = [];
+    List<List<WeatherData>> weatherData = [[]];
     List<WeatherData> weatherList = decode(text);
 
-    int currentDay = DateTime.parse(weatherList[0].date).day;
-    int lastHour = weatherList.length - 1;
+    int currentDay = weatherList[0].date.day;
 
-    for (int i = 0; i < weatherList.length;) {
-      if (currentDay == DateTime.parse(weatherList[i].date).day) {
-        int hoursRemaining = 24 - DateTime.parse(weatherList[i].date).hour;
-        weatherData.add(weatherList.sublist(i, i + hoursRemaining));
-        i += hoursRemaining;
-      } else {
-        currentDay = DateTime.parse(weatherList[i].date).day;
-        int maxHoursLeft = (lastHour - i) < 24 ? (lastHour - i) : 24;
-        weatherData.add(weatherList.sublist(i, i + maxHoursLeft));
-        i += 24;
-      }
+    for (int i = 0, j = 0; i < weatherList.length; i++) {
+        if (weatherList[i].date.day == currentDay) {
+          weatherData[j].add(weatherList[i]);
+          currentDay = weatherList[i].date.day;
+        } else if (weatherData.length < 5) {
+          weatherData.add([]);
+          weatherData[++j].add(weatherList[i]);
+          currentDay = weatherList[i].date.day;
+        }
     }
     return weatherData;
   }
 
   static Map<String, dynamic> toMap(WeatherData weatherData) => {
-        'date': weatherData.date,
+        'date': weatherData.date.toString(),
         'temperature': weatherData.temperature,
         'windSpeed': weatherData.windSpeed,
         'windDirection': weatherData.windDirection,

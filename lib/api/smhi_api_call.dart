@@ -29,7 +29,7 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
       dynamic windDirection;
       int weatherSymbol = 0;
 
-      String dateTime = timeSeriesArr[i]['validTime'] as String;
+      DateTime dateTime = DateTime.parse(timeSeriesArr[i]['validTime']);
       //only 3 days of data
       // if (dateTime.day - DateTime.now().day > 3) {
       //   break;

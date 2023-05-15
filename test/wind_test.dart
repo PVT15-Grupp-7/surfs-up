@@ -5,7 +5,7 @@ import 'package:surfs_up/api/weather_data.dart'; // Replace with the actual file
 void main() {
   test('setWindSymbol returns the correct symbol for a given wind direction',
       () {
-    final weatherData = WeatherData('2023-05-12', 25, 10, 180, 15, 1, 0, 0);
+    final weatherData = WeatherData(DateTime.parse('2023-05-12'), 25, 10, 180, 15, 1, 0, 0);
 
     final symbols = {
       0: 'N',
@@ -26,7 +26,7 @@ void main() {
 
   test('setWindSymbolOne returns the correct symbol for a given wind direction',
       () {
-    final weatherData = WeatherData('2023-05-12', 25, 10, 180, 15, 1, 0,
+    final weatherData = WeatherData(DateTime.parse('2023-05-12'), 25, 10, 180, 15, 1, 0,
         0); // Replace with the actual class name if necessary
 
     final symbols = {

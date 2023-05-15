@@ -18,7 +18,7 @@ class WeatherRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var sunriseToro = getSunriseSunset(location.latCoordinate,
-        location.longCoordinate, duration, DateTime.parse(dayData[0].date));
+        location.longCoordinate, duration, dayData[0].date);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
