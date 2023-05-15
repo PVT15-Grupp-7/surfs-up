@@ -20,32 +20,32 @@ class SafetyPageEmergencyPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Om en person är medvetslös ska du göra enligt följande:',
+                'If a person is unconscious, you should do the following:',
                 style: CustomTextStyle.title2,
               ),
               const SizedBox(height: 40),
               const Text(
-                '1. Kontrollera livstecken',
+                '1. Check for signs of life',
                 style: CustomTextStyle.paragraph1,
               ),
               const SizedBox(height: 10),
               const Text(
-                '2. Kontrollera andningen',
+                '2. Check for breathing',
                 style: CustomTextStyle.paragraph1,
               ),
               const SizedBox(height: 10),
               const Text(
-                '3. Ring 112 (om personen inte är meveten och eller inte andas.)',
+                '3. Call 112 (if the person is unconscious and/or not breathing)',
                 style: CustomTextStyle.paragraph1,
               ),
               const SizedBox(height: 10),
               const Text(
-                '4. Om personen andas, placera denne i stabilt sidoläge. Om personen INTE andas, påbörja HLR omgående.',
+                '4. If the person is breathing, place them in a stable side position. If the person is NOT breathing, start CPR immediately.',
                 style: CustomTextStyle.paragraph1,
               ),
               const SizedBox(height: 15),
               const Text(
-                'Länk till ytterligare information om medvetslöshet och HLR:',
+                'Link to additional information about unconsciousness and CPR:',
                 style: CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,
               ),

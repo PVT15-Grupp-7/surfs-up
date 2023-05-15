@@ -10,8 +10,8 @@ class InfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return SingleChildScrollView(
+      child: Center(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -27,12 +27,13 @@ class InfoPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () async {
                       String url = location.locationURL;
-                  final uri = Uri.parse(url);
-                  if (await canLaunchUrl(uri)) {
-                    await launchUrl(uri, mode: LaunchMode.externalApplication);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
+                      final uri = Uri.parse(url);
+                      if (await canLaunchUrl(uri)) {
+                        await launchUrl(uri,
+                            mode: LaunchMode.externalApplication);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size.zero,
@@ -44,19 +45,37 @@ class InfoPage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               Text(
-                'Seabed and Depth: \n${location.seabed}',
+                'Seabed and Depth: \n\n${location.seabed}',
                 style: CustomTextStyle.paragraph1,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage(location.infoImagePath),
-                  ),
-                ],
+              Center(
+                child: Image(
+                  image: AssetImage(location.infoImagePath),
+                  fit: BoxFit.fitWidth,
+                ),
               ),
               const Text('Link for more depth and more information:'),
-              const Text('URL LINK HERE'),
+              GestureDetector(
+                onTap: () async {
+                  String url = location.infoURL;
+                  final uri = Uri.parse(url);
+                  if (await canLaunchUrl(uri)) {
+                    await launchUrl(uri, mode: LaunchMode.externalApplication);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Link to website',
+                    style: CustomTextStyle.paragraph2.copyWith(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                      fontFamily: 'Righteous-Regular',
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(height: 30),
               const Text(
                 'General Information:',

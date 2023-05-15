@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/all_pages.dart';
+import 'package:surfs_up/api/app_preferences.dart';
+import 'package:surfs_up/api/weather_data.dart';
 import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/pages/about_us_page.dart';
 import 'package:surfs_up/pages/info_page.dart';
@@ -8,6 +10,7 @@ import 'package:surfs_up/pages/safety_page.dart';
 import 'package:surfs_up/pages/surf_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
 import 'package:surfs_up/services/authentication_service.dart';
+import 'package:surfs_up/pages/for_beginners.dart';
 
 class NavigationAdmin extends StatefulWidget {
   const NavigationAdmin({Key? key}) : super(key: key);
@@ -19,20 +22,38 @@ class NavigationAdmin extends StatefulWidget {
 class _NavigationAdminState extends State<NavigationAdmin> {
   final AuthenticationService _auth = AuthenticationService();
 
-  int _selectedTab = 0;
-  Widget _selectedPage = SurfPage(location: locations[0]);
+  late int _selectedTab;
+  late Widget _selectedPage;
   bool isSwitched = false;
-  Location _selectedLocation = locations[0];
+  late Location _selectedLocation;
+  late List<List<WeatherData>> _weatherData;
+
+  void _getWeatherDataList() {
+    final String? weatherString =
+        AppPref.getString(_selectedLocation.sharedPreferences);
+    _weatherData = WeatherData.getWeatherData(weatherString!);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedTab = 0;
+    _selectedLocation = locations[0];
+    _getWeatherDataList();
+    _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
+  }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedTab = index;
       if (index == 0) {
-        _selectedPage = SurfPage(location: _selectedLocation,);
+        _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
       } else if (index == 1) {
-        _selectedPage = const WeatherPage();
+        _selectedPage = WeatherPage(listOfDayWeatherData: _weatherData,);
       } else if (index == 2) {
-        _selectedPage = SafetyPage(location: _selectedLocation,);
+        _selectedPage = SafetyPage(
+          location: _selectedLocation,
+        );
       } else if (index == 3) {
         _selectedPage = InfoPage(location: _selectedLocation);
       }
@@ -75,6 +96,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                 onChanged: (newValue) {
                   setState(() {
                     _selectedLocation = newValue as Location;
+                    _getWeatherDataList();
                     _onItemTapped(_selectedTab);
                   });
                 }),
@@ -118,6 +140,18 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => const AboutUsPage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.help),
+              title: const Text('For Begginers'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ForBeginnersPage(),
                   ),
                 );
               },
