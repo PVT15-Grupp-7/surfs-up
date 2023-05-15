@@ -27,7 +27,7 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
     for (int i = 0; i < _sizeOfWeatherData; i++) {
       //print(timeSeriveArr[0]);
       //print(timeSeriveArr.length);
-      double temp = 0, windSpeed = 0, gust = 0;
+      double temp = 0, windSpeed = 0, gust = 0, precipitation = 0;
       dynamic windDirection;
       int weatherSymbol = 0;
 
@@ -50,11 +50,14 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
           gust = getValue(parameter);
         } else if (parameter['name'] == 'Wsymb2') {
           weatherSymbol = getValue(parameter);
+        }else if(parameter['name'] == 'pmean'){
+          precipitation = getValue(parameter);
         }
       }
 
-      WeatherData weatherData = WeatherData(
-          dateTime, temp, windSpeed, windDirection, gust, weatherSymbol, 0, 0);
+
+      WeatherData weatherData = WeatherData(dateTime, temp, windSpeed, windDirection, gust, weatherSymbol, 0, precipitation);
+
       listOfWeatherData.add(weatherData);
       print(i);
     }

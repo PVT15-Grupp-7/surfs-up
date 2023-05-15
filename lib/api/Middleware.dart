@@ -1,6 +1,7 @@
 import 'package:surfs_up/api/weather_data.dart';
 import 'get_api_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'surf_conditions_algorithm.dart';
 
 void callAPIs() async {
   print('------------------------Calling in Middleware----------------------- ');
@@ -22,6 +23,11 @@ void callAPIs() async {
 
   //print(toroData.length);
   //print(vaddoData.length);
+
+  cheackSurfConditions(vaddoData, 'vaddo');
+  cheackSurfConditions(toroData, 'toro');
+
+
 
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();

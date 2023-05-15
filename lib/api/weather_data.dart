@@ -12,10 +12,13 @@ class WeatherData {
   IconData windIcon = Icons.arrow_right_alt_outlined;
   String windDirectionSymbol = "";
   int surfConditions = 0;
-  bool surf = false;
+  int surf = 0;
+  double precipitation;
+
 
   WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection,
       this.gust, this.weatherSymbol, this.surfConditions, this.precipitation) {
+
     gust = gust.round();
     setWeatherIcon(weatherSymbol);
     setWindSymbol(windDirection);
@@ -50,7 +53,7 @@ class WeatherData {
     windDirection = wd;
   }
 
-  void setSurf(bool surf) {
+  void setSurf(int surf) {
     this.surf = surf;
   }
 
@@ -218,6 +221,7 @@ class WeatherData {
   }
 
   static Map<String, dynamic> toMap(WeatherData weatherData) => {
+
         'date': weatherData.date,
         'temperature': weatherData.temperature,
         'windSpeed': weatherData.windSpeed,

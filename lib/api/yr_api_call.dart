@@ -53,8 +53,10 @@ List<WeatherData> getValues(var jsonRes) {
     var instant = data['instant'];
     var details = instant['details'];
 
+
     WeatherData weatherData = WeatherData(dateTime, details['air_temperature'],
         details['wind_speed'], details['wind_from_direction'], 0.0, 0, 0, 0);
+
 
     yrweatherData.add(weatherData);
   }

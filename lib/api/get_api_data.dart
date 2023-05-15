@@ -26,7 +26,7 @@ Future<List<WeatherData>> getData(double lat, double lon) async{
   }
 
   //Anropa surf algoritmen här
-  cheackSurfConditions(smhiData);
+  //cheackSurfConditions(smhiData);
 
   print('------------------smhi call done------------------');
 
