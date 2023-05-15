@@ -42,7 +42,41 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     _getWeatherDataList();
     _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
   }
+ Future<void> _showLogoutConfirmationDialog() async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Log Out'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No', style: TextStyle(color: Colors.red),),
+              onPressed: () {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () async {
+                await _auth.signOut();
+                Navigator.of(context).pop(); // Stänger dialogrutan
 
+                // Visa notifiering
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content:  Text('Logged out successfully'),
+                    backgroundColor: Colors.green,
+                    duration:  Duration(seconds: 2),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
   void _onItemTapped(int index) {
     setState(() {
       _selectedTab = index;
@@ -162,7 +196,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               leading: const Icon(Icons.logout),
               title: const Text('Sign out'),
               onTap: () async {
-                await _auth.signOut();
+                await _showLogoutConfirmationDialog();
               },
             )
           ],

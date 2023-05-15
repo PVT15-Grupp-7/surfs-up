@@ -38,6 +38,7 @@ class _PreferencesPageState extends State<PreferencesPage> {
       });
     }
   }
+  
 
   Future<bool> _onBackPressed() {
     return showCupertinoDialog(
@@ -163,6 +164,7 @@ class _PreferencesPageState extends State<PreferencesPage> {
             const Padding(padding: EdgeInsets.all(10)),
             ElevatedButton(
                 onPressed: () {
+                  _showSaveConfirmationDialog();
                   // add functionality
                 },
                 style: ElevatedButton.styleFrom(
@@ -178,4 +180,37 @@ class _PreferencesPageState extends State<PreferencesPage> {
       ),
     );
   }
+  void _showSaveConfirmationDialog() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Save Confirmation'),
+        content: const Text('Do you want to save the changes?'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('No'),
+            onPressed: () {
+              Navigator.of(context).pop(); // Stänger dialogrutan
+            },
+          ),
+          TextButton(
+            child: const Text('Yes'),
+            onPressed: () {
+              Navigator.of(context).pop(); // Stänger dialogrutan
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar (
+                  content:  Text('Changes saved'),
+                  backgroundColor: Colors.green,
+                  duration:  Duration(seconds: 2),
+                ),
+              );
+              Navigator.of(context).pop(); // Återgår till navigation_admin.dart
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
 }

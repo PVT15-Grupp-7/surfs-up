@@ -41,13 +41,7 @@ class SafetyPageDefibrillatorPage extends StatelessWidget {
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () async {
-                  String url = location.defibrillatorURL;
-                  final uri = Uri.parse(url);
-                  if (await canLaunchUrl(uri)) {
-                    await launchUrl(uri, mode: LaunchMode.externalApplication);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
+                   await _showOpenLinkConfirmationDialog(context, location.defibrillatorURL);
                 },
                 child: RichText(
                   text: TextSpan(
@@ -63,6 +57,38 @@ class SafetyPageDefibrillatorPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+  Future<void> _showOpenLinkConfirmationDialog(BuildContext context, String url) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Link Confirmation'),
+          content: const Text('Are you sure you want to open the link?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () async {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+
+                final uri = Uri.parse(url);
+                if (await canLaunch(uri.toString())) {
+                  await launch(uri.toString(), forceSafariVC: false);
+                } else {
+                  throw 'Could not launch $uri';
+                }
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
