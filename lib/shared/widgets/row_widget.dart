@@ -17,7 +17,7 @@ class RowWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.air_outlined, size: 30),
-            Text('${averageSpeed()}(${avarageGust()})',
+            Text('${averageSpeed()}m/s (${avarageGust()})',
                 style: CustomTextStyle.tileTextStyle),
           ],
         ),

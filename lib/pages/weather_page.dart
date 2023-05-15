@@ -36,7 +36,7 @@ class WeatherPage extends StatelessWidget {
                 ),
                 expandedCrossAxisAlignment: CrossAxisAlignment.end,
                 title: Text(
-                  isToday ? "Today" : dateFormat.format(date),
+                  isToday ? "Today, avg" : '${dateFormat.format(date)}, avg',
                   style: CustomTextStyle.title3,
                 ),
                 subtitle:
@@ -64,7 +64,7 @@ class WeatherPage extends StatelessWidget {
                           ),
                           ExpandedItem(
                             itemIcon: Icons.umbrella,
-                            itemText: hourItem.windDirection.toString(),
+                            itemText: hourItem.precipitation.toString(),
                           ),
                           ExpandedItem(
                             itemIcon: CupertinoIcons.sunrise_fill,

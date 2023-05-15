@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class WeatherData {
   String date;
-  dynamic windDirection, temperature, windSpeed, gust;
+  dynamic windDirection, temperature, windSpeed, gust, precipitation;
 
   //symbol to display the weather icon and surf conditions 0-3 or 5 depending how we want it
   int weatherSymbol;
@@ -15,7 +15,7 @@ class WeatherData {
   bool surf = false;
 
   WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection,
-      this.gust, this.weatherSymbol, this.surfConditions) {
+      this.gust, this.weatherSymbol, this.surfConditions, this.precipitation) {
     gust = gust.round();
     setWeatherIcon(weatherSymbol);
     setWindSymbol(windDirection);
@@ -52,6 +52,10 @@ class WeatherData {
 
   void setSurf(bool surf) {
     this.surf = surf;
+  }
+
+  void setPrecipitation(dynamic precipitation) {
+    this.precipitation = precipitation;
   }
 
   void setWeatherIcon(dynamic weatherSymbol) {
@@ -181,6 +185,7 @@ class WeatherData {
       json['gust'],
       json['weatherSymbol'],
       json['surfConditions'],
+      json['precipitation'],
     );
   }
 
@@ -220,6 +225,7 @@ class WeatherData {
         'gust': weatherData.gust,
         'weatherSymbol': weatherData.weatherSymbol,
         'surfConditions': weatherData.surfConditions,
+        'precipitation': weatherData.precipitation,
       };
 
   static String encode(List<WeatherData> weatherData) => json.encode(
@@ -231,6 +237,6 @@ class WeatherData {
 
   @override
   String toString() {
-    return 'WeatherData date: $date , temperature: $temperature, windSpeed: $windSpeed, windDirection: $windDirection, gust: $gust, weatherSymbol: $weatherSymbol, surfConditions: $surfConditions';
+    return 'WeatherData date: $date , temperature: $temperature, windSpeed: $windSpeed, windDirection: $windDirection, gust: $gust, weatherSymbol: $weatherSymbol, surfConditions: $surfConditions, precipitation: $precipitation';
   }
 }
