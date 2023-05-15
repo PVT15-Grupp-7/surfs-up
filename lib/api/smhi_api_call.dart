@@ -7,15 +7,14 @@ const int _sizeOfWeatherData = 70;
 
 // List that will contain all the weather data
 
-Future<List<WeatherData>> getSMHI(double lat, double lon) async{
-
+Future<List<WeatherData>> getSMHI(double lat, double lon) async {
   List<WeatherData> listOfWeatherData = [];
   print(listOfWeatherData.length);
 
-
   //creating the request
-  var request = http.Request('GET', Uri.parse(
-      'https://opendata-download-metfcst.smhi.se/api/'
+  var request = http.Request(
+      'GET',
+      Uri.parse('https://opendata-download-metfcst.smhi.se/api/'
           'category/pmp3g/version/2/geotype/point/lon/$lon/lat/$lat/data.json'));
 //Sending the request
   http.StreamedResponse response = await request.send();
@@ -25,9 +24,7 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async{
     final jsonRes = jsonDecode(st);
     var timeSeriveArr = jsonRes['timeSeries'];
 
-
-    for(int i = 0; i < _sizeOfWeatherData; i++){
-
+    for (int i = 0; i < _sizeOfWeatherData; i++) {
       //print(timeSeriveArr[0]);
       //print(timeSeriveArr.length);
       double temp = 0, windSpeed = 0, gust = 0, precipitation = 0;
@@ -41,10 +38,9 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async{
       //   break;
       // }
       var parameters = timeSeriveArr[i]['parameters'];
-      for (int j = 0; j < parameters.length; j++){
-
+      for (int j = 0; j < parameters.length; j++) {
         var parameter = parameters[j];
-        if(parameter['name'] == 't'){
+        if (parameter['name'] == 't') {
           temp = getValue(parameter);
         } else if (parameter['name'] == 'wd') {
           windDirection = getValue(parameter);
@@ -52,18 +48,19 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async{
           windSpeed = getValue(parameter);
         } else if (parameter['name'] == 'gust') {
           gust = getValue(parameter);
-        } else if( parameter['name'] == 'Wsymb2'){
+        } else if (parameter['name'] == 'Wsymb2') {
           weatherSymbol = getValue(parameter);
         }else if(parameter['name'] == 'pmean'){
           precipitation = getValue(parameter);
         }
       }
 
+
       WeatherData weatherData = WeatherData(dateTime, temp, windSpeed, windDirection, gust, weatherSymbol, 0, precipitation);
+
       listOfWeatherData.add(weatherData);
       print(i);
     }
-
   } else {
     print(response.reasonPhrase);
   }

@@ -46,6 +46,7 @@ dependencies:
   intl: ^0.17.0
   url_launcher: ^6.0.9
   flutter_native_splash: ^2.2.19
+  sunrise_sunset_calc: ^3.0.0
 
 dev_dependencies:
   flutter_test:

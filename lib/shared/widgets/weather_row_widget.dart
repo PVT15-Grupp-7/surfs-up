@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:surfs_up/api/weather_data.dart';
+import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:sunrise_sunset_calc/sunrise_sunset_calc.dart';
 
 class WeatherRowWidget extends StatelessWidget {
-  const WeatherRowWidget({super.key, required this.dayData});
+  final Location location;
+  WeatherRowWidget({super.key, required this.dayData, required this.location});
+  final duration = const Duration(
+      hours: 2); // kan behöva ändras till hours: 0 ifall tidszonen är rätt
+  final dateFormat = DateFormat.Hm();
 
   final List<WeatherData> dayData;
 
   @override
   Widget build(BuildContext context) {
+    var sunriseToro = getSunriseSunset(location.latCoordinate,
+        location.longCoordinate, duration, DateTime.parse(dayData[0].date));
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -24,18 +33,34 @@ class WeatherRowWidget extends StatelessWidget {
         const Padding(padding: EdgeInsets.all(10)),
         Row(
           // mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.umbrella, size: 30),
-            Text('0,0mm', style: CustomTextStyle.tileTextStyle),
+          children: [
+            const Icon(Icons.umbrella, size: 30),
+            Text('${averagePrecipitation()}mm',
+                style: CustomTextStyle.tileTextStyle),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
-        Row(
+        Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Icon(CupertinoIcons.sunrise_fill, size: 30),
-            SizedBox(width: 4),
-            Text('04:56', style: CustomTextStyle.tileTextStyle),
+            SizedBox(height: 4),
+            Icon(
+              CupertinoIcons.sunset_fill,
+              size: 30,
+            ),
+          ],
+        ),
+        const SizedBox(
+          width: 4,
+        ),
+        Column(
+          children: [
+            Text(dateFormat.format(sunriseToro.sunrise).toString(),
+                style: CustomTextStyle.tileTextStyle),
+            const SizedBox(height: 18),
+            Text(dateFormat.format(sunriseToro.sunset).toString(),
+                style: CustomTextStyle.tileTextStyle),
           ],
         ),
       ],
@@ -70,5 +95,15 @@ class WeatherRowWidget extends StatelessWidget {
     });
 
     return mostFrequentIcon;
+  }
+
+  String averagePrecipitation() {
+    double sum = 0;
+    for (var item in dayData) {
+      sum += item.precipitation;
+    }
+    double average = sum / dayData.length;
+    String roundedAverage = average.toStringAsFixed(1);
+    return roundedAverage;
   }
 }
