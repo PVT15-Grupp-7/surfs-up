@@ -20,7 +20,7 @@ class WeatherPage extends StatelessWidget {
         itemCount: listOfDayWeatherData.length,
         itemBuilder: (_, index) {
           final item = listOfDayWeatherData[index];
-          final DateTime date = DateTime.parse(item.first.date);
+          final DateTime date = item.first.date;
           final DateFormat dateFormat = DateFormat('EEE, MMM d');
           final bool isToday = (index == 0);
           return Padding(
@@ -56,7 +56,7 @@ class WeatherPage extends StatelessWidget {
                       ),
                     ),
                     child: ListTile(
-                      leading: Text('${DateTime.parse(hourItem.date).hour}:00'),
+                      leading: Text('${hourItem.date.hour}:00'),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [

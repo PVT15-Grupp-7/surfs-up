@@ -47,7 +47,7 @@ List<WeatherData> getValues(var jsonRes) {
 
   for (int i = 0; i < _sizeOfWeatherData; i++) {
     var timeserie = timeseries[i];
-    String dateTime = timeserie['time'];
+    DateTime dateTime = DateTime.parse(timeserie['time']);
 
     var data = timeserie['data'];
     var instant = data['instant'];
