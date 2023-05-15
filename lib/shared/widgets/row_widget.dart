@@ -24,7 +24,7 @@ class RowWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(dayData[0].windIcon, size: 30),
+            Icon(getMostFrequentWindArrow(dayData), size: 30),
             Text(mostFrequentSymbol, style: CustomTextStyle.tileTextStyle),
           ],
         ),
@@ -70,5 +70,27 @@ class RowWidget extends StatelessWidget {
     });
 
     return mostFrequentSymbol;
+  }
+
+  IconData getMostFrequentWindArrow(List<WeatherData> dayData) {
+    Map<IconData, int> iconCounts = {};
+
+    // Count the occurrences of each arrow icon
+    for (var data in dayData) {
+      IconData icon = data.windIcon;
+      iconCounts[icon] = (iconCounts[icon] ?? 0) + 1;
+    }
+
+    // Find the arrow icon with the highest count
+    IconData mostFrequentIcon = Icons.arrow_right_alt_outlined;
+    int maxCount = 0;
+    iconCounts.forEach((icon, count) {
+      if (count > maxCount) {
+        mostFrequentIcon = icon;
+        maxCount = count;
+      }
+    });
+
+    return mostFrequentIcon;
   }
 }
