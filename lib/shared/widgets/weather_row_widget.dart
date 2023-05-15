@@ -33,7 +33,7 @@ class WeatherRowWidget extends StatelessWidget {
         Row(
           children: [
             const Icon(Icons.umbrella, size: 30),
-            Text('${averagePrecipitation()}mm',
+            Text('${totalPrecipitation()}mm',
                 style: CustomTextStyle.tileTextStyle),
           ],
         ),
@@ -94,13 +94,11 @@ class WeatherRowWidget extends StatelessWidget {
     return mostFrequentIcon;
   }
 
-  String averagePrecipitation() {
+  String totalPrecipitation() {
     double sum = 0;
     for (var item in dayData) {
       sum += item.precipitation;
     }
-    double average = sum / dayData.length;
-    String roundedAverage = average.toStringAsFixed(1);
-    return roundedAverage;
+    return sum.toStringAsFixed(1);
   }
 }
