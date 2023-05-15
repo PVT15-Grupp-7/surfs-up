@@ -16,7 +16,7 @@ class WeatherRowWidget extends StatelessWidget {
         Row(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.wb_sunny_outlined, size: 30),
+            Icon(getMostFrequentWeatherIcon(dayData)),
             const SizedBox(width: 4),
             Text(averageTemperature(), style: CustomTextStyle.tileTextStyle),
           ],
@@ -48,5 +48,27 @@ class WeatherRowWidget extends StatelessWidget {
       sum += item.temperature;
     }
     return (sum / dayData.length).round().toString();
+  }
+
+  IconData getMostFrequentWeatherIcon(List<WeatherData> dayData) {
+    Map<IconData, int> iconCounts = {};
+
+    // Count the occurrences of each weather icon
+    for (var data in dayData) {
+      IconData icon = data.weatherIcon;
+      iconCounts[icon] = (iconCounts[icon] ?? 0) + 1;
+    }
+
+    // Find the weather icon with the highest count
+    IconData mostFrequentIcon = Icons.wb_sunny_outlined;
+    int maxCount = 0;
+    iconCounts.forEach((icon, count) {
+      if (count > maxCount) {
+        mostFrequentIcon = icon;
+        maxCount = count;
+      }
+    });
+
+    return mostFrequentIcon;
   }
 }

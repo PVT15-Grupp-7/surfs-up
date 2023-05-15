@@ -1,15 +1,16 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WeatherData {
-
   String date;
   dynamic windDirection, temperature, windSpeed, gust;
 
   //symbol to display the weather icon and surf conditions 0-3 or 5 depending how we want it
   int weatherSymbol;
-  late IconData weatherIcon;
-  late IconData windIcon;
+  IconData weatherIcon = Icons.wb_sunny_outlined;
+  IconData windIcon = Icons.arrow_right_alt_outlined;
+  String windDirectionSymbol = "";
   int surfConditions = 0;
   bool surf = false;
 
@@ -17,8 +18,8 @@ class WeatherData {
       this.gust, this.weatherSymbol, this.surfConditions) {
     gust = gust.round();
     setWeatherIcon(weatherSymbol);
-
-
+    setWindSymbol(windDirection);
+    setWindSymbolOne(windDirection);
   }
 
   void setWeatherSymbol(int weatherSymbol) {
@@ -54,14 +55,121 @@ class WeatherData {
   }
 
   void setWeatherIcon(dynamic weatherSymbol) {
-    switch(weatherSymbol) {
-      case 1-3:
-        windIcon = Icons.sunny;
+    // förmodligen en bra metod att skriva unit test för
+    switch (weatherSymbol) {
+      case 1:
+      case 2:
+        weatherIcon = Icons.wb_sunny_outlined;
         break;
+      case 3:
       case 4:
-        windIcon = Icons.cloud;
+        weatherIcon = CupertinoIcons.cloud_sun;
         break;
+      case 5:
+      case 6:
+        weatherIcon = Icons.cloud_outlined;
+        break;
+      case 7:
+        weatherIcon = CupertinoIcons.cloud_fog;
+        break;
+      case 8:
+      case 9:
+      case 10:
+      case 18:
+      case 19:
+      case 20:
+        weatherIcon = CupertinoIcons.cloud_heavyrain;
+        break;
+      case 11:
+      case 21:
+        weatherIcon = Icons.thunderstorm_outlined;
+        break;
+      case 12:
+      case 13:
+      case 14:
+      case 22:
+      case 23:
+      case 24:
+        weatherIcon = CupertinoIcons.cloud_sleet;
+        break;
+      case 15:
+      case 16:
+      case 17:
+      case 25:
+      case 26:
+      case 27:
+        weatherIcon = CupertinoIcons.cloud_snow;
+        break;
+      default:
     }
+  }
+
+  String setWindSymbol(dynamic windDirection) {
+    // Adjust the wind direction to be within the range of 0 to 360
+    windDirection = (windDirection % 360 + 360) % 360;
+
+    // Define the wind direction symbols and their corresponding values
+    final symbols = {
+      'N': 0,
+      'NE': 45,
+      'E': 90,
+      'SE': 135,
+      'S': 180,
+      'SW': 225,
+      'W': 270,
+      'NW': 315,
+    };
+
+    // Calculate the closest symbol
+    var closestSymbol = '';
+    num minDifference = double.infinity;
+
+    for (var symbol in symbols.keys) {
+      final symbolValue = symbols[symbol]!;
+      final difference = (symbolValue - windDirection).abs();
+
+      if (difference < minDifference) {
+        closestSymbol = symbol;
+        minDifference = difference;
+      }
+    }
+
+    windDirectionSymbol = closestSymbol;
+    return closestSymbol;
+  }
+
+  IconData setWindSymbolOne(dynamic windDirection) {
+    // Adjust the wind direction to be within the range of 0 to 360
+    windDirection = (windDirection % 360 + 360) % 360;
+
+    // Define the wind direction symbols and their corresponding values
+    final symbols = {
+      CupertinoIcons.arrow_up: 0,
+      CupertinoIcons.arrow_up_right: 45,
+      CupertinoIcons.arrow_right: 90,
+      CupertinoIcons.arrow_down_right: 135,
+      CupertinoIcons.arrow_down: 180,
+      CupertinoIcons.arrow_down_left: 225,
+      CupertinoIcons.arrow_left: 270,
+      CupertinoIcons.arrow_up_left: 315,
+    };
+
+    // Calculate the closest symbol
+    IconData closestSymbolOne = CupertinoIcons.arrow_up;
+    num minDifference = double.infinity;
+
+    for (var symbolOne in symbols.keys) {
+      final symbolValue = symbols[symbolOne]!;
+      final difference = (symbolValue - windDirection).abs();
+
+      if (difference < minDifference) {
+        closestSymbolOne = symbolOne;
+        minDifference = difference;
+      }
+    }
+
+    windIcon = closestSymbolOne;
+    return closestSymbolOne;
   }
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
@@ -104,8 +212,7 @@ class WeatherData {
     return weatherData;
   }
 
-  static Map<String, dynamic> toMap(WeatherData weatherData) =>
-      {
+  static Map<String, dynamic> toMap(WeatherData weatherData) => {
         'date': weatherData.date,
         'temperature': weatherData.temperature,
         'windSpeed': weatherData.windSpeed,
@@ -115,14 +222,12 @@ class WeatherData {
         'surfConditions': weatherData.surfConditions,
       };
 
-  static String encode(List<WeatherData> weatherData) =>
-      json.encode(
+  static String encode(List<WeatherData> weatherData) => json.encode(
         weatherData
-            .map<Map<String, dynamic>>((weatherData) =>
-            WeatherData.toMap(weatherData))
+            .map<Map<String, dynamic>>(
+                (weatherData) => WeatherData.toMap(weatherData))
             .toList(),
       );
-
 
   @override
   String toString() {

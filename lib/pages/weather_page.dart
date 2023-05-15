@@ -39,7 +39,8 @@ class WeatherPage extends StatelessWidget {
                   isToday ? "Today" : dateFormat.format(date),
                   style: CustomTextStyle.title3,
                 ),
-                subtitle: WeatherRowWidget(dayData: listOfDayWeatherData[index]),
+                subtitle:
+                    WeatherRowWidget(dayData: listOfDayWeatherData[index]),
                 tilePadding: const EdgeInsets.all(11),
                 textColor: Colors.white,
                 children: item.map((WeatherData hourItem) {
@@ -58,7 +59,7 @@ class WeatherPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ExpandedItem(
-                            itemIcon: Icons.wb_sunny_outlined,
+                            itemIcon: hourItem.weatherIcon,
                             itemText: hourItem.temperature.toString(),
                           ),
                           ExpandedItem(
