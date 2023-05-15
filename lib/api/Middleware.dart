@@ -28,8 +28,6 @@ void callAPIs() async {
   cheackSurfConditions(toroData, 'toro');
 
 
-
-
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   //print('kom jag hit ens?');
   prefs.remove('toroData');
@@ -41,5 +39,7 @@ void callAPIs() async {
   //await prefs.setString('testar12345', 'hacker filip');
 
   print('------------------------Encoded------------------------ ');
+
+  //return 1;
 
 }

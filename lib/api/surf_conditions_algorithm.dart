@@ -1,7 +1,7 @@
 import 'package:surfs_up/api/weather_data.dart';
 
 const int minWindToro = 7;
-const int optimalWindToro = 210;
+const int optimalWindToro = 180;
 
 const int minWindVaddo = 13;
 const int optimalWindVaddo = 0;
@@ -78,15 +78,17 @@ print('$minWind  .....    $optimalWind');
 }
 
 void deeperSurfCheack(WeatherData data, int minWind, int optimalWind) {
-  dynamic diffrens;
+  dynamic diffrens = 0;
   if (minWind == 13 && data.windDirection > 180){
     diffrens = (optimalWind+360) - data.windDirection;
   } else {
     diffrens = optimalWind - data.windDirection;
   }
+
+  print(data.windDirection);
   print(diffrens);
   //cecka wind, gust and direcktion
-  if (diffrens <= 35) {
+  if (diffrens <= 45 && diffrens >= -45) {
     dynamic windSpeed = data.windSpeed;
     if (windSpeed < minWind+3 && windSpeed > minWind && data.gust > 10) {
       data.setSurf(1);
