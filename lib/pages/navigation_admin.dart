@@ -10,7 +10,7 @@ import 'package:surfs_up/pages/safety_page.dart';
 import 'package:surfs_up/pages/surf_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
 import 'package:surfs_up/services/authentication_service.dart';
-import 'package:surfs_up/pages/for_bigginers.dart';
+import 'package:surfs_up/pages/for_beginners.dart';
 
 class NavigationAdmin extends StatefulWidget {
   const NavigationAdmin({Key? key}) : super(key: key);
@@ -145,8 +145,8 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.key),
-              title: const Text('For bigginers'),
+              leading: const Icon(Icons.help),
+              title: const Text('For Begginers'),
               onTap: () {
                 Navigator.push(
                   context,
