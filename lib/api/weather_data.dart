@@ -7,9 +7,10 @@ class WeatherData{
   //symbol to display the weather icon and surf conditions 0-3 or 5 dependig how we want it
   int weatherSymbol;
   int surfConditions = 0;
-  bool surf = false;
+  int surf = 0;
+  double precipitation;
 
-WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, this.gust, this.weatherSymbol, this.surfConditions){
+WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, this.gust, this.weatherSymbol, this.surfConditions, this.precipitation){
   this.gust = gust.round();
 }
 
@@ -24,7 +25,7 @@ WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, thi
     this.surfConditions = surfConditions;
   }
   int getSurfConditions(){
-    return surfConditions!;
+    return surfConditions;
   }
 
   void setTemperature(dynamic temperature){
@@ -37,7 +38,7 @@ WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, thi
     windDirection = wd;
   }
 
-  void setSurf(bool surf){
+  void setSurf(int surf){
     this.surf = surf;
   }
 
@@ -50,6 +51,7 @@ WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, thi
       json['gust'],
       json['weatherSymbol'],
       json['surfConditions'],
+      json['precipitation'],
     );
   }
 
@@ -66,6 +68,7 @@ WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, thi
     'gust': weatherData.gust,
     'weatherSymbol': weatherData.weatherSymbol,
     'surfConditions': weatherData.surfConditions,
+    'precipitation': weatherData.precipitation,
   };
 
   static String encode(List<WeatherData> weatherData) => json.encode(
@@ -77,7 +80,7 @@ WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection, thi
 
   @override
   String toString() {
-    return 'WeatherData date: $date , temperature: $temperature, windSpeed: $windSpeed, windDirection: $windDirection, gust: $gust, weatherSymbol: $weatherSymbol, surfConditions: $surfConditions';
+    return 'WeatherData date: $date , temperature: $temperature, windSpeed: $windSpeed, windDirection: $windDirection, gust: $gust, weatherSymbol: $weatherSymbol, surfConditions: $surfConditions, precipitation: $precipitation';
   }
 
 }
