@@ -57,7 +57,7 @@ class SurfPage extends StatelessWidget {
                   ),
                   expandedCrossAxisAlignment: CrossAxisAlignment.end,
                   title: Text(
-                    isToday ? "Today, avg" : '${dateFormat.format(date)}, avg',
+                    isToday ? "Today" : dateFormat.format(date),
                     style: CustomTextStyle.title3,
                   ),
                   subtitle: RowWidget(dayData: listOfDayWeatherData[index]),
