@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 
-class ForBeginnersPage extends StatelessWidget {
-  const ForBeginnersPage({Key? key}) : super(key: key);
+class BeginnersTipsPage extends StatelessWidget {
+  const BeginnersTipsPage({Key? key}) : super(key: key);
 
   static const double _textSpacing = 40.0;
 
@@ -11,7 +11,7 @@ class ForBeginnersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kSecondaryColor,
-      appBar: AppBar(title: const Text('For Beginners')),
+      appBar: AppBar(title: const Text('Tips for Beginners')),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
@@ -19,7 +19,7 @@ class ForBeginnersPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: const [
               Text(
-                'For Beginners in Surfing:',
+                'Tips for Beginners to Surfing:',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),

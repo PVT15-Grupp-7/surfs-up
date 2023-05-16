@@ -3,7 +3,7 @@ import 'package:surfs_up/api/weather_data.dart';
 import 'package:http/http.dart' as http;
 
 // Variable that decides how many hours of weather data we want to get
-const int _sizeOfWeatherData = 70;
+const int _sizeOfWeatherData = 67;
 
 // List that will contain all the weather data
 

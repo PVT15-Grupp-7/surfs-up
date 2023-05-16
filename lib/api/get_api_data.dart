@@ -12,7 +12,7 @@ Future<List<WeatherData>> getData(double lat, double lon) async{
   List<WeatherData> smhiData = await getSMHI(lat, lon);
   List<WeatherData> yrData = await getYR(lat, lon);
 
-  for(int i = 0; i <70; i++){
+  for(int i = 0; i <67; i++){
 
     //samlahiop datan från både och slippa värdernas
     WeatherData smhi = smhiData[i];
