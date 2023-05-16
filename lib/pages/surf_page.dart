@@ -19,7 +19,7 @@ class SurfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: InfoButtonClass(),
+      floatingActionButton: const InfoButtonClass(),
       body: ListView.builder(
           itemCount: listOfDayWeatherData.length,
           itemBuilder: (_, index) {
