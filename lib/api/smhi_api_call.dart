@@ -3,7 +3,8 @@ import 'package:surfs_up/api/weather_data.dart';
 import 'package:http/http.dart' as http;
 
 // Variable that decides how many hours of weather data we want to get
-const int _sizeOfWeatherData = 70;
+const int _sizeOfWeatherData =
+    60; // 70* hours, vad händer om det inte finns så många timmar
 
 // List that will contain all the weather data
 
@@ -50,13 +51,13 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
           gust = getValue(parameter);
         } else if (parameter['name'] == 'Wsymb2') {
           weatherSymbol = getValue(parameter);
-        }else if(parameter['name'] == 'pmean'){
+        } else if (parameter['name'] == 'pmean') {
           precipitation = getValue(parameter);
         }
       }
 
-
-      WeatherData weatherData = WeatherData(dateTime, temp, windSpeed, windDirection, gust, weatherSymbol, 0, precipitation);
+      WeatherData weatherData = WeatherData(dateTime, temp, windSpeed,
+          windDirection, gust, weatherSymbol, 0, precipitation);
 
       listOfWeatherData.add(weatherData);
       print(i);
