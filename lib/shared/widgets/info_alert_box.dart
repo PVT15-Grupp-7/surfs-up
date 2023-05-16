@@ -83,6 +83,7 @@ class InfoButtonClass extends StatelessWidget {
             children: const [
               Icon(
                 CupertinoIcons.star_fill,
+                color: Colors.yellow,
               ),
               SizedBox(width: 2),
               Icon(CupertinoIcons.star),
@@ -114,9 +115,13 @@ class InfoButtonClass extends StatelessWidget {
             children: const [
               Icon(
                 CupertinoIcons.star_fill,
+                color: Colors.yellow,
               ),
               SizedBox(width: 2),
-              Icon(CupertinoIcons.star_fill),
+              Icon(
+                CupertinoIcons.star_fill,
+                color: Colors.yellow,
+              ),
               SizedBox(width: 2),
               Icon(CupertinoIcons.star),
             ],
@@ -145,11 +150,18 @@ class InfoButtonClass extends StatelessWidget {
             children: const [
               Icon(
                 CupertinoIcons.star_fill,
+                color: Colors.yellow,
               ),
               SizedBox(width: 2),
-              Icon(CupertinoIcons.star_fill),
+              Icon(
+                CupertinoIcons.star_fill,
+                color: Colors.yellow,
+              ),
               SizedBox(width: 2),
-              Icon(CupertinoIcons.star_fill),
+              Icon(
+                CupertinoIcons.star_fill,
+                color: Colors.yellow,
+              ),
             ],
           ),
           SizedBox(height: 4),
