@@ -44,7 +44,7 @@ class SurfPage extends StatelessWidget {
           } else {
             print("Instagram app not installed.");
 
-           
+
           }
         },
         child: const Text("Share to Instagram Story"),
