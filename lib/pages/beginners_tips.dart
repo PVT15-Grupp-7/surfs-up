@@ -3,7 +3,6 @@ import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'beginners_tips_Swedish.dart';
 
-
 class BeginnersTipsPage extends StatefulWidget {
   const BeginnersTipsPage({Key? key}) : super(key: key);
 
@@ -17,12 +16,7 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.popUntil(context, ModalRoute.withName('/')); // Navigera tillbaka till startsidan
-        return true;
-      },
-    child: Scaffold(
+    return Scaffold(
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
         title: const Text('Tips for Beginners'),
@@ -52,11 +46,12 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPage> {
                         title: const Text('Svenska'),
                         onTap: () {
                           Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const BeginnersTipsPageSwedish(),
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const BeginnersTipsPageSwedish(),
+                            ),
+                          );
                         },
                       ),
                     ],
@@ -72,7 +67,7 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPage> {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children:const  [
+            children: const [
               Text(
                 'Tips for Beginners to Surfing:',
                 style: CustomTextStyle.title2,
@@ -112,10 +107,9 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPage> {
                 textAlign: TextAlign.center,
               ),
               Text(
-                'Learn the proper paddling technique to get out to the waves. Practice standing up on the board in shallow water before venturing into waves. Keep your gaze forward and use your arms and legs to balance.',
-                style: CustomTextStyle.paragraph1,
-                textAlign: TextAlign.center
-              ),
+                  'Learn the proper paddling technique to get out to the waves. Practice standing up on the board in shallow water before venturing into waves. Keep your gaze forward and use your arms and legs to balance.',
+                  style: CustomTextStyle.paragraph1,
+                  textAlign: TextAlign.center),
               Text(
                 'Respect for Other Surfers:',
                 style: CustomTextStyle.title2,
@@ -169,8 +163,6 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPage> {
           ),
         ),
       ),
-    ),
     );
   }
 }
-

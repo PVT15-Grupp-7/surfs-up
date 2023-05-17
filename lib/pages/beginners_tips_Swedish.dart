@@ -16,12 +16,7 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPageSwedish> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.popUntil(context, ModalRoute.withName('/')); // Navigera tillbaka till startsidan
-        return true;
-      },
-      child: Scaffold(
+    return Scaffold(
       backgroundColor: kSecondaryColor,
       appBar: AppBar(
         title: const Text('Tips för nybörjare'),
@@ -41,22 +36,22 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPageSwedish> {
                         title: const Text('Engelska'),
                         onTap: () {
                           Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const BeginnersTipsPage(),
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const BeginnersTipsPage(),
+                            ),
+                          );
                         },
                       ),
                       ListTile(
                         leading: const Icon(Icons.language),
                         title: const Text('Svenska'),
                         onTap: () {
-                    setState(() {
-                      _selectedLocale = const Locale('sv', 'SE');
-                    });
-                    Navigator.pop(context);
-                  },
+                          setState(() {
+                            _selectedLocale = const Locale('sv', 'SE');
+                          });
+                          Navigator.pop(context);
+                        },
                       ),
                     ],
                   ),
@@ -167,8 +162,6 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPageSwedish> {
           ),
         ),
       ),
-    ),
     );
   }
 }
-
