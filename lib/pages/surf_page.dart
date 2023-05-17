@@ -10,6 +10,8 @@ import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
 import 'package:surfs_up/shared/widgets/info_alert_box.dart';
 import 'package:surfs_up/shared/widgets/surf_row_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:social_share/social_share.dart';
 
 class SurfPage extends StatelessWidget {
   const SurfPage({super.key, required this.listOfDayWeatherData});
@@ -19,7 +21,36 @@ class SurfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: const InfoButtonClass(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          // Replace "your_content_url" with the URL of the content you want to share
+          String contentUrl =
+              'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif';
+          String encodedContentUrl = Uri.encodeFull(contentUrl);
+
+          // Check if Instagram app is installed on the device
+          if (await canLaunch("instagram://")) {
+            // Launch Instagram app and open the story creation screen
+            await launch("instagram://camera");
+
+            // Delay for a short duration to allow the Instagram app to open
+            await Future.delayed(const Duration(seconds: 1));
+
+            // Create the URL to open the Instagram story creation screen
+            String storyCreationUrl =
+                "instagram://story-camera?media=$encodedContentUrl";
+
+            // Open the Instagram story creation screen with the content URL
+            await launch(Uri.parse(storyCreationUrl).toString());
+          } else {
+            print("Instagram app not installed.");
+            // Instagram app is not installed, handle accordingly
+            // You can redirect users to the App Store or Google Play Store to download Instagram
+          }
+        },
+        child: const Text("Share to Instagram Story"),
+      ),
+      //floatingActionButton: const InfoButtonClass(),
       body: ListView.builder(
           itemCount: listOfDayWeatherData.length,
           itemBuilder: (_, index) {
