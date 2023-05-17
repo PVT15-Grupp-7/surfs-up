@@ -18,12 +18,11 @@ class WeatherRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var sunriseToro = getSunriseSunset(location.latCoordinate,
-        location.longCoordinate, duration, DateTime.parse(dayData[0].date));
+        location.longCoordinate, duration, dayData[0].date);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(getMostFrequentWeatherIcon(dayData)),
             const SizedBox(width: 4),
@@ -32,16 +31,14 @@ class WeatherRowWidget extends StatelessWidget {
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Row(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.umbrella, size: 30),
-            Text('${averagePrecipitation()}mm',
+            Text('${totalPrecipitation()}mm',
                 style: CustomTextStyle.tileTextStyle),
           ],
         ),
         const Padding(padding: EdgeInsets.all(10)),
         Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Icon(CupertinoIcons.sunrise_fill, size: 30),
             SizedBox(height: 4),
@@ -97,13 +94,11 @@ class WeatherRowWidget extends StatelessWidget {
     return mostFrequentIcon;
   }
 
-  String averagePrecipitation() {
+  String totalPrecipitation() {
     double sum = 0;
     for (var item in dayData) {
       sum += item.precipitation;
     }
-    double average = sum / dayData.length;
-    String roundedAverage = average.toStringAsFixed(1);
-    return roundedAverage;
+    return sum.toStringAsFixed(1);
   }
 }

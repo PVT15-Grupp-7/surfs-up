@@ -10,7 +10,7 @@ import 'package:surfs_up/pages/safety_page.dart';
 import 'package:surfs_up/pages/surf_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
 import 'package:surfs_up/services/authentication_service.dart';
-import 'package:surfs_up/pages/for_beginners.dart';
+import 'package:surfs_up/pages/beginners_tips.dart';
 
 class NavigationAdmin extends StatefulWidget {
   const NavigationAdmin({Key? key}) : super(key: key);
@@ -27,6 +27,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
   bool isSwitched = false;
   late Location _selectedLocation;
   late List<List<WeatherData>> _weatherData;
+  Color switchedColor = Colors.red;
 
   void _getWeatherDataList() {
     final String? weatherString =
@@ -42,7 +43,41 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     _getWeatherDataList();
     _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
   }
+ Future<void> _showLogoutConfirmationDialog() async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Log Out'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No', style: TextStyle(color: Colors.red),),
+              onPressed: () {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () async {
+                Navigator.of(context).pop(); // Stänger dialogrutan
 
+                // Visa notifiering
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content:  Text('Logged out successfully'),
+                    backgroundColor: Colors.green,
+                    duration:  Duration(seconds: 2),
+                  ),
+                );
+                await _auth.signOut();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
   void _onItemTapped(int index) {
     setState(() {
       _selectedTab = index;
@@ -67,10 +102,12 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     if (isSwitched == false) {
       setState(() {
         isSwitched = true;
+        switchedColor = Colors.green;
       });
     } else {
       setState(() {
         isSwitched = false;
+        switchedColor = Colors.red;
       });
     }
   }
@@ -83,10 +120,12 @@ class _NavigationAdminState extends State<NavigationAdmin> {
           child: Container(
             margin: const EdgeInsets.only(right: 40),
             child: DropdownButton(
+                alignment: Alignment.center,
+                underline: const SizedBox.shrink(),
                 borderRadius: BorderRadius.circular(20),
                 dropdownColor: kDarkBlue,
                 value: _selectedLocation,
-                icon: const Icon(Icons.keyboard_arrow_down),
+                icon: const Icon(Icons.arrow_drop_down_circle),
                 items: locations.map((location) {
                   return DropdownMenuItem(
                     value: location,
@@ -112,31 +151,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
         child: ListView(
           children: [
             ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Preferences'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PreferencesPage(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.notifications),
-              title: const Text('Notifications'),
-              trailing: Switch(
-                value: isSwitched,
-                onChanged: toggleSwitch,
-                activeColor: kPrimaryColor,
-                activeTrackColor: kPrimaryColor,
-                inactiveThumbColor: Colors.red,
-                inactiveTrackColor: Colors.red,
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.info),
+              leading: const Icon(Icons.info_outline, color: Colors.blue,),
               title: const Text('About us'),
               onTap: () {
                 Navigator.push(
@@ -148,24 +163,48 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.help),
-              title: const Text('For Begginers'),
+              leading: const Icon(Icons.tips_and_updates_outlined, color: Colors.yellow,),
+              title: const Text('Tips for Beginners'),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ForBeginnersPage(),
+                    builder: (context) => const BeginnersTipsPage(),
                   ),
                 );
               },
             ),
             ListTile(
+              leading: Icon(Icons.notifications_outlined, color: switchedColor,),
+              title: const Text('Notifications'),
+              trailing: Switch(
+                value: isSwitched,
+                onChanged: toggleSwitch,
+                activeColor: kPrimaryColor,
+                activeTrackColor: kPrimaryColor,
+                inactiveThumbColor: Colors.red,
+                inactiveTrackColor: Colors.red,
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings_outlined, color: Colors.grey,),
+              title: const Text('Preferences'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PreferencesPage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
               iconColor: Colors.red,
               textColor: Colors.red,
-              leading: const Icon(Icons.logout),
               title: const Text('Sign out'),
               onTap: () async {
-                await _auth.signOut();
+                await _showLogoutConfirmationDialog();
               },
             )
           ],

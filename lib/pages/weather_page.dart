@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:surfs_up/api/weather_data.dart';
@@ -21,7 +20,7 @@ class WeatherPage extends StatelessWidget {
         itemCount: listOfDayWeatherData.length,
         itemBuilder: (_, index) {
           final item = listOfDayWeatherData[index];
-          final DateTime date = DateTime.parse(item.first.date);
+          final DateTime date = item.first.date;
           final DateFormat dateFormat = DateFormat('EEE, MMM d');
           final bool isToday = (index == 0);
           return Padding(
@@ -39,7 +38,7 @@ class WeatherPage extends StatelessWidget {
                 ),
                 expandedCrossAxisAlignment: CrossAxisAlignment.end,
                 title: Text(
-                  isToday ? "Today, avg" : '${dateFormat.format(date)}, avg',
+                  isToday ? "Today" : dateFormat.format(date),
                   style: CustomTextStyle.title3,
                 ),
                 subtitle: WeatherRowWidget(
@@ -57,7 +56,7 @@ class WeatherPage extends StatelessWidget {
                       ),
                     ),
                     child: ListTile(
-                      leading: Text('${DateTime.parse(hourItem.date).hour}:00'),
+                      leading: Text('${hourItem.date.hour}:00'),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [

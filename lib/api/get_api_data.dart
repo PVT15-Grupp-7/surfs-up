@@ -7,11 +7,10 @@ Future<List<WeatherData>> getData(double lat, double lon) async {
   print('------------------print from smhi call------------------');
 
   List<WeatherData> smhiData = await getSMHI(lat, lon);
-  print('smhiData length: ${smhiData.length}');
-  List<WeatherData> yrData = await getYR(lat, lon);
-  print('yrData length: ${yrData.length}');
 
-  for (int i = 0; i < 60; i++) {
+  List<WeatherData> yrData = await getYR(lat, lon);
+
+  for(int i = 0; i <67; i++){
     //70* är antalet timmar som ska hämtas från api:erna, vilket kan vara ett problem om det inte finns så många timmar
     //samlahiop datan från både och slippa värdernas
     WeatherData smhi = smhiData[i];

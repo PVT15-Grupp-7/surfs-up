@@ -8,7 +8,7 @@ import 'package:surfs_up/pages/weather_page.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
 import 'package:surfs_up/shared/widgets/info_alert_box.dart';
-import 'package:surfs_up/shared/widgets/row_widget.dart';
+import 'package:surfs_up/shared/widgets/surf_row_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 class SurfPage extends StatelessWidget {
@@ -24,7 +24,7 @@ class SurfPage extends StatelessWidget {
           itemCount: listOfDayWeatherData.length,
           itemBuilder: (_, index) {
             final item = listOfDayWeatherData[index];
-            final DateTime date = DateTime.parse(item.first.date);
+            final DateTime date = item.first.date;
             final DateFormat dateFormat = DateFormat('EEE, MMM d');
             final bool isToday = (index == 0);
             return Padding(
@@ -42,7 +42,7 @@ class SurfPage extends StatelessWidget {
                   ),
                   expandedCrossAxisAlignment: CrossAxisAlignment.end,
                   title: Text(
-                    isToday ? "Today, avg" : '${dateFormat.format(date)}, avg',
+                    isToday ? "Today" : dateFormat.format(date),
                     style: CustomTextStyle.title3,
                   ),
                   subtitle: RowWidget(dayData: listOfDayWeatherData[index]),
@@ -60,7 +60,7 @@ class SurfPage extends StatelessWidget {
                       ),
                       child: ListTile(
                         leading:
-                            Text('${DateTime.parse(hourItem.date).hour}:00'),
+                            Text('${hourItem.date.hour}:00'),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -71,8 +71,7 @@ class SurfPage extends StatelessWidget {
                             ),
                             ExpandedItem(
                               itemIcon: hourItem.windIcon,
-                              itemText: hourItem.windDirectionSymbol +
-                                  hourItem.windDirection.toString(),
+                              itemText: hourItem.windDirectionSymbol,
                             ),
                             hourItem.surfIcon,
                           ],

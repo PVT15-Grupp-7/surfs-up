@@ -22,18 +22,11 @@ class InfoPage extends StatelessWidget {
                 children: [
                   Text(
                     'Address:\n${location.address}',
-                    style: CustomTextStyle.paragraph1,
+                    style: CustomTextStyle.title3,
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      String url = location.locationURL;
-                      final uri = Uri.parse(url);
-                      if (await canLaunchUrl(uri)) {
-                        await launchUrl(uri,
-                            mode: LaunchMode.externalApplication);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
+                      await _showRedirectConfirmationDialog(context);
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size.zero,
@@ -45,9 +38,10 @@ class InfoPage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               Text(
-                'Seabed and Depth: \n\n${location.seabed}',
-                style: CustomTextStyle.paragraph1,
+                'Seabed and Depth: \n${location.seabed}',
+                style: CustomTextStyle.title3,
               ),
+              const SizedBox(height: 20),
               Center(
                 child: Image(
                   image: AssetImage(location.infoImagePath),
@@ -58,16 +52,12 @@ class InfoPage extends StatelessWidget {
               GestureDetector(
                 onTap: () async {
                   String url = location.infoURL;
-                  final uri = Uri.parse(url);
-                  if (await canLaunchUrl(uri)) {
-                    await launchUrl(uri, mode: LaunchMode.externalApplication);
-                  } else {
-                    throw 'Could not launch $url';
-                  }
+                await  _showOpenLinkConfirmationDialog(context, url);
+                  
                 },
                 child: RichText(
                   text: TextSpan(
-                    text: 'Link to website',
+                    text: 'Link to ${location.name} website',
                     style: CustomTextStyle.paragraph2.copyWith(
                       color: Colors.blue,
                       decoration: TextDecoration.underline,
@@ -79,7 +69,7 @@ class InfoPage extends StatelessWidget {
               const SizedBox(height: 30),
               const Text(
                 'General Information:',
-                style: CustomTextStyle.title2,
+                style: CustomTextStyle.title3,
               ),
               Text(
                 location.description,
@@ -90,4 +80,71 @@ class InfoPage extends StatelessWidget {
       ),
     );
   }
-}
+   Future<void> _showRedirectConfirmationDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Redirect Confirmation'),
+          content: const Text('You will be redirected to Google Maps, are you sure?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () async {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+
+                // Öppna länken i Google Maps
+                String url = location.locationURL;
+                final uri = Uri.parse(url);
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+   Future<void> _showOpenLinkConfirmationDialog(BuildContext context, String url) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Link Confirmation'),
+          content: const Text('Are you sure you want to open the link?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('No', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+              },
+            ),
+            TextButton(
+              child: const Text('Yes'),
+              onPressed: () async {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+
+                // Öppna länken
+                final uri = Uri.parse(url);
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+} 

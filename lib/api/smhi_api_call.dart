@@ -3,14 +3,15 @@ import 'package:surfs_up/api/weather_data.dart';
 import 'package:http/http.dart' as http;
 
 // Variable that decides how many hours of weather data we want to get
-const int _sizeOfWeatherData =
-    60; // 70* hours, vad händer om det inte finns så många timmar
+
+const int _sizeOfWeatherData = 67;
+
 
 // List that will contain all the weather data
 
 Future<List<WeatherData>> getSMHI(double lat, double lon) async {
   List<WeatherData> listOfWeatherData = [];
-  print(listOfWeatherData.length);
+  // print(listOfWeatherData.length);
 
   //creating the request
   var request = http.Request(
@@ -23,22 +24,19 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
   if (response.statusCode == 200) {
     final st = await response.stream.bytesToString();
     final jsonRes = jsonDecode(st);
-    var timeSeriveArr = jsonRes['timeSeries'];
+    var timeSeriesArr = jsonRes['timeSeries'];
 
     for (int i = 0; i < _sizeOfWeatherData; i++) {
-      //print(timeSeriveArr[0]);
-      //print(timeSeriveArr.length);
       double temp = 0, windSpeed = 0, gust = 0, precipitation = 0;
       dynamic windDirection;
       int weatherSymbol = 0;
 
-      String dateTime = timeSeriveArr[i]['validTime'] as String;
-      //print(dateTime);
+      DateTime dateTime = DateTime.parse(timeSeriesArr[i]['validTime']);
       //only 3 days of data
       // if (dateTime.day - DateTime.now().day > 3) {
       //   break;
       // }
-      var parameters = timeSeriveArr[i]['parameters'];
+      var parameters = timeSeriesArr[i]['parameters'];
       for (int j = 0; j < parameters.length; j++) {
         var parameter = parameters[j];
         if (parameter['name'] == 't') {
@@ -60,7 +58,6 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
           windDirection, gust, weatherSymbol, 0, precipitation);
 
       listOfWeatherData.add(weatherData);
-      print(i);
     }
   } else {
     print(response.reasonPhrase);
