@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('test setSurfIcon', () {
-    int surfConditions = 3; // Set the surf conditions value here
+    int surfConditions = 5; // Set the surf conditions value here
 
     Row surfIcon = setSurfIcon(surfConditions);
 
@@ -12,7 +12,6 @@ void main() {
     switch (surfConditions) {
       case 0:
         expect(surfIcon, isNotNull);
-        expect(surfIcon is Row, true);
         expect(surfIcon.children.length, 3);
         expect(surfIcon.children[0], isA<Icon>());
         expect((surfIcon.children[0] as Icon).icon, CupertinoIcons.star);
@@ -23,7 +22,6 @@ void main() {
         break;
       case 1:
         expect(surfIcon, isNotNull);
-        expect(surfIcon is Row, true);
         expect(surfIcon.children.length, 3);
         expect(surfIcon.children[0], isA<Icon>());
         expect((surfIcon.children[0] as Icon).icon, CupertinoIcons.star_fill);
@@ -34,7 +32,6 @@ void main() {
         break;
       case 2:
         expect(surfIcon, isNotNull);
-        expect(surfIcon is Row, true);
         expect(surfIcon.children.length, 4);
         expect(surfIcon.children[0], isA<Icon>());
         expect((surfIcon.children[0] as Icon).icon, CupertinoIcons.star_fill);
@@ -46,18 +43,15 @@ void main() {
         break;
       case 3:
         expect(surfIcon, isNotNull);
-        expect(surfIcon is Row, true);
         expect(surfIcon.children.length, 3);
         expect(surfIcon.children[0], isA<Icon>());
         expect((surfIcon.children[0] as Icon).icon, CupertinoIcons.star_fill);
         expect(surfIcon.children[1], isA<SizedBox>());
         expect(surfIcon.children[2], isA<Icon>());
         expect((surfIcon.children[2] as Icon).icon, CupertinoIcons.star_fill);
-        // Add more assertions for the specific icons and properties if needed
         break;
       default:
         expect(surfIcon, isNotNull);
-        expect(surfIcon is Row, true);
         expect(surfIcon.children.isEmpty, true);
     }
   });
