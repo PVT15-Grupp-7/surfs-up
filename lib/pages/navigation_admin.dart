@@ -43,7 +43,8 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     _getWeatherDataList();
     _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
   }
- Future<void> _showLogoutConfirmationDialog() async {
+
+  Future<void> _showLogoutConfirmationDialog() async {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -52,7 +53,10 @@ class _NavigationAdminState extends State<NavigationAdmin> {
           content: const Text('Are you sure you want to log out?'),
           actions: <Widget>[
             TextButton(
-              child: const Text('No', style: TextStyle(color: Colors.red),),
+              child: const Text(
+                'No',
+                style: TextStyle(color: Colors.red),
+              ),
               onPressed: () {
                 Navigator.of(context).pop(); // Stänger dialogrutan
               },
@@ -65,9 +69,9 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                 // Visa notifiering
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content:  Text('Logged out successfully'),
+                    content: Text('Logged out successfully'),
                     backgroundColor: Colors.green,
-                    duration:  Duration(seconds: 2),
+                    duration: Duration(seconds: 2),
                   ),
                 );
                 await _auth.signOut();
@@ -78,6 +82,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
       },
     );
   }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedTab = index;
@@ -151,7 +156,10 @@ class _NavigationAdminState extends State<NavigationAdmin> {
         child: ListView(
           children: [
             ListTile(
-              leading: const Icon(Icons.info_outline, color: Colors.blue,),
+              leading: const Icon(
+                Icons.info_outline,
+                color: Colors.blue,
+              ),
               title: const Text('About us'),
               onTap: () {
                 Navigator.push(
@@ -163,7 +171,10 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.tips_and_updates_outlined, color: Colors.yellow,),
+              leading: const Icon(
+                Icons.tips_and_updates_outlined,
+                color: Colors.yellow,
+              ),
               title: const Text('Tips for Beginners'),
               onTap: () {
                 Navigator.push(
@@ -175,7 +186,10 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.notifications_outlined, color: switchedColor,),
+              leading: Icon(
+                Icons.notifications_outlined,
+                color: switchedColor,
+              ),
               title: const Text('Notifications'),
               trailing: Switch(
                 value: isSwitched,
@@ -187,7 +201,10 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.settings_outlined, color: Colors.grey,),
+              leading: const Icon(
+                Icons.settings_outlined,
+                color: Colors.grey,
+              ),
               title: const Text('Preferences'),
               onTap: () {
                 Navigator.push(
