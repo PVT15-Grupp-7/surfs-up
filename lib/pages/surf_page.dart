@@ -7,6 +7,7 @@ import 'package:surfs_up/pages/safety_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
+import 'package:surfs_up/shared/widgets/info_alert_box.dart';
 import 'package:surfs_up/shared/widgets/surf_row_widget.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -18,23 +19,7 @@ class SurfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => showDialog(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: const Text('Information'),
-            content: const Text(
-                'Here we can add information about the different data and icons. For example how surfing conditions are calculated and rated'),
-            actions: [
-              TextButton(
-                  onPressed: () => Navigator.pop(context, 'OK'),
-                  child: const Text('OK'))
-            ],
-          ),
-        ),
-        backgroundColor: kPrimaryColor,
-        child: const Icon(Icons.question_mark),
-      ),
+      floatingActionButton: const InfoButtonClass(),
       body: ListView.builder(
           itemCount: listOfDayWeatherData.length,
           itemBuilder: (_, index) {
@@ -57,7 +42,7 @@ class SurfPage extends StatelessWidget {
                   ),
                   expandedCrossAxisAlignment: CrossAxisAlignment.end,
                   title: Text(
-                    isToday ? "Today, avg" : '${dateFormat.format(date)}, avg',
+                    isToday ? "Today" : dateFormat.format(date),
                     style: CustomTextStyle.title3,
                   ),
                   subtitle: RowWidget(dayData: listOfDayWeatherData[index]),

@@ -81,7 +81,10 @@ class WeatherData {
         surfIcon = Row(
           mainAxisSize: MainAxisSize.min,
           children: const [
-            Icon(CupertinoIcons.star_fill),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
             SizedBox(width: 4),
             Icon(CupertinoIcons.star),
             SizedBox(width: 4),
@@ -93,9 +96,15 @@ class WeatherData {
         surfIcon = Row(
           mainAxisSize: MainAxisSize.min,
           children: const [
-            Icon(CupertinoIcons.star_fill),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
             SizedBox(width: 4),
-            Icon(CupertinoIcons.star_fill),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
             SizedBox(width: 4),
             Icon(CupertinoIcons.star),
           ],
@@ -105,11 +114,20 @@ class WeatherData {
         surfIcon = Row(
           mainAxisSize: MainAxisSize.min,
           children: const [
-            Icon(CupertinoIcons.star_fill),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
             SizedBox(width: 4),
-            Icon(CupertinoIcons.star_fill),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
             SizedBox(width: 4),
-            Icon(CupertinoIcons.star_fill),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
           ],
         );
         break;
