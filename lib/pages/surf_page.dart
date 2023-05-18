@@ -15,16 +15,7 @@ class SurfPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (listOfDayWeatherData[0].isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Center(
-            child: Text(
-                'Something went wrong, could not load data for from SMHI and YR.\n\n'
-                'Please try again later.',
-            textAlign: TextAlign.center,)),
-      );
-    } else {
+    if (listOfDayWeatherData[0].isNotEmpty) {
       return Scaffold(
         floatingActionButton: const InfoButtonClass(),
         body: ListView.builder(
@@ -89,6 +80,16 @@ class SurfPage extends StatelessWidget {
                 ),
               );
             }),
+      );
+    } else {
+      return const Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Center(
+            child: Text(
+          'Something went wrong, could not load data for from SMHI and YR.\n\n'
+          'Please try again later.',
+          textAlign: TextAlign.center,
+        )),
       );
     }
   }

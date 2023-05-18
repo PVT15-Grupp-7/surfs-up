@@ -9,6 +9,7 @@ import 'package:surfs_up/shared/widgets/weather_row_widget.dart';
 
 class WeatherPage extends StatelessWidget {
   final Location location;
+
   const WeatherPage(
       {super.key, required this.listOfDayWeatherData, required this.location});
 
@@ -16,16 +17,7 @@ class WeatherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (listOfDayWeatherData[0].isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Center(
-            child: Text(
-              'Something went wrong, could not load data from SMHI and YR.\n\n'
-                  'Please try again later.',
-              textAlign: TextAlign.center,)),
-      );
-    } else {
+    if (listOfDayWeatherData[0].isNotEmpty) {
       return ListView.builder(
           itemCount: listOfDayWeatherData.length,
           itemBuilder: (_, index) {
@@ -57,7 +49,7 @@ class WeatherPage extends StatelessWidget {
                   textColor: Colors.white,
                   children: item.map((WeatherData hourItem) {
                     return Container(
-                      width: 500,
+                      // width: 500,
                       decoration: BoxDecoration(
                         color: kDarkBlue,
                         border: Border.all(
@@ -87,6 +79,16 @@ class WeatherPage extends StatelessWidget {
               ),
             );
           });
+    } else {
+      return const Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Center(
+            child: Text(
+          'Something went wrong, could not load data from SMHI and YR.\n\n'
+          'Please try again later.',
+          textAlign: TextAlign.center,
+        )),
+      );
     }
   }
 }
