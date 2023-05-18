@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:surfs_up/services/authentication_service.dart';
+
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/api/app_preferences.dart';
 import 'package:surfs_up/api/weather_data.dart';
@@ -9,7 +12,6 @@ import 'package:surfs_up/pages/preferences_page.dart';
 import 'package:surfs_up/pages/safety_page.dart';
 import 'package:surfs_up/pages/surf_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
-import 'package:surfs_up/services/authentication_service.dart';
 import 'package:surfs_up/pages/for_beginners.dart';
 
 class NavigationAdmin extends StatefulWidget {
@@ -41,6 +43,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     _selectedLocation = locations[0];
     _getWeatherDataList();
     _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
+
   }
 
   void _onItemTapped(int index) {
