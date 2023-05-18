@@ -16,66 +16,77 @@ class WeatherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: listOfDayWeatherData.length,
-        itemBuilder: (_, index) {
-          final item = listOfDayWeatherData[index];
-          final DateTime date = item.first.date;
-          final DateFormat dateFormat = DateFormat('EEE, MMM d');
-          final bool isToday = (index == 0);
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Card(
-              // key: PageStorageKey(item['id']),
-              color: kMediumBlue,
-              elevation: 4,
-              child: ExpansionTile(
-                iconColor: Colors.white,
-                collapsedTextColor: Colors.white,
-                collapsedIconColor: Colors.white,
-                childrenPadding: const EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                expandedCrossAxisAlignment: CrossAxisAlignment.end,
-                title: Text(
-                  isToday ? "Today" : dateFormat.format(date),
-                  style: CustomTextStyle.title3,
-                ),
-                subtitle: WeatherRowWidget(
-                    dayData: listOfDayWeatherData[index], location: location),
-                tilePadding: const EdgeInsets.all(11),
-                textColor: Colors.white,
-                children: item.map((WeatherData hourItem) {
-                  return Container(
-                    width: 500,
-                    decoration: BoxDecoration(
-                      color: kDarkBlue,
-                      border: Border.all(
-                        color: kTransparentGrey,
-                        width: 1,
+    if (listOfDayWeatherData[0].isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Center(
+            child: Text(
+              'Something went wrong, could not load data from SMHI and YR.\n\n'
+                  'Please try again later.',
+              textAlign: TextAlign.center,)),
+      );
+    } else {
+      return ListView.builder(
+          itemCount: listOfDayWeatherData.length,
+          itemBuilder: (_, index) {
+            final item = listOfDayWeatherData[index];
+            final DateTime date = item.first.date;
+            final DateFormat dateFormat = DateFormat('EEE, MMM d');
+            final bool isToday = (index == 0);
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Card(
+                // key: PageStorageKey(item['id']),
+                color: kMediumBlue,
+                elevation: 4,
+                child: ExpansionTile(
+                  iconColor: Colors.white,
+                  collapsedTextColor: Colors.white,
+                  collapsedIconColor: Colors.white,
+                  childrenPadding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  expandedCrossAxisAlignment: CrossAxisAlignment.end,
+                  title: Text(
+                    isToday ? "Today, avg" : '${dateFormat.format(date)}, avg',
+                    style: CustomTextStyle.title3,
+                  ),
+                  subtitle: WeatherRowWidget(
+                      dayData: listOfDayWeatherData[index], location: location),
+                  tilePadding: const EdgeInsets.all(11),
+                  textColor: Colors.white,
+                  children: item.map((WeatherData hourItem) {
+                    return Container(
+                      width: 500,
+                      decoration: BoxDecoration(
+                        color: kDarkBlue,
+                        border: Border.all(
+                          color: kTransparentGrey,
+                          width: 1,
+                        ),
                       ),
-                    ),
-                    child: ListTile(
-                      leading: Text('${hourItem.date.hour}:00'),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ExpandedItem(
-                            itemIcon: hourItem.weatherIcon,
-                            itemText: ' ${hourItem.temperature}',
-                          ),
-                          ExpandedItem(
-                            itemIcon: Icons.umbrella,
-                            itemText: '${hourItem.precipitation}mm',
-                          ),
-                        ],
+                      child: ListTile(
+                        leading: Text('${hourItem.date.hour}:00'),
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ExpandedItem(
+                              itemIcon: hourItem.weatherIcon,
+                              itemText: ' ${hourItem.temperature}',
+                            ),
+                            ExpandedItem(
+                              itemIcon: Icons.umbrella,
+                              itemText: '${hourItem.precipitation}mm',
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
-            ),
-          );
-        });
+            );
+          });
+    }
   }
 }

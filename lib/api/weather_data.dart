@@ -277,17 +277,21 @@ class WeatherData {
     List<List<WeatherData>> weatherData = [[]];
     List<WeatherData> weatherList = decode(text);
 
+    if (weatherList.isEmpty) {
+      return weatherData;
+    }
+
     int currentDay = weatherList[0].date.day;
 
     for (int i = 0, j = 0; i < weatherList.length; i++) {
-        if (weatherList[i].date.day == currentDay) {
-          weatherData[j].add(weatherList[i]);
-          currentDay = weatherList[i].date.day;
-        } else if (weatherData.length < 5) {
-          weatherData.add([]);
-          weatherData[++j].add(weatherList[i]);
-          currentDay = weatherList[i].date.day;
-        }
+      if (weatherList[i].date.day == currentDay) {
+        weatherData[j].add(weatherList[i]);
+        currentDay = weatherList[i].date.day;
+      } else if (weatherData.length < 5) {
+        weatherData.add([]);
+        weatherData[++j].add(weatherList[i]);
+        currentDay = weatherList[i].date.day;
+      }
     }
     return weatherData;
   }
