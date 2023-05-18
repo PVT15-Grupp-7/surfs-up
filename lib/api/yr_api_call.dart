@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'weather_data.dart';
 import 'package:http/http.dart' as https;
 
-const int _sizeOfWeatherData = 70;
-
 Future<List<WeatherData>> getYR(double lat, double lon) async {
   List<WeatherData> yrweatherData = [];
 
@@ -43,9 +41,9 @@ List<WeatherData> getValues(var jsonRes) {
   List<WeatherData> yrweatherData = [];
 
   var properties = jsonRes['properties'];
-  var timeseries = properties['timeseries'];
+  List timeseries = properties['timeseries'];
 
-  for (int i = 0; i < _sizeOfWeatherData; i++) {
+  for (int i = 0; i < timeseries.length; i++) {
     var timeserie = timeseries[i];
     DateTime dateTime = DateTime.parse(timeserie['time']);
 
@@ -53,10 +51,8 @@ List<WeatherData> getValues(var jsonRes) {
     var instant = data['instant'];
     var details = instant['details'];
 
-
     WeatherData weatherData = WeatherData(dateTime, details['air_temperature'],
         details['wind_speed'], details['wind_from_direction'], 0.0, 0, 0, 0);
-
 
     yrweatherData.add(weatherData);
   }
