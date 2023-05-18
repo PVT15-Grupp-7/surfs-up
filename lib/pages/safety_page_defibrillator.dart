@@ -3,10 +3,17 @@ import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SafetyPageDefibrillatorPage extends StatelessWidget {
+class SafetyPageDefibrillatorPage extends StatefulWidget {
   final Location location;
 
-  const SafetyPageDefibrillatorPage({super.key, required this.location});
+  const SafetyPageDefibrillatorPage({Key? key, required this.location}) : super(key: key);
+
+  @override
+  _SafetyPageDefibrillatorPageState createState() => _SafetyPageDefibrillatorPageState();
+}
+
+class _SafetyPageDefibrillatorPageState extends State<SafetyPageDefibrillatorPage> {
+  Locale _selectedLocale = const Locale('en', 'US');
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +21,44 @@ class SafetyPageDefibrillatorPage extends StatelessWidget {
       backgroundColor: const Color(0xFF132246),
       appBar: AppBar(
         title: const Text('Defibrillator'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.language),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Choose Language'),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.language),
+                        title: const Text('English'),
+                        onTap: () {
+                          setState(() {
+                            _selectedLocale = const Locale('en', 'US');
+                          });
+                          Navigator.pop(context);
+                        },
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.language),
+                        title: const Text('Swedish'),
+                        onTap: () {
+                          setState(() {
+                            _selectedLocale = const Locale('sv', 'SE');
+                          });
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -24,28 +69,30 @@ class SafetyPageDefibrillatorPage extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: Text(
-                  location.name,
+                  widget.location.name,
                   style: CustomTextStyle.title1,
                 ),
               ),
-              Image.asset(location.defibrillatorImagePath,
+              Image.asset(
+                widget.location.defibrillatorImagePath,
                 height: 300,
                 width: 400,
               ),
               const SizedBox(height: 10),
               Text(
-                'Nearest Defibrillator in ${location.name}:\n'
-                    'See link for more information,',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Nearest Defibrillator in ${widget.location.name}:\nSee link for more information'
+                    : 'Närmaste hjärtstartare i ${widget.location.name}:\nSe länken för mer information',
                 style: CustomTextStyle.title3,
               ),
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () async {
-                   await _showOpenLinkConfirmationDialog(context, location.defibrillatorURL);
+                  await _showOpenLinkConfirmationDialog(context, widget.location.defibrillatorURL);
                 },
                 child: RichText(
                   text: TextSpan(
-                    text: 'Link',
+                    text: _selectedLocale == const Locale('en', 'US') ? 'Link' : 'Länk',
                     style: CustomTextStyle.title2.copyWith(
                       color: Colors.blue,
                       decoration: TextDecoration.underline,
@@ -59,13 +106,14 @@ class SafetyPageDefibrillatorPage extends StatelessWidget {
       ),
     );
   }
+
   Future<void> _showOpenLinkConfirmationDialog(BuildContext context, String url) async {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Link Confirmation'),
-          content: const Text('Are you sure you want to open the link?'),
+          content: const Text('Are you sure you want to open the link ?'),
           actions: <Widget>[
             TextButton(
               child: const Text('No', style: TextStyle(color: Colors.red)),
@@ -79,8 +127,8 @@ class SafetyPageDefibrillatorPage extends StatelessWidget {
                 Navigator.of(context).pop(); // Stänger dialogrutan
 
                 final uri = Uri.parse(url);
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+                if (await canLaunch(uri.toString())) {
+                  await launch(uri.toString(), forceSafariVC: false);
                 } else {
                   throw 'Could not launch $uri';
                 }
@@ -92,3 +140,4 @@ class SafetyPageDefibrillatorPage extends StatelessWidget {
     );
   }
 }
+

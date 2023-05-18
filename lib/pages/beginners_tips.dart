@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
-import 'beginners_tips_Swedish.dart';
+import '../shared/constants/colors.dart';
 
 class BeginnersTipsPage extends StatefulWidget {
   const BeginnersTipsPage({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPage> {
               showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
-                  title: const Text('Select Language'),
+                  title: const Text('Choose Language'),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -43,15 +42,12 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPage> {
                       ),
                       ListTile(
                         leading: const Icon(Icons.language),
-                        title: const Text('Svenska'),
+                        title: const Text('Swedish'),
                         onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const BeginnersTipsPageSwedish(),
-                            ),
-                          );
+                          setState(() {
+                            _selectedLocale = const Locale('sv', 'SE');
+                          });
+                          Navigator.pop(context);
                         },
                       ),
                     ],
@@ -67,91 +63,123 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPage> {
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: const [
+            children: [
               Text(
-                'Tips for Beginners to Surfing:',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Tips for Beginners in Surfing:'
+                    : 'Tips för nybörjare inom surfing:',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
               Text(
-                'As a beginner in surfing, here are some important things to keep in mind to get a good start:',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'As a beginner in surfing, there are a few important things to keep in mind to get a good start:'
+                    : 'Som nybörjare inom surfing finns det några viktiga saker att tänka på för att få en bra start:',
                 style: CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'Safety:',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Safety:'
+                    : 'Säkerhet:',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
               Text(
-                'Prioritize your own safety and others\' safety in the water. Learn about surf conditions, underwater currents, and local hazards. Always use a suitable surf leash and consider a surf guard if needed.',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Prioritize your own safety and the safety of others in the water. Learn about surf conditions, underwater currents, and local hazards. Always use an appropriate surf leash and consider a surf buddy if needed.'
+                    : 'Prioritera din egen säkerhet och andras säkerhet i vattnet. Lär dig om surfvillkor, undervattensströmmar och lokala faror. Använd alltid ett lämpligt surfbandslina och överväg en surfvakt om det behövs.',
                 style: CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'Proper Equipment:',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Proper Equipment:'
+                    : 'Rätt utrustning:',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
               Text(
-                'Start with a larger and more stable surfboard, often called a "longboard" or "mini-mal." Use a suitable wetsuit and surf wax to improve grip on the board.',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Start with a larger and more stable surfboard, often called a "longboard" or "mini-mal". Use a suitable wetsuit and surf wax for better grip on the board.'
+                    : 'Börja med en större och stabilare surfbräda, ofta kallad "longboard" eller "mini-mal". Använd en lämplig våtdräkt och surfvax för bättre grepp på brädan.',
                 style: CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'Basic Technique:',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Basic Technique:'
+                    : 'Grundläggande teknik:',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
               Text(
-                  'Learn the proper paddling technique to get out to the waves. Practice standing up on the board in shallow water before venturing into waves. Keep your gaze forward and use your arms and legs to balance.',
-                  style: CustomTextStyle.paragraph1,
-                  textAlign: TextAlign.center),
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Learn the proper paddling technique to get out to the waves. Practice standing up on the board in shallow water before venturing into the waves. Keep your gaze forward and use your arms and legs to balance.'
+                    : 'Lär dig rätt paddlingsteknik för att ta dig ut till vågorna. Öva på att stå upp på brädan i grunt vatten innan du vågar dig ut i vågorna. Håll blicken framåt och använd armarna och benen för att balansera.',
+                style: CustomTextStyle.paragraph1,
+                textAlign: TextAlign.center,
+              ),
               Text(
-                'Respect for Other Surfers:',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Respect for Other Surfers:'
+                    : 'Respekt för andra surfare:',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
               Text(
-                'Follow the rules of water traffic, give priority to those already riding a wave, and avoid collisions with other surfers.',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Follow the rules of water traffic, give priority to those already surfing a wave, and avoid collisions with other surfers.'
+                    : 'Följ reglerna för vattentrafik, ge företräde åt de som redan surfar på en våg och undvik kollisioner med andra surfare.',
                 style: CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'Physical Conditioning:',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Physical Fitness:'
+                    : 'Fysisk kondition:',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
               Text(
-                'Be in good physical shape by exercising regularly and stretching to avoid injuries.',
-                style: CustomTextStyle.paragraph1,
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Stay in good physical shape by exercising regularly and stretching to avoid injuries.'
+                    : 'Håll dig i god fysisk form genom att träna regelbundet och stretcha för att undvika skador.',
+                style : CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'Patience:',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Patience:'
+                    : 'Tålamod:',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: _textSpacing),
               Text(
-                'Have realistic expectations and be patient. Becoming a skilled surfer takes time and practice.',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Have realistic expectations and be patient. Becoming a skilled surfer takes time and practice.'
+                    : 'Ha realistiska förväntningar och var tålmodig. Att bli en skicklig surfare tar tid och övning.',
                 style: CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'By keeping these points in mind and gaining the right education and experience, you as a beginner will be well-prepared to enjoy the exciting world of surfing.',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'By keeping these points in mind and gaining the right knowledge and experience, you as a beginner will be well prepared to enjoy the exciting world of surfing.'
+                    : 'Genom att ha dessa punkter i åtanke och skaffa rätt kunskap och erfarenhet kommer du som nybörjare att vara väl förberedd för att njuta av den spännande världen av surfing.',
                 style: CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: _textSpacing),
               Text(
-                'Contact us at \nsurfs-up@gmail.com',
+                _selectedLocale == const Locale('en', 'US')
+                    ? 'Contact us at \nsurfs-up@gmail.com'
+                    : 'Kontakta oss på \nsurfs-up@gmail.com',
                 style: CustomTextStyle.title2,
                 textAlign: TextAlign.center,
               ),
@@ -166,3 +194,5 @@ class _BeginnersTipsPageState extends State<BeginnersTipsPage> {
     );
   }
 }
+
+

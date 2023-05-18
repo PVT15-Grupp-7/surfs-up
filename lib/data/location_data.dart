@@ -27,6 +27,8 @@ class Location {
       required this.sharedPreferences,
       required this.longCoordinate,
       required this.latCoordinate});
+
+  get descriptionSwedish => null;
 }
 
 final List<Location> locations = [
