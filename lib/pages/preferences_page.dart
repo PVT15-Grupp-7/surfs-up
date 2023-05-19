@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:surfs_up/all_pages.dart';
+import 'package:surfs_up/language_provider.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
+import 'package:surfs_up/shared/widgets/language_dialog_button_widget.dart';
 
 class PreferencesPage extends StatefulWidget {
   const PreferencesPage({super.key});
@@ -38,29 +41,34 @@ class _PreferencesPageState extends State<PreferencesPage> {
       });
     }
   }
-  
 
   Future<bool> _onBackPressed() {
+    final selectedLanguage =
+        Provider.of<LanguageProvider>(context, listen: false).selectedLanguage;
     return showCupertinoDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(
                   backgroundColor: kDarkBlue,
                   elevation: 8,
-                  title: const Text(
-                    'Do you want to save the changes?',
+                  title: Text(
+                    selectedLanguage == Language.english
+                        ? 'Do you want to save the changes?'
+                        : 'Vill du spara ändringarna?',
                     style: CustomTextStyle.paragraph1,
                   ),
                   actions: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(true),
-                      child: const Text(
-                        'No',
-                        style: TextStyle(color: Colors.red),
+                      child: Text(
+                        selectedLanguage == Language.english ? 'No' : 'Nej',
+                        style: const TextStyle(color: Colors.red),
                       ),
                     ),
                     TextButton(
                         onPressed: () => Navigator.of(context).pop(true),
-                        child: const Text('Yes'))
+                        child: Text(selectedLanguage == Language.english
+                            ? 'Yes'
+                            : 'Ja'))
                   ],
                 ),
             barrierDismissible: false)
@@ -69,13 +77,21 @@ class _PreferencesPageState extends State<PreferencesPage> {
 
   @override
   Widget build(BuildContext context) {
+    final selectedLanguage =
+        Provider.of<LanguageProvider>(context).selectedLanguage;
+
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: const Color(0xFF0C152D),
-          title: const Text('Preferences'),
+          title: Text(selectedLanguage == Language.english
+              ? 'Preferences'
+              : 'Inställningar'),
+          actions: const [
+            LanguageDialogButton(),
+          ],
         ),
         backgroundColor: const Color(0xFF132246),
         body: Center(
@@ -84,8 +100,10 @@ class _PreferencesPageState extends State<PreferencesPage> {
             const Padding(
               padding: EdgeInsets.all(10),
             ),
-            const Text(
-              'I want to recieve notifications from',
+            Text(
+              selectedLanguage == Language.english
+                  ? 'I want to recieve notifications from'
+                  : 'Jag vill få notifikationer från',
               style: CustomTextStyle.paragraph1,
             ),
             CheckboxListTile(
@@ -115,8 +133,10 @@ class _PreferencesPageState extends State<PreferencesPage> {
               },
             ),
             const Padding(padding: EdgeInsets.all(10)),
-            const Text(
-              'I only want notifications when the wind is',
+            Text(
+              selectedLanguage == Language.english
+                  ? 'I only want notifications when the wind is'
+                  : 'Jag vill bara få notifikationer när vinden är',
               style: CustomTextStyle.paragraph1,
             ),
             const Padding(padding: EdgeInsets.all(5)),
@@ -139,8 +159,8 @@ class _PreferencesPageState extends State<PreferencesPage> {
                         checkDropdownValues();
                       });
                     }),
-                const Text(
-                  'to',
+                Text(
+                  selectedLanguage == Language.english ? 'to' : 'till',
                   style: CustomTextStyle.paragraph1,
                 ),
                 DropdownButton(
@@ -164,7 +184,7 @@ class _PreferencesPageState extends State<PreferencesPage> {
             const Padding(padding: EdgeInsets.all(10)),
             ElevatedButton(
                 onPressed: () {
-                  _showSaveConfirmationDialog();
+                  _showSaveConfirmationDialog(selectedLanguage);
                   // add functionality
                 },
                 style: ElevatedButton.styleFrom(
@@ -174,43 +194,53 @@ class _PreferencesPageState extends State<PreferencesPage> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: const Text('Save', style: CustomTextStyle.paragraph1)),
+                child: Text(
+                    selectedLanguage == Language.english ? 'Save' : 'Spara',
+                    style: CustomTextStyle.paragraph1)),
           ],
         )),
       ),
     );
   }
-  void _showSaveConfirmationDialog() {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Save Confirmation'),
-        content: const Text('Do you want to save the changes?'),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('No'),
-            onPressed: () {
-              Navigator.of(context).pop(); // Stänger dialogrutan
-            },
-          ),
-          TextButton(
-            child: const Text('Yes'),
-            onPressed: () {
-              Navigator.of(context).pop(); // Stänger dialogrutan
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar (
-                  content:  Text('Changes saved'),
-                  backgroundColor: Colors.green,
-                  duration:  Duration(seconds: 2),
-                ),
-              );
-              Navigator.of(context).pop(); // Återgår till navigation_admin.dart
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
+
+  void _showSaveConfirmationDialog(Language language) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(language == Language.english
+              ? 'Save Confirmation'
+              : 'Bekräfta valet'),
+          content: Text(language == Language.english
+              ? 'Do you want to save the changes?'
+              : 'Vill du spara ändringarna?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text(language == Language.english ? 'No' : 'Nej'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+              },
+            ),
+            TextButton(
+              child: Text(language == Language.english ? 'Yes' : 'Ja'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Stänger dialogrutan
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(language == Language.english
+                        ? 'Changes saved'
+                        : 'Ändringar sparade'),
+                    backgroundColor: Colors.green,
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+                Navigator.of(context)
+                    .pop(); // Återgår till navigation_admin.dart
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
