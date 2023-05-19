@@ -180,3 +180,16 @@ List<WeatherData> decode(String text) {
       .map<WeatherData>((item) => WeatherData.fromJson(item))
       .toList();
 }
+
+@override
+String toString() {
+  var date = DateTime.now().toUtc();
+  var gust;
+  var surfConditions;
+  var precipitation;
+  var weatherSymbol;
+  var windDirection;
+  var windSpeed;
+  var temperature;
+  return 'WeatherData date: ${date.toIso8601String().replaceFirst('Z', '')}, temperature: $temperature, windSpeed: $windSpeed, windDirection: $windDirection, gust: $gust, weatherSymbol: $weatherSymbol, surfConditions: $surfConditions, precipitation: $precipitation';
+}
