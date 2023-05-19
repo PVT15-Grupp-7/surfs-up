@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:surfs_up/data/location_data.dart';
+import 'package:surfs_up/language_provider.dart';
 import 'package:surfs_up/pages/safety_page-emergency.dart';
 import 'package:surfs_up/pages/safety_page_defibrillator.dart';
 
 class SafetyPage extends StatelessWidget {
   final Location location;
+
   const SafetyPage({Key? key, required this.location}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final selectedLanguage =
+        Provider.of<LanguageProvider>(context).selectedLanguage;
+
     return Scaffold(
       body: Column(
         // Placera innehållet längst upp på skärmen
@@ -44,8 +50,10 @@ class SafetyPage extends StatelessWidget {
                       ),
                     ),
                     // Texten inuti knappen
-                    child: const Text(
-                      'Emergency',
+                    child: Text(
+                      selectedLanguage == Language.english
+                          ? 'Emergency'
+                          : 'Nödsituation',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -58,8 +66,9 @@ class SafetyPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                SafetyPageDefibrillatorPage(location: location,)),
+                            builder: (context) => SafetyPageDefibrillatorPage(
+                                  location: location,
+                                )),
                       );
                     },
                     // Stilen på knappen
