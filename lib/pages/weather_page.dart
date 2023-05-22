@@ -47,11 +47,16 @@ class WeatherPage extends StatelessWidget {
                       dayData: listOfDayWeatherData[index], location: location),
                   tilePadding: const EdgeInsets.all(11),
                   textColor: Colors.white,
-                  children: item.map((WeatherData hourItem) {
+                  children: item.asMap().entries.map((entry) {
+                    final WeatherData hourItem = entry.value;
+                    final int hourIndex = entry.key;
+                    final bool isEven = hourIndex % 2 == 0;
+                    final Color tileColor =
+                        isEven ? kDarkBlue : const Color(0xff212943);
                     return Container(
                       // width: 500,
                       decoration: BoxDecoration(
-                        color: kDarkBlue,
+                        color: tileColor,
                         border: Border.all(
                           color: kTransparentGrey,
                           width: 1,

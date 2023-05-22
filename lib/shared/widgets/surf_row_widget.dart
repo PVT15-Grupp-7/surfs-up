@@ -1,15 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:surfs_up/api/weather_data.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 
 class RowWidget extends StatelessWidget {
-  const RowWidget({Key? key, required this.dayData}) : super(key: key);
+  RowWidget({Key? key, required this.dayData}) : super(key: key);
 
   final List<WeatherData> dayData;
+  Row surfIcon = Row();
 
   @override
   Widget build(BuildContext context) {
     final mostFrequentSymbol = getMostFrequentWindDirectionSymbol(dayData);
+    int highestSurfCondition = findHighestSurfCondition(dayData);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -32,9 +35,8 @@ class RowWidget extends StatelessWidget {
         const Padding(padding: EdgeInsets.all(10)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(Icons.waves_outlined, size: 30),
-            Text('OK', style: CustomTextStyle.tileTextStyle),
+          children: [
+            setSurfIcon(highestSurfCondition),
           ],
         ),
       ],
@@ -102,5 +104,106 @@ class RowWidget extends StatelessWidget {
     });
 
     return mostFrequentIcon;
+  }
+
+  Row setSurfIcon(int surfConditions) {
+    switch (surfConditions) {
+      case 0:
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+          ],
+        );
+
+      case 1:
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+          ],
+        );
+
+      case 2:
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+          ],
+        );
+
+      case 3:
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+          ],
+        );
+
+      default:
+        return Row();
+    }
+  }
+
+  int findHighestSurfCondition(List<WeatherData> dayData) {
+    int highestSurfCondition = 0;
+    for (var data in dayData) {
+      if (data.surfConditions > highestSurfCondition) {
+        highestSurfCondition = data.surfConditions;
+      }
+    }
+    return highestSurfCondition;
   }
 }

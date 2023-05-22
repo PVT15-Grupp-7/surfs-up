@@ -69,13 +69,21 @@ class WeatherData {
           children: const [
             Icon(
               CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
             ),
             SizedBox(width: 4),
-            Icon(CupertinoIcons.star),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
             SizedBox(width: 4),
-            Icon(CupertinoIcons.star),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
           ],
         );
+
         break;
       case 1:
         surfIcon = Row(
@@ -86,9 +94,15 @@ class WeatherData {
               color: Colors.yellow,
             ),
             SizedBox(width: 4),
-            Icon(CupertinoIcons.star),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
             SizedBox(width: 4),
-            Icon(CupertinoIcons.star),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
           ],
         );
         break;
@@ -106,7 +120,10 @@ class WeatherData {
               color: Colors.yellow,
             ),
             SizedBox(width: 4),
-            Icon(CupertinoIcons.star),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
           ],
         );
         break;
