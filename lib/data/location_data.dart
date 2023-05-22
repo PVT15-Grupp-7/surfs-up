@@ -78,17 +78,18 @@ final List<Location> locations = [
     name: 'Väddö',
     address: '760 40 Väddö',
     descriptionSE:
-        'Denna avlånga ö ligger i norra Roslagen norr om Stockholm och är GRYM att surfa på! Här finns det något för alla, '
-        'oavsett om du är nybörjare eller erfaren. Väddö är en av de bästa platserna i Sverige för att lära sig att vindsurfa på. '
-        'Det är en stor vik med långgrunt vatten och en sandstrand som gör att det är lätt att komma igång. Det är också en bra '
-        'plats för att lära sig att vågsurfa på. När det blåser hårt från sydost till sydväst så kommer det in riktigt bra vågor '
-        'som är perfekta för att lära sig att vågsurfa på. Det är också en bra plats för att lära sig att vågsurfa på. När det '
-        'blåser hårt från sydost till sydväst så kommer det in riktigt bra vågor som är perfekta för att lära sig att vågsurfa på.\n\n '
-        'Det är också en bra plats för att lära sig att vågsurfa på. När det blåser hårt från sydost till sydväst så kommer det in '
-        'riktigt bra vågor som är perfekta för att lära sig att vågsurfa på. Det är också en bra plats för att lära sig att vågsurfa på. '
-        'När det blåser hårt från sydost till sydväst så kommer det in riktigt bra vågor som är perfekta för att lära sig att vågsurfa på. '
-        'Det är också en bra plats för att lära sig att vågsurfa på. När det blåser hårt från sydost till sydväst så kommer det in riktigt '
-        'bra vågor som är perfekta för att lära sig att vågsurfa på.',
+        'Väddö, en vacker och naturskön plats belägen vid Stockholms skärgård, erbjuder en fantastisk upplevelse för'
+        'surfentusiaster. Med sin långa och vidsträckta kustlinje är Väddö ett populärt resmål för dem som älskar att rida '
+        'vågorna.\n\nAtt surfa på Väddö innebär att ge sig ut på det öppna havet och möta de kraftfulla bränningarna. Med ett '
+        'varierat utbud av surfspots kan surfare här hitta vågor som passar både nybörjare och mer erfarna åkare. Oavsett om '
+        'du är ute efter höga vågor att utmana dig själv med eller mjuka och långa vågor att cruisa på, har Väddö något att '
+        'erbjuda.\n\nFörutom de imponerande vågorna har Väddö också en unik och orörd natur som omger surfområdena. De omgivande '
+        'skogarna och klipporna ger en lugn och avkopplande atmosfär. Det är inte ovanligt att se sälar eller havsfåglar som '
+        'sällskap under din surfsession, vilket förstärker känslan av att vara i harmoni med naturen.\n\nSurfinggemenskapen på '
+        'Väddö är välkomnande och passionerad. Här kan du möta likasinnade surfare och dela upplevelser och tips. Det finns'
+        'även möjligheter att delta i surfskolor eller hyra utrustning om du vill testa på sporten för första gången.\n\nAtt '
+        'surfa på Väddö är en chans att koppla av, njuta av naturen och utmana sig själv i vattnet. Det är en plats där '
+        'surfare kan finna sin frid och känna spänningen av att erövra vågorna.',
     descriptionEN:
         'This elongated island is located in northern Roslagen north of Stockholm and is AWESOME for surfing! There is something for everyone here, '
         'whether you are a beginner or experienced. Väddö is one of the best places in Sweden to learn windsurfing.It is a large bay with shallow water '
