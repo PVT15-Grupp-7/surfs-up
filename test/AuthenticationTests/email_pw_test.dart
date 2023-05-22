@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:surfs_up/services/authentication_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+// Detta är mestadels en lösning från chatGPT, men som inte verkar intiera FB på rätt sätt.
+
 // Create a mock FirebaseAuth instance
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
 
