@@ -2,16 +2,8 @@ import 'dart:convert';
 import 'package:surfs_up/api/weather_data.dart';
 import 'package:http/http.dart' as http;
 
-// Variable that decides how many hours of weather data we want to get
-
-const int _sizeOfWeatherData = 67;
-
-
-// List that will contain all the weather data
-
 Future<List<WeatherData>> getSMHI(double lat, double lon) async {
   List<WeatherData> listOfWeatherData = [];
-  // print(listOfWeatherData.length);
 
   //creating the request
   var request = http.Request(
@@ -24,9 +16,10 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
   if (response.statusCode == 200) {
     final st = await response.stream.bytesToString();
     final jsonRes = jsonDecode(st);
-    var timeSeriesArr = jsonRes['timeSeries'];
+    List timeSeriesArr = jsonRes['timeSeries'];
+    print(timeSeriesArr.length);
 
-    for (int i = 0; i < _sizeOfWeatherData; i++) {
+    for (int i = 0; i < timeSeriesArr.length; i++) {
       double temp = 0, windSpeed = 0, gust = 0, precipitation = 0;
       dynamic windDirection;
       int weatherSymbol = 0;
@@ -62,7 +55,6 @@ Future<List<WeatherData>> getSMHI(double lat, double lon) async {
   } else {
     print(response.reasonPhrase);
   }
-
   return listOfWeatherData;
 }
 

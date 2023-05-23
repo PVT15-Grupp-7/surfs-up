@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:surfs_up/language_provider.dart';
 import 'package:surfs_up/pages/wrapper.dart';
 import 'package:surfs_up/services/authentication_service.dart';
 import 'data/app_user_data.dart';
@@ -60,12 +61,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<AppUser?>.value(
-      value: AuthenticationService().user,
-      initialData: null,
-      child: MaterialApp(
-        home: const Wrapper(),
-        theme: themeData(),
+    return ChangeNotifierProvider(
+      create: (_) => LanguageProvider(),
+      child: StreamProvider<AppUser?>.value(
+        value: AuthenticationService().user,
+        initialData: null,
+        child: Consumer<LanguageProvider>(
+          builder: (context, languageProvider, _) {
+            return MaterialApp(
+              home: const Wrapper(),
+              theme: themeData(),
+            );
+          },
+        ),
       ),
     );
   }
