@@ -47,7 +47,9 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
   }
 
+
   Future<void> _showLogoutConfirmationDialog(Language language) async {
+
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -58,9 +60,11 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               : "Är du säker på att du vill logga ut?"),
           actions: <Widget>[
             TextButton(
+
               child: Text(
                 language == Language.english ? 'No' : "Nej",
                 style: const TextStyle(color: Colors.red),
+
               ),
               onPressed: () {
                 Navigator.of(context).pop(); // Stänger dialogrutan
@@ -73,12 +77,14 @@ class _NavigationAdminState extends State<NavigationAdmin> {
 
                 // Visa notifiering
                 ScaffoldMessenger.of(context).showSnackBar(
+
                   SnackBar(
                     content: Text(language == Language.english
                         ? 'Logged out successfully'
                         : "Utloggad"),
                     backgroundColor: Colors.green,
                     duration: const Duration(seconds: 2),
+
                   ),
                 );
                 await _auth.signOut();
@@ -169,8 +175,10 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                 Icons.info_outline,
                 color: Colors.blue,
               ),
+
               title: Text(
                   selectedLanguage == Language.english ? 'About us' : "Om oss"),
+
               onTap: () {
                 Navigator.push(
                   context,
@@ -185,9 +193,11 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                 Icons.tips_and_updates_outlined,
                 color: Colors.yellow,
               ),
+
               title: Text(selectedLanguage == Language.english
                   ? 'Tips for Beginners'
                   : "Tips för nybörjare"),
+
               onTap: () {
                 Navigator.push(
                   context,
@@ -202,9 +212,11 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                 Icons.notifications_outlined,
                 color: switchedColor,
               ),
+
               title: Text(selectedLanguage == Language.english
                   ? 'Notifications'
                   : "Notifikationer"),
+
               trailing: Switch(
                 value: isSwitched,
                 onChanged: toggleSwitch,
@@ -219,9 +231,11 @@ class _NavigationAdminState extends State<NavigationAdmin> {
                 Icons.settings_outlined,
                 color: Colors.grey,
               ),
+
               title: Text(selectedLanguage == Language.english
                   ? 'Preferences'
                   : "Preferenser"),
+
               onTap: () {
                 Navigator.push(
                   context,
