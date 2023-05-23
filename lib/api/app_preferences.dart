@@ -9,6 +9,12 @@ class AppPref {
     if (_init) return;
     preferences = await SharedPreferences.getInstance();
     _init = true;
+    if(preferences.getString('surfUpLanguage') == null) {
+      preferences.setString('surfUpLanguage', 'Language.english');
+    }
+    if(preferences.getBool('notification') == null) {
+      preferences.setBool('notification', false);
+    }
     return preferences;
   }
 
@@ -18,11 +24,14 @@ class AppPref {
 
   static Language getLanguage() {
     String? language = preferences.getString('surfUpLanguage');
-
-    if (language == null) {
-      preferences.setString('surfUpLanguage', 'Language.english');
-      language = 'Language.english';
-    }
     return language == 'Language.english' ? Language.english : Language.swedish;
+  }
+
+  static bool? getNotification() {
+    return preferences.getBool('notification');
+  }
+
+  static void setNotification(bool value) {
+    preferences.setBool('notification', value);
   }
 }
