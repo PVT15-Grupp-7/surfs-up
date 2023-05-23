@@ -10,7 +10,7 @@ class LanguageProvider extends ChangeNotifier {
 
   void setLanguage(Language language) {
     if (_selectedLanguage != language) {
-      AppPref.preferences.setString('surfUpLanguage', language.toString());
+      AppPref.setLanguage(language);
       _selectedLanguage = language;
       notifyListeners();
     }
