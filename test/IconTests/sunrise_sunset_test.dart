@@ -19,13 +19,15 @@ void main() {
       address: '',
       defibrillatorImagePath: '',
       defibrillatorURL: '',
-      description: '',
       infoImagePath: '',
       infoURL: '',
       locationURL: '',
       name: '',
-      seabed: '',
       sharedPreferences: '',
+      descriptionEN: '',
+      descriptionSE: '',
+      seabedEN: '',
+      seabedSE: '',
     );
 
     DateTime sunrise = DateTime.parse('2023-05-12T05:42:00Z');
