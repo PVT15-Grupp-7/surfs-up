@@ -5,7 +5,7 @@ import 'package:surfs_up/api/weather_data.dart';
 void main() {
   test('test getWeatherData', () {
     String text =
-        '[{"date": "2023-05-12T00:00:00.000Z", "temperature": 25, "windSpeed": 10, "windDirection": 180, "gust": 15, "weatherSymbol": 1, "surfConditions": 0, "precipitation": 0}, {"date": "2023-05-13T00:00:00.000Z", "temperature": 26, "windSpeed": 11, "windDirection": 190, "gust": 16, "weatherSymbol": 2, "surfConditions": 1, "precipitation": 0}, {"date": "2023-05-13T00:00:00.000Z", "temperature": 27, "windSpeed": 12, "windDirection": 200, "gust": 17, "weatherSymbol": 3, "surfConditions": 2, "precipitation": 0}, {"date": "2023-05-14T00:00:00.000Z", "temperature": 28, "windSpeed": 13, "windDirection": 210, "gust": 18, "weatherSymbol": 4, "surfConditions": 3, "precipitation": 0}]';
+        '[{"date": "2023-05-12T00:00:00.000Z", "temperature": 25, "windSpeed": 10, "windDirection": 180, "gust": 15, "weatherSymbol": 1, "surfConditions": 0, "precipitation": 0.0}, {"date": "2023-05-13T00:00:00.000Z", "temperature": 26, "windSpeed": 11, "windDirection": 190, "gust": 16, "weatherSymbol": 2, "surfConditions": 1, "precipitation": 0.0}, {"date": "2023-05-13T00:00:00.000Z", "temperature": 27, "windSpeed": 12, "windDirection": 200, "gust": 17, "weatherSymbol": 3, "surfConditions": 2, "precipitation": 0.0}, {"date": "2023-05-14T00:00:00.000Z", "temperature": 28, "windSpeed": 13, "windDirection": 210, "gust": 18, "weatherSymbol": 4, "surfConditions": 3, "precipitation": 0.0}]';
 
     List<List<WeatherData>> expectedWeatherData = [
       [
@@ -17,7 +17,7 @@ void main() {
           15,
           1,
           0,
-          0,
+          0.0,
         )
       ],
       [
@@ -29,7 +29,7 @@ void main() {
           16,
           2,
           1,
-          0,
+          0.0,
         ),
         WeatherData(
           DateTime.parse('2023-05-13T00:00:00.000Z'),
@@ -39,7 +39,7 @@ void main() {
           17,
           3,
           2,
-          0,
+          0.0,
         )
       ],
       [
@@ -51,7 +51,7 @@ void main() {
           18,
           4,
           3,
-          0,
+          0.0,
         )
       ]
     ];
@@ -80,25 +80,25 @@ void main() {
 
   test('test toMap', () {
     WeatherData weatherData = WeatherData(
-      DateTime.parse('2023-05-12T00:00:00.000Z'),
+      DateTime.parse('2023-05-12 00:00:00.000Z'),
       25,
       10,
       180,
       15,
       1,
       0,
-      0,
+      0.0,
     );
 
     Map<String, dynamic> expectedMap = {
-      'date': '2023-05-12T00:00:00.000Z',
+      'date': '2023-05-12 00:00:00.000Z',
       'temperature': 25,
       'windSpeed': 10,
       'windDirection': 180,
       'gust': 15,
       'weatherSymbol': 1,
       'surfConditions': 0,
-      'precipitation': 0,
+      'precipitation': 0.0,
     };
 
     Map<String, dynamic> result = toMap(weatherData);
@@ -131,7 +131,7 @@ void main() {
     ];
 
     String expectedEncodedData =
-        '[{"date":"2023-05-12T00:00:00.000Z","temperature":25,"windSpeed":10,"windDirection":180,"gust":15,"weatherSymbol":1,"surfConditions":0,"precipitation":0},{"date":"2023-05-13T00:00:00.000Z","temperature":26,"windSpeed":11,"windDirection":190,"gust":16,"weatherSymbol":2,"surfConditions":1,"precipitation":0}]';
+        '[{"date":"2023-05-12 00:00:00.000Z","temperature":25,"windSpeed":10,"windDirection":180,"gust":15,"weatherSymbol":1,"surfConditions":0,"precipitation":0.0},{"date":"2023-05-13 00:00:00.000Z","temperature":26,"windSpeed":11,"windDirection":190,"gust":16,"weatherSymbol":2,"surfConditions":1,"precipitation":0.0}]';
 
     String result = encode(weatherData);
 
