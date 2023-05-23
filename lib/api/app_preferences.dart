@@ -9,13 +9,19 @@ class AppPref {
     if (_init) return;
     preferences = await SharedPreferences.getInstance();
     _init = true;
-    if(preferences.getString('surfUpLanguage') == null) {
-      preferences.setString('surfUpLanguage', 'Language.english');
-    }
-    if(preferences.getBool('notification') == null) {
-      preferences.setBool('notification', false);
-    }
+    await firstTimeSetup();
     return preferences;
+  }
+
+  static firstTimeSetup() {
+    if(preferences.getBool('surfUpSetup') == null) {
+      setLanguage(Language.english);
+      setNotification(false);
+      setLocationNotification('toroNotification', false);
+      setLocationNotification('vaddoNotification', false);
+      setNotificationWindValues(['5', '10']);
+      preferences.setBool('surfUpSetup', true);
+    }
   }
 
   static getString(String key) {
@@ -27,11 +33,31 @@ class AppPref {
     return language == 'Language.english' ? Language.english : Language.swedish;
   }
 
+  static void setLanguage(Language language) {
+    preferences.setString('surfUpLanguage', language.toString());
+  }
+
   static bool? getNotification() {
     return preferences.getBool('notification');
   }
 
   static void setNotification(bool value) {
     preferences.setBool('notification', value);
+  }
+
+  static bool? getLocationNotification(String location) {
+    return preferences.getBool(location);
+  }
+
+  static void setLocationNotification(String location, bool value) {
+    preferences.setBool(location, value);
+  }
+
+  static List<String> getNotificationWindValues() {
+    return preferences.getStringList('windValues')!;
+  }
+
+  static void setNotificationWindValues(List<String> values) {
+    preferences.setStringList('windValues', values);
   }
 }
