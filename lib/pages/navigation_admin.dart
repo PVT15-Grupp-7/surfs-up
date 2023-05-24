@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:surfs_up/services/authentication_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import 'package:surfs_up/services/authentication_service.dart';
+import 'package:surfs_up/services/notification_service.dart';
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/api/app_preferences.dart';
 import 'package:surfs_up/api/weather_data.dart';
@@ -23,13 +27,13 @@ class NavigationAdmin extends StatefulWidget {
 
 class _NavigationAdminState extends State<NavigationAdmin> {
   final AuthenticationService _auth = AuthenticationService();
+  final NotificationService _notificationService = NotificationService();
 
   late int _selectedTab;
   late Widget _selectedPage;
   bool isSwitched = false;
   late Location _selectedLocation;
   late List<List<WeatherData>> _weatherData;
-
   void _getWeatherDataList() {
     final String? weatherString =
         AppPref.getString(_selectedLocation.sharedPreferences);
@@ -43,6 +47,8 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     _selectedLocation = locations[0];
     _getWeatherDataList();
     _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
+    _notificationService.init();
+    _notificationService.setupMessages();
 
   }
 
@@ -72,6 +78,27 @@ class _NavigationAdminState extends State<NavigationAdmin> {
       setState(() {
         isSwitched = false;
       });
+    }
+  }
+
+  Future<void> setupMessages() async {
+    RemoteMessage? message =
+      await FirebaseMessaging.instance.getInitialMessage();
+    
+    if (message != null ) {
+      handleNavigation(message);
+    }
+
+    FirebaseMessaging.onMessageOpenedApp.listen(handleNavigation);
+  }
+
+  void handleNavigation(RemoteMessage message) {
+    if (message.from == 'surf') {
+      // Navigate to SurfPage
+      _onItemTapped(0);
+    } else if (message.from == 'weather') {
+      // Navigate to WeatherPage
+      _onItemTapped(1);
     }
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:surfs_up/pages/auth/sign_up_page.dart';
-import 'package:surfs_up/pages/auth/sign_in_page.dart';
+import 'package:surfs_up/pages/login_pages/sign_up_page.dart';
+import 'package:surfs_up/pages/login_pages/sign_in_page.dart';
 
 /// This class is the wrapper for the authentication (sign in and sign up) pages.
 /// Whenever the user switches between sign in and sign up, the state is updated
