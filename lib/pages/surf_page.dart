@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/api/weather_data.dart';
-import 'package:surfs_up/pages/preferences_page.dart';
-import 'package:surfs_up/pages/safety_page.dart';
-import 'package:surfs_up/pages/weather_page.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
 import 'package:surfs_up/shared/widgets/info_alert_box.dart';
+import 'package:surfs_up/shared/widgets/instagram_button.dart';
 import 'package:surfs_up/shared/widgets/surf_row_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:social_share/social_share.dart';
 
 class SurfPage extends StatelessWidget {
   const SurfPage({super.key, required this.listOfDayWeatherData});
@@ -21,35 +16,6 @@ class SurfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          String contentUrl =
-              'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif';
-          String encodedContentUrl = Uri.encodeFull(contentUrl);
-
-          // ska kolla om insta finns på enheten
-          if (await canLaunch("instagram://")) {
-
-            await launch("instagram://camera");
-
-
-            await Future.delayed(const Duration(seconds: 1));
-
-
-            String storyCreationUrl =
-                "instagram://story-camera?media=$encodedContentUrl";
-
-
-            await launch(Uri.parse(storyCreationUrl).toString());
-          } else {
-            print("Instagram app not installed.");
-
-
-          }
-        },
-        child: const Text("Share to Instagram Story"),
-      ),
-      //floatingActionButton: const InfoButtonClass(),
       body: ListView.builder(
           itemCount: listOfDayWeatherData.length,
           itemBuilder: (_, index) {
@@ -89,8 +55,7 @@ class SurfPage extends StatelessWidget {
                         ),
                       ),
                       child: ListTile(
-                        leading:
-                            Text('${hourItem.date.hour}:00'),
+                        leading: Text('${hourItem.date.hour}:00'),
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -113,6 +78,21 @@ class SurfPage extends StatelessWidget {
               ),
             );
           }),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            bottom: 16.0,
+            right: 16.0,
+            child: InfoButtonClass(),
+          ),
+          Positioned(
+            bottom: 16.0,
+            left: 16.0,
+            child: InstagramButtonClass(),
+          ),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
