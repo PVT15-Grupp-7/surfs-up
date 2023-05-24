@@ -36,8 +36,8 @@ Future callAPIs() async {
   //print(toroData.length);
   //print(vaddoData.length);
 
-  checkSurfConditions(vaddoData, 'vaddo');
-  checkSurfConditions(toroData, 'toro');
+  await checkSurfConditions(vaddoData, 'vaddo');
+  await checkSurfConditions(toroData, 'toro');
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final encodedData = WeatherData.encode(toroData);

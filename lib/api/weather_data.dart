@@ -11,8 +11,8 @@ class WeatherData {
   IconData weatherIcon = Icons.wb_sunny_outlined;
   IconData windIcon = Icons.arrow_right_alt_outlined;
   String windDirectionSymbol = "";
-  int surfConditions = 0;
-  int surf = 0;
+  late int surfConditions;
+  late int surf;
   double precipitation;
   Row surfIcon = Row();
 
