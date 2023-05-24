@@ -88,7 +88,11 @@ class NotificationService {
     }
   }
 
-  void setupMessage() {}
+  void setupMessage() {
+
+
+    
+  }
 
 
   void createChannel(AndroidNotificationChannel channel) async {

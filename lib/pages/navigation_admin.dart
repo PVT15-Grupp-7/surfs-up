@@ -75,27 +75,6 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     }
   }
 
-  Future<void> setupMessages() async {
-    RemoteMessage? message =
-      await FirebaseMessaging.instance.getInitialMessage();
-    
-    if (message != null ) {
-      handleNavigation(message);
-    }
-
-    FirebaseMessaging.onMessageOpenedApp.listen(handleNavigation);
-  }
-
-  void handleNavigation(RemoteMessage message) {
-    if (message.from == 'surf') {
-      // Navigate to SurfPage
-      _onItemTapped(0);
-    } else if (message.from == 'weather') {
-      // Navigate to WeatherPage
-      _onItemTapped(1);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
