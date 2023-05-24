@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:surfs_up/pages/wrapper.dart';
 import 'package:surfs_up/services/authentication_service.dart';
-import 'package:surfs_up/services/notification_service.dart';
 import 'data/app_user_data.dart';
 import 'firebase/firebase_options.dart';
 import 'all_pages.dart';
@@ -19,12 +16,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await FirebaseMessaging.instance.getInitialMessage();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-  callAPIs();
   AppPref.init();
-  runApp(const MyApp());
+  callAPIs();
+  
+runApp(const MyApp());
 }
 
 /// Main application widget. It provides a theme for the application and a StreamProvider
@@ -76,8 +71,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  print('Handling a background message ${message.messageId}');
 }
