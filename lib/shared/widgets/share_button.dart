@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:surfs_up/all_pages.dart';
+import 'package:surfs_up/language_provider.dart';
 
 class ShareButtonClass extends StatelessWidget {
   const ShareButtonClass({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final selectedLanguage =
+        Provider.of<LanguageProvider>(context).selectedLanguage;
+
     return FloatingActionButton(
       onPressed: () => showDialog(
         context: context,
@@ -14,7 +19,9 @@ class ShareButtonClass extends StatelessWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          title: const Text('Share to Social Media'),
+          title: Text(selectedLanguage == Language.english
+              ? 'Share to social media'
+              : "Dela på sociala medier"),
           content: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
@@ -40,10 +47,14 @@ class ShareButtonClass extends StatelessWidget {
             Row(
               children: [
                 TextButton(
-                  onPressed: () => Navigator.pop(context, 'Cancel'),
-                  child: const Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.red),
+                  onPressed: () => Navigator.pop(
+                      context,
+                      selectedLanguage == Language.english
+                          ? 'Cancel'
+                          : "Avbryt"),
+                  child: Text(
+                    selectedLanguage == Language.english ? 'Cancel' : 'Avbryt',
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
               ],
@@ -57,6 +68,9 @@ class ShareButtonClass extends StatelessWidget {
   }
 
   Widget _facebookSymbol(BuildContext context) {
+    final selectedLanguage =
+        Provider.of<LanguageProvider>(context).selectedLanguage;
+
     return FloatingActionButton(
       onPressed: () => showDialog(
         context: context,
@@ -65,7 +79,9 @@ class ShareButtonClass extends StatelessWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          title: const Text('Share to Facebook'),
+          title: Text(selectedLanguage == Language.english
+              ? 'Share to Facebook'
+              : 'Dela på Facebook'),
           content: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Column(
@@ -80,23 +96,32 @@ class ShareButtonClass extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.red),
+                    onPressed: () => Navigator.pop(
+                        context,
+                        selectedLanguage == Language.english
+                            ? 'Cancel'
+                            : "Avbryt"),
+                    child: Text(
+                      selectedLanguage == Language.english
+                          ? 'Cancel'
+                          : 'Avbryt',
+                      style: const TextStyle(color: Colors.red),
                     )),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context, 'Share');
                     Navigator.of(context).popUntil((route) => route.isFirst);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Succesfully shared to Facebook'),
-                        duration: Duration(seconds: 2),
+                      SnackBar(
+                        content: Text(selectedLanguage == Language.english
+                            ? 'Succesfully shared to Facebook'
+                            : 'Lyckad delning till Facebook'),
+                        duration: const Duration(seconds: 2),
                       ),
                     );
                   },
-                  child: const Text('Share'),
+                  child: Text(
+                      selectedLanguage == Language.english ? 'Share' : 'Dela'),
                 ),
               ],
             ),
@@ -112,6 +137,9 @@ class ShareButtonClass extends StatelessWidget {
   }
 
   Widget _instagramSymbol(BuildContext context) {
+    final selectedLanguage =
+        Provider.of<LanguageProvider>(context).selectedLanguage;
+
     return FloatingActionButton(
       onPressed: () => showDialog(
         context: context,
@@ -120,7 +148,9 @@ class ShareButtonClass extends StatelessWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          title: const Text('Share to Instagram'),
+          title: Text(selectedLanguage == Language.english
+              ? 'Share to Instagram'
+              : 'Dela på Instagram'),
           content: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Column(
@@ -135,23 +165,36 @@ class ShareButtonClass extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.red),
+                    onPressed: () => Navigator.pop(
+                        context,
+                        selectedLanguage == Language.english
+                            ? 'Cancel'
+                            : 'Avbryt'),
+                    child: Text(
+                      selectedLanguage == Language.english
+                          ? 'Cancel'
+                          : 'Avbryt',
+                      style: const TextStyle(color: Colors.red),
                     )),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context, 'Share');
+                    Navigator.pop(
+                        context,
+                        selectedLanguage == Language.english
+                            ? 'Share'
+                            : 'Dela');
                     Navigator.of(context).popUntil((route) => route.isFirst);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Succesfully shared to Instagram'),
-                        duration: Duration(seconds: 2),
+                      SnackBar(
+                        content: Text(selectedLanguage == Language.english
+                            ? 'Succesfully shared to Instagram'
+                            : 'Lyckad delning till Instagram'),
+                        duration: const Duration(seconds: 2),
                       ),
                     );
                   },
-                  child: const Text('Share'),
+                  child: Text(
+                      selectedLanguage == Language.english ? 'Share' : 'Dela'),
                 ),
               ],
             ),
@@ -167,6 +210,9 @@ class ShareButtonClass extends StatelessWidget {
   }
 
   Widget _snapchatSymbol(BuildContext context) {
+    final selectedLanguage =
+        Provider.of<LanguageProvider>(context).selectedLanguage;
+
     return FloatingActionButton(
       onPressed: () => showDialog(
         context: context,
@@ -175,7 +221,9 @@ class ShareButtonClass extends StatelessWidget {
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
-            title: const Text('Share to Snapchat'),
+            title: Text(selectedLanguage == Language.english
+                ? 'Share to Snapchat'
+                : 'Dela på Snapchat'),
             content: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Column(
@@ -190,23 +238,34 @@ class ShareButtonClass extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                      child: const Text(
-                        'Cancel',
-                        style: TextStyle(color: Colors.red),
+                      onPressed: () => Navigator.pop(
+                          context,
+                          selectedLanguage == Language.english
+                              ? 'Cancel'
+                              : 'Avbryt'),
+                      child: Text(
+                        selectedLanguage == Language.english
+                            ? 'Cancel'
+                            : 'Avbryt',
+                        style: const TextStyle(color: Colors.red),
                       )),
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(context, 'Share');
+                      Navigator.pop(context,
+                          selectedLanguage == Language ? 'Share' : 'Dela');
                       Navigator.of(context).popUntil((route) => route.isFirst);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Succesfully shared to Snapchat'),
-                          duration: Duration(seconds: 2),
+                        SnackBar(
+                          content: Text(selectedLanguage == Language.english
+                              ? 'Succesfully shared to Snapchat'
+                              : 'Lyckad delning till Snapchat'),
+                          duration: const Duration(seconds: 2),
                         ),
                       );
                     },
-                    child: const Text('Share'),
+                    child: Text(selectedLanguage == Language.english
+                        ? 'Share'
+                        : 'Dela'),
                   ),
                 ],
               ),
@@ -221,6 +280,9 @@ class ShareButtonClass extends StatelessWidget {
   }
 
   Widget _whatsappSymbol(BuildContext context) {
+    final selectedLanguage =
+        Provider.of<LanguageProvider>(context).selectedLanguage;
+
     return FloatingActionButton(
       onPressed: () => showDialog(
         context: context,
@@ -229,7 +291,9 @@ class ShareButtonClass extends StatelessWidget {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          title: const Text('Share to WhatsApp'),
+          title: Text(selectedLanguage == Language.english
+              ? 'Share to WhatsApp'
+              : 'Dela på WhatsApp'),
           content: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Column(
@@ -244,23 +308,36 @@ class ShareButtonClass extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.red),
+                    onPressed: () => Navigator.pop(
+                        context,
+                        selectedLanguage == Language.english
+                            ? 'Cancel'
+                            : 'Avbryt'),
+                    child: Text(
+                      selectedLanguage == Language.english
+                          ? 'Cancel'
+                          : 'Avbryt',
+                      style: const TextStyle(color: Colors.red),
                     )),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context, 'Share');
+                    Navigator.pop(
+                        context,
+                        selectedLanguage == Language.english
+                            ? 'Share'
+                            : 'Dela');
                     Navigator.of(context).popUntil((route) => route.isFirst);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Succesfully shared to WhatsApp'),
-                        duration: Duration(seconds: 2),
+                      SnackBar(
+                        content: Text(selectedLanguage == Language.english
+                            ? 'Succesfully shared to WhatsApp'
+                            : 'Lyckad delning till WhatsApp'),
+                        duration: const Duration(seconds: 2),
                       ),
                     );
                   },
-                  child: const Text('Share'),
+                  child: Text(
+                      selectedLanguage == Language.english ? 'Share' : 'Dela'),
                 ),
               ],
             ),
