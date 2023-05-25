@@ -5,8 +5,8 @@ import 'package:surfs_up/api/weather_data.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
 import 'package:surfs_up/shared/widgets/info_alert_box.dart';
+import 'package:surfs_up/shared/widgets/share_button.dart';
 import 'package:surfs_up/shared/widgets/surf_row_widget.dart';
-import 'package:flutter/cupertino.dart';
 
 class SurfPage extends StatelessWidget {
   const SurfPage({super.key, required this.listOfDayWeatherData});
@@ -17,7 +17,6 @@ class SurfPage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (listOfDayWeatherData[0].isNotEmpty) {
       return Scaffold(
-        floatingActionButton: const InfoButtonClass(),
         body: ListView.builder(
             itemCount: listOfDayWeatherData.length,
             itemBuilder: (_, index) {
@@ -80,6 +79,21 @@ class SurfPage extends StatelessWidget {
                 ),
               );
             }),
+        floatingActionButton: Stack(
+          children: const [
+            Positioned(
+              bottom: 16.0,
+              right: 16.0,
+              child: InfoButtonClass(),
+            ),
+            Positioned(
+              bottom: 16.0,
+              left: 16.0,
+              child: ShareButtonClass(),
+            ),
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
     } else {
       return const Padding(
