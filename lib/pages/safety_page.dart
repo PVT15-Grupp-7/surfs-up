@@ -20,7 +20,7 @@ class SafetyPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 0),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -37,10 +37,10 @@ class SafetyPage extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red,
-                      fixedSize: const Size(250, 75),
+                      fixedSize: const Size(405, 75),
                       textStyle: const TextStyle(fontSize: 30),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                     ),
                     child: Text(
@@ -62,10 +62,10 @@ class SafetyPage extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(250, 75),
+                      fixedSize: const Size(405, 75),
                       textStyle: const TextStyle(fontSize: 30),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                     ),
                     child: const Text('Defibrillator'),
@@ -73,13 +73,13 @@ class SafetyPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Text(
                 selectedLanguage == Language.english
-                    ? 'For new surfers, it is important to be aware of the safety aspects and consider the following points:'
-                    : 'För nya surfare är det viktigt att vara medveten om säkerhetsaspekterna och att ta hänsyn till följande punkter:',
+                    ? '🛟 General Safety Information:'
+                    : '🛟 Generell Säkerhetsinformation:',
                 textAlign: TextAlign.center,
                 style:const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
