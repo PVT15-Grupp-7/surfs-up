@@ -5,7 +5,7 @@ import 'package:surfs_up/api/weather_data.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
 import 'package:surfs_up/shared/widgets/info_alert_box.dart';
-import 'package:surfs_up/shared/widgets/instagram_button.dart';
+import 'package:surfs_up/shared/widgets/share_button.dart';
 import 'package:surfs_up/shared/widgets/surf_row_widget.dart';
 
 class SurfPage extends StatelessWidget {
@@ -79,7 +79,7 @@ class SurfPage extends StatelessWidget {
             );
           }),
       floatingActionButton: Stack(
-        children: [
+        children: const [
           Positioned(
             bottom: 16.0,
             right: 16.0,
@@ -88,7 +88,7 @@ class SurfPage extends StatelessWidget {
           Positioned(
             bottom: 16.0,
             left: 16.0,
-            child: InstagramButtonClass(),
+            child: ShareButtonClass(),
           ),
         ],
       ),
