@@ -45,14 +45,22 @@ class SurfPage extends StatelessWidget {
                     subtitle: RowWidget(dayData: listOfDayWeatherData[index]),
                     tilePadding: const EdgeInsets.all(11),
                     textColor: Colors.white,
-                    children: item.map((WeatherData hourItem) {
+                    children: item.asMap().entries.map((entry) {
+                      final WeatherData hourItem = entry.value;
+                      final int hourIndex = entry.key;
+                      final bool isEven = hourIndex % 2 == 0;
+                      final Color tileColor = isEven
+                          ? kDarkBlue
+                          : const Color(
+                              0xff212943); // Set the colors for every other ListTile
+
                       return Container(
                         width: 500,
                         decoration: BoxDecoration(
-                          color: kDarkBlue,
+                          color: tileColor,
                           border: Border.all(
-                            color: kTransparentGrey,
-                            width: 1,
+                            color: Colors.white,
+                            width: 0.65,
                           ),
                         ),
                         child: ListTile(

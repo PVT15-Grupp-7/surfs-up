@@ -61,11 +61,18 @@ class InfoButtonClass extends StatelessWidget {
             children: const [
               Icon(
                 CupertinoIcons.star,
+                color: Color(0xFF5A5A5A),
               ),
               SizedBox(width: 2),
-              Icon(CupertinoIcons.star),
+              Icon(
+                CupertinoIcons.star,
+                color: Color(0xFF5A5A5A),
+              ),
               SizedBox(width: 2),
-              Icon(CupertinoIcons.star),
+              Icon(
+                CupertinoIcons.star,
+                color: Color(0xFF5A5A5A),
+              ),
             ],
           ),
           const SizedBox(height: 4),
@@ -98,12 +105,18 @@ class InfoButtonClass extends StatelessWidget {
                 color: Colors.yellow,
               ),
               SizedBox(width: 2),
-              Icon(CupertinoIcons.star),
+              Icon(
+                CupertinoIcons.star,
+                color: Color(0xFF5A5A5A),
+              ),
               SizedBox(width: 2),
-              Icon(CupertinoIcons.star),
+              Icon(
+                CupertinoIcons.star,
+                color: Color(0xFF5A5A5A),
+              ),
             ],
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -138,7 +151,10 @@ class InfoButtonClass extends StatelessWidget {
                 color: Colors.yellow,
               ),
               SizedBox(width: 2),
-              Icon(CupertinoIcons.star),
+              Icon(
+                CupertinoIcons.star,
+                color: Color(0xFF5A5A5A),
+              ),
             ],
           ),
           const SizedBox(height: 4),
