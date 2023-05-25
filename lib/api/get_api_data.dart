@@ -1,25 +1,28 @@
 import 'smhi_api_call.dart';
 import 'weather_data.dart';
 import 'yr_api_call.dart';
-import 'surf_conditions_algorithm.dart';
 
 Future<List<WeatherData>> getData(double lat, double lon) async {
   print('------------------print from smhi call------------------');
 
   List<WeatherData> smhiData = await getSMHI(lat, lon);
-
   List<WeatherData> yrData = await getYR(lat, lon);
+  print('SMHI length:${smhiData.length}');
+  print('YR length:${yrData.length}');
 
-  for(int i = 0; i <67; i++){
-    //70* är antalet timmar som ska hämtas från api:erna, vilket kan vara ett problem om det inte finns så många timmar
-    //samlahiop datan från både och slippa värdernas
-    WeatherData smhi = smhiData[i];
-    WeatherData yr = yrData[i];
+  if (smhiData.isEmpty) {
+    return smhiData;
+  } else if (yrData.isNotEmpty) {
+    for (int i = 0; i < 48; i++) {
+      //samla ihop datan från både och slippa värdernas
+      WeatherData smhi = smhiData[i];
+      WeatherData yr = yrData[i];
 
-    smhi.setTemperature(((smhi.temperature + yr.temperature) / 2).round());
-    smhi.setWindSpeed(((smhi.windSpeed + yr.windSpeed) / 2).round());
-    smhi.setWindDirection(
-        ((smhi.windDirection + yr.windDirection) / 2).round());
+      smhi.setTemperature(((smhi.temperature + yr.temperature) / 2).round());
+      smhi.setWindSpeed(((smhi.windSpeed + yr.windSpeed) / 2).round());
+      smhi.setWindDirection(
+          ((smhi.windDirection + yr.windDirection) / 2).round());
+    }
   }
 
   //Anropa surf algoritmen här
