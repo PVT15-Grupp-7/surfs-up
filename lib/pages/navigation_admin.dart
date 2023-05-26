@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:surfs_up/services/authentication_service.dart';
 import 'package:surfs_up/services/notification_service.dart';
 import 'package:provider/provider.dart';
@@ -14,8 +13,6 @@ import 'package:surfs_up/pages/preferences_page.dart';
 import 'package:surfs_up/pages/safety_page.dart';
 import 'package:surfs_up/pages/surf_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
-import 'package:surfs_up/pages/for_beginners.dart';
-import 'package:surfs_up/services/authentication_service.dart';
 import 'package:surfs_up/pages/beginners_tips.dart';
 import 'package:surfs_up/shared/widgets/language_dialog_button_widget.dart';
 
@@ -265,7 +262,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
               label: selectedLanguage == Language.english ? 'Weather' : 'Väder',
               backgroundColor: kDarkBlue),
           BottomNavigationBarItem(
-              icon: const Icon(Icons.heart_broken),
+              icon: const Icon(Icons.health_and_safety),
               label:
                   selectedLanguage == Language.english ? 'Safety' : 'Säkerhet',
               backgroundColor: kDarkBlue),

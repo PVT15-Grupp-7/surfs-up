@@ -43,11 +43,17 @@ class SafetyPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                     ),
-                    child: Text(
-                      selectedLanguage == Language.english
-                          ? 'Emergency'
-                          : 'Nödsituation',
-                      style: const TextStyle(color: Colors.white),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(Icons.local_hospital),
+                        Text(
+                          selectedLanguage == Language.english
+                              ? ' Emergency'
+                              : ' Nödsituation',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -69,7 +75,13 @@ class SafetyPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                     ),
-                    child: const Text('Defibrillator'),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(Icons.heart_broken),
+                        Text(' Defibrillator'),
+                      ],
+                    ),
                   ),
                 ],
               ),
