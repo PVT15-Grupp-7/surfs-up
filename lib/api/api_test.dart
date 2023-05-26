@@ -9,7 +9,7 @@ void main() async{
 
   List<WeatherData> list = getSMHI(57.80, 18.80) as List<WeatherData>;
 
-  cheackSurfConditions(list, 'toro');
+  checkSurfConditions(list, 'toro');
 
 
   for (int i = 0; i < 6; i++) {

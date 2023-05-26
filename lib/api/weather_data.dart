@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class WeatherData {
-  String date;
+  DateTime date;
   dynamic windDirection, temperature, windSpeed, gust;
 
   //symbol to display the weather icon and surf conditions 0-3 or 5 depending how we want it
@@ -11,17 +11,18 @@ class WeatherData {
   IconData weatherIcon = Icons.wb_sunny_outlined;
   IconData windIcon = Icons.arrow_right_alt_outlined;
   String windDirectionSymbol = "";
-  int surfConditions = 0;
-  int surf = 0;
+  late int surfConditions;
+  late int surf;
   double precipitation;
-
+  Row surfIcon = Row();
 
   WeatherData(this.date, this.temperature, this.windSpeed, this.windDirection,
-      this.gust, this.weatherSymbol, this.surfConditions,this.precipitation) {
+      this.gust, this.weatherSymbol, this.surfConditions, this.precipitation) {
     gust = gust.round();
     setWeatherIcon(weatherSymbol);
     setWindSymbol(windDirection);
     setWindSymbolOne(windDirection);
+    setSurfIcon(surfConditions);
   }
 
   void setWeatherSymbol(int weatherSymbol) {
@@ -54,6 +55,102 @@ class WeatherData {
 
   void setSurf(int surf) {
     this.surf = surf;
+  }
+
+  void setPrecipitation(double precipitation) {
+    this.precipitation = precipitation;
+  }
+
+  void setSurfIcon(int surfConditions) {
+    switch (surfConditions) {
+      case 0:
+        surfIcon = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+          ],
+        );
+
+        break;
+      case 1:
+        surfIcon = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+          ],
+        );
+        break;
+      case 2:
+        surfIcon = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star,
+              color: Color(0xFF5A5A5A),
+            ),
+          ],
+        );
+        break;
+      case 3:
+        surfIcon = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+            SizedBox(width: 4),
+            Icon(
+              CupertinoIcons.star_fill,
+              color: Colors.yellow,
+            ),
+          ],
+        );
+        break;
+      default:
+        surfIcon = Row();
+    }
   }
 
   void setWeatherIcon(dynamic weatherSymbol) {
@@ -146,14 +243,14 @@ class WeatherData {
 
     // Define the wind direction symbols and their corresponding values
     final symbols = {
-      CupertinoIcons.arrow_up: 0,
-      CupertinoIcons.arrow_up_right: 45,
-      CupertinoIcons.arrow_right: 90,
-      CupertinoIcons.arrow_down_right: 135,
-      CupertinoIcons.arrow_down: 180,
-      CupertinoIcons.arrow_down_left: 225,
-      CupertinoIcons.arrow_left: 270,
-      CupertinoIcons.arrow_up_left: 315,
+      CupertinoIcons.arrow_down: 0,
+      CupertinoIcons.arrow_down_left: 45,
+      CupertinoIcons.arrow_left: 90,
+      CupertinoIcons.arrow_up_left: 135,
+      CupertinoIcons.arrow_up: 180,
+      CupertinoIcons.arrow_up_right: 225,
+      CupertinoIcons.arrow_right: 270,
+      CupertinoIcons.arrow_down_right: 315,
     };
 
     // Calculate the closest symbol
@@ -176,7 +273,7 @@ class WeatherData {
 
   factory WeatherData.fromJson(Map<String, dynamic> json) {
     return WeatherData(
-      json['date'],
+      DateTime.parse(json['date']),
       json['temperature'],
       json['windSpeed'],
       json['windDirection'],
@@ -194,37 +291,38 @@ class WeatherData {
   }
 
   static List<List<WeatherData>> getWeatherData(String text) {
-    List<List<WeatherData>> weatherData = [];
+    List<List<WeatherData>> weatherData = [[]];
     List<WeatherData> weatherList = decode(text);
 
-    int currentDay = DateTime.parse(weatherList[0].date).day;
-    int lastHour = weatherList.length - 1;
+    if (weatherList.isEmpty) {
+      return weatherData;
+    }
 
-    for (int i = 0; i < weatherList.length;) {
-      if (currentDay == DateTime.parse(weatherList[i].date).day) {
-        int hoursRemaining = 24 - DateTime.parse(weatherList[i].date).hour;
-        weatherData.add(weatherList.sublist(i, i + hoursRemaining));
-        i += hoursRemaining;
-      } else {
-        currentDay = DateTime.parse(weatherList[i].date).day;
-        int maxHoursLeft = (lastHour - i) < 24 ? (lastHour - i) : 24;
-        weatherData.add(weatherList.sublist(i, i + maxHoursLeft));
-        i += 24;
+    int currentDay = weatherList[0].date.day;
+
+    for (int i = 0, j = 0; i < weatherList.length; i++) {
+      if (weatherList[i].date.day == currentDay) {
+        weatherData[j].add(weatherList[i]);
+        currentDay = weatherList[i].date.day;
+      } else if (weatherData.length < 5) {
+        weatherData.add([]);
+        weatherData[++j].add(weatherList[i]);
+        currentDay = weatherList[i].date.day;
       }
     }
     return weatherData;
   }
 
   static Map<String, dynamic> toMap(WeatherData weatherData) => {
-    'date': weatherData.date,
-    'temperature': weatherData.temperature,
-    'windSpeed': weatherData.windSpeed,
-    'windDirection': weatherData.windDirection,
-    'gust': weatherData.gust,
-    'weatherSymbol': weatherData.weatherSymbol,
-    'surfConditions': weatherData.surfConditions,
-    'precipitation': weatherData.precipitation,
-  };
+        'date': weatherData.date.toString(),
+        'temperature': weatherData.temperature,
+        'windSpeed': weatherData.windSpeed,
+        'windDirection': weatherData.windDirection,
+        'gust': weatherData.gust,
+        'weatherSymbol': weatherData.weatherSymbol,
+        'surfConditions': weatherData.surfConditions,
+        'precipitation': weatherData.precipitation,
+      };
 
   static String encode(List<WeatherData> weatherData) => json.encode(
         weatherData

@@ -1,21 +1,33 @@
+import 'dart:io';
+
 import 'package:surfs_up/api/weather_data.dart';
 import 'get_api_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'surf_conditions_algorithm.dart';
 
-void callAPIs() async {
-  print('------------------------Calling in Middleware----------------------- ');
+Future callAPIs() async {
+  print(
+      '------------------------Calling in Middleware----------------------- ');
 
-  //List<List<WeatherData>> weather = [];
+  List<WeatherData> toroData = [];
+  List<WeatherData> vaddoData = [];
 
-   // List<Day> toröData
-  List<WeatherData> toroData = await getData(57.80, 18.80);
-  print("TORÖDATA EFTER GETDATA 1!! ${toroData.length}");
-  List<WeatherData> vaddoData = await getData(59.98, 18.88);
-  print("TORÖDATA EFTER GETDATA 2!! ${toroData.length}");
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      print('Internet: Connected');
 
-  //weather.add(toroData);
-  //weather.add(vaddoData);
+      print('----------------Calling in Torö Data API----------------- ');
+      toroData = await getData(58.80, 17.80);
+      print("Torö Data complete, got ${toroData.length} hours of data");
+
+      print('----------------Calling in Väddö Data API----------------- ');
+      vaddoData = await getData(59.98, 18.88);
+      print("Veddö Data complete, got ${toroData.length} hours of data");
+    }
+  } on SocketException catch (e) {
+    print('No internet connection');
+  }
 
   //print('_______________Print from middleware_______________');
 
@@ -24,15 +36,10 @@ void callAPIs() async {
   //print(toroData.length);
   //print(vaddoData.length);
 
-  cheackSurfConditions(vaddoData, 'vaddo');
-  cheackSurfConditions(toroData, 'toro');
-
-
-
+  await checkSurfConditions(vaddoData, 'vaddo');
+  await checkSurfConditions(toroData, 'toro');
 
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //print('kom jag hit ens?');
-  prefs.remove('toroData');
   final encodedData = WeatherData.encode(toroData);
   final encodedVeddoData = WeatherData.encode(vaddoData);
   await prefs.setString('toroData', encodedData);
@@ -41,5 +48,4 @@ void callAPIs() async {
   //await prefs.setString('testar12345', 'hacker filip');
 
   print('------------------------Encoded------------------------ ');
-
 }

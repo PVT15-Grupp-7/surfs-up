@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:surfs_up/language_provider.dart';
 import 'package:surfs_up/pages/wrapper.dart';
 import 'package:surfs_up/services/authentication_service.dart';
 import 'package:surfs_up/services/notification_service.dart';
@@ -25,10 +26,9 @@ void main() async {
     sound: true,
   );
 
-  AppPref.init();
-  callAPIs();
-  
-runApp(const MyApp());
+  await AppPref.init();
+  await callAPIs();
+  runApp(const MyApp());
 }
 
 /// Main application widget. It provides a theme for the application and a StreamProvider
@@ -71,12 +71,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<AppUser?>.value(
-      value: AuthenticationService().user,
-      initialData: null,
-      child: MaterialApp(
-        home: const Wrapper(),
-        theme: themeData(),
+    return ChangeNotifierProvider(
+      create: (_) => LanguageProvider(),
+      child: StreamProvider<AppUser?>.value(
+        value: AuthenticationService().user,
+        initialData: null,
+        child: Consumer<LanguageProvider>(
+          builder: (context, languageProvider, _) {
+            return MaterialApp(
+              home: const Wrapper(),
+              theme: themeData(),
+            );
+          },
+        ),
       ),
     );
   }
