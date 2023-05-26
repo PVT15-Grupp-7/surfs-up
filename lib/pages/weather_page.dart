@@ -26,10 +26,9 @@ class WeatherPage extends StatelessWidget {
 
     if (listOfDayWeatherData[0].isNotEmpty) {
       return FutureBuilder<void>(
-        future: initializeDateFormatting(
-            'sv'), // Initialize the date symbols for the Swedish locale
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+          future: initializeDateFormatting(
+              'sv'), // Initialize the date symbols for the Swedish locale
+          builder: (context, snapshot) {
             return ListView.builder(
                 itemCount: listOfDayWeatherData.length,
                 itemBuilder: (_, index) {
@@ -105,13 +104,7 @@ class WeatherPage extends StatelessWidget {
                     ),
                   );
                 });
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      );
+          });
     } else {
       return const Padding(
         padding: EdgeInsets.all(20.0),

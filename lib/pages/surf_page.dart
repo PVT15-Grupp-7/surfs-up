@@ -23,108 +23,109 @@ class SurfPage extends StatelessWidget {
         Provider.of<LanguageProvider>(context).selectedLanguage;
     if (listOfDayWeatherData[0].isNotEmpty) {
       return FutureBuilder<void>(
-        future: initializeDateFormatting('sv'), // Initialize the date symbols for the Swedish locale
+        future: initializeDateFormatting(
+            'sv'), // Initialize the date symbols for the Swedish locale
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-      return Scaffold(
-        body: ListView.builder(
-            itemCount: listOfDayWeatherData.length,
-            itemBuilder: (_, index) {
-              final item = listOfDayWeatherData[index];
-              final DateTime date = item.first.date;
-              final DateFormat dateFormat = selectedLanguage == Language.swedish ? DateFormat('E, MMM d', 'sv') : DateFormat('EEE, MMM d');
-              final bool isToday = (index == 0);
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Card(
-                  // key: PageStorageKey(item['id']),
-                  color: kMediumBlue,
-                  elevation: 4,
-                  child: ExpansionTile(
-                    iconColor: Colors.white,
-                    collapsedTextColor: Colors.white,
-                    collapsedIconColor: Colors.white,
-                    childrenPadding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
-                    expandedCrossAxisAlignment: CrossAxisAlignment.end,
-                    title: Text(
-                      isToday
-                          ? selectedLanguage == Language.english
-                              ? "Today"
-                              : "Idag"
-                          : dateFormat.format(date).capitalize(),
-                      style: CustomTextStyle.title3,
-                    ),
-                    subtitle: RowWidget(dayData: listOfDayWeatherData[index]),
-                    tilePadding: const EdgeInsets.all(11),
-                    textColor: Colors.white,
-                    children: item.asMap().entries.map((entry) {
-                      final WeatherData hourItem = entry.value;
-                      final int hourIndex = entry.key;
-                      final bool isEven = hourIndex % 2 == 0;
-                      final Color tileColor = isEven
-                          ? kDarkBlue
-                          : const Color(
-                              0xff212943); // Set the colors for every other ListTile
+          return Scaffold(
+            body: ListView.builder(
+                itemCount: listOfDayWeatherData.length,
+                itemBuilder: (_, index) {
+                  final item = listOfDayWeatherData[index];
+                  final DateTime date = item.first.date;
+                  final DateFormat dateFormat =
+                      selectedLanguage == Language.swedish
+                          ? DateFormat('E, MMM d', 'sv')
+                          : DateFormat('EEE, MMM d');
+                  final bool isToday = (index == 0);
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Card(
+                      // key: PageStorageKey(item['id']),
+                      color: kMediumBlue,
+                      elevation: 4,
+                      child: ExpansionTile(
+                        iconColor: Colors.white,
+                        collapsedTextColor: Colors.white,
+                        collapsedIconColor: Colors.white,
+                        childrenPadding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                        ),
+                        expandedCrossAxisAlignment: CrossAxisAlignment.end,
+                        title: Text(
+                          isToday
+                              ? selectedLanguage == Language.english
+                                  ? "Today"
+                                  : "Idag"
+                              : dateFormat.format(date).capitalize(),
+                          style: CustomTextStyle.title3,
+                        ),
+                        subtitle:
+                            RowWidget(dayData: listOfDayWeatherData[index]),
+                        tilePadding: const EdgeInsets.all(11),
+                        textColor: Colors.white,
+                        children: item.asMap().entries.map((entry) {
+                          final WeatherData hourItem = entry.value;
+                          final int hourIndex = entry.key;
+                          final bool isEven = hourIndex % 2 == 0;
+                          final Color tileColor = isEven
+                              ? kDarkBlue
+                              : const Color(
+                                  0xff212943); // Set the colors for every other ListTile
 
-                      return Container(
-                        width: 500,
-                        decoration: BoxDecoration(
-                          color: tileColor,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: 0.65,
-                          ),
-                        ),
-                        child: ListTile(
-                          leading: Text('${hourItem.date.hour}:00'),
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ExpandedItem(
-                                itemIcon: Icons.air_outlined,
-                                itemText:
-                                    '${hourItem.windSpeed}m/s (${hourItem.gust})',
+                          return Container(
+                            width: 500,
+                            decoration: BoxDecoration(
+                              color: tileColor,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 0.65,
                               ),
-                              ExpandedItem(
-                                itemIcon: hourItem.windIcon,
-                                itemText: hourItem.windDirectionSymbol,
+                            ),
+                            child: ListTile(
+                              leading: Text('${hourItem.date.hour}:00'),
+                              title: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  ExpandedItem(
+                                    itemIcon: Icons.air_outlined,
+                                    itemText:
+                                        '${hourItem.windSpeed}m/s (${hourItem.gust})',
+                                  ),
+                                  ExpandedItem(
+                                    itemIcon: hourItem.windIcon,
+                                    itemText: hourItem.windDirectionSymbol,
+                                  ),
+                                  hourItem.surfIcon,
+                                ],
                               ),
-                              hourItem.surfIcon,
-                            ],
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                  ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  );
+                }),
+            floatingActionButton: Stack(
+              children: const [
+                Positioned(
+                  bottom: 16.0,
+                  right: 16.0,
+                  child: InfoButtonClass(),
                 ),
-              );
-            }),
-        floatingActionButton: Stack(
-          children: const [
-            Positioned(
-              bottom: 16.0,
-              right: 16.0,
-              child: InfoButtonClass(),
+                Positioned(
+                  bottom: 16.0,
+                  left: 16.0,
+                  child: ShareButtonClass(),
+                ),
+              ],
             ),
-            Positioned(
-              bottom: 16.0,
-              left: 16.0,
-              child: ShareButtonClass(),
-            ),
-          ],
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+          );
+        },
       );
     } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          },
-      );
-      }else {
       return const Padding(
         padding: EdgeInsets.all(20.0),
         child: Center(
