@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/cli_commands.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/api/weather_data.dart';
+import 'package:surfs_up/language_provider.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
 import 'package:surfs_up/shared/widgets/info_alert_box.dart';
@@ -15,14 +19,20 @@ class SurfPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedLanguage =
+        Provider.of<LanguageProvider>(context).selectedLanguage;
     if (listOfDayWeatherData[0].isNotEmpty) {
+      return FutureBuilder<void>(
+        future: initializeDateFormatting('sv'), // Initialize the date symbols for the Swedish locale
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
       return Scaffold(
         body: ListView.builder(
             itemCount: listOfDayWeatherData.length,
             itemBuilder: (_, index) {
               final item = listOfDayWeatherData[index];
               final DateTime date = item.first.date;
-              final DateFormat dateFormat = DateFormat('EEE, MMM d');
+              final DateFormat dateFormat = selectedLanguage == Language.swedish ? DateFormat('E, MMM d', 'sv') : DateFormat('EEE, MMM d');
               final bool isToday = (index == 0);
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -39,7 +49,11 @@ class SurfPage extends StatelessWidget {
                     ),
                     expandedCrossAxisAlignment: CrossAxisAlignment.end,
                     title: Text(
-                      isToday ? "Today" : dateFormat.format(date),
+                      isToday
+                          ? selectedLanguage == Language.english
+                              ? "Today"
+                              : "Idag"
+                          : dateFormat.format(date).capitalize(),
                       style: CustomTextStyle.title3,
                     ),
                     subtitle: RowWidget(dayData: listOfDayWeatherData[index]),
@@ -104,6 +118,13 @@ class SurfPage extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       );
     } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          },
+      );
+      }else {
       return const Padding(
         padding: EdgeInsets.all(20.0),
         child: Center(
