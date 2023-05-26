@@ -50,6 +50,8 @@ dependencies:
   intl: ^0.18.1
   url_launcher: ^6.0.9
   flutter_native_splash: ^2.2.19
+  firebase_messaging: ^14.6.1
+  flutter_local_notifications: ^14.0.0+2
   sunrise_sunset_calc: ^3.0.0
   circle_flags: ^1.0.4
 

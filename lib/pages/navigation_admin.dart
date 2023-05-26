@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:surfs_up/services/authentication_service.dart';
+import 'package:surfs_up/services/notification_service.dart';
 import 'package:provider/provider.dart';
 import 'package:surfs_up/all_pages.dart';
 import 'package:surfs_up/api/app_preferences.dart';
@@ -11,6 +14,7 @@ import 'package:surfs_up/pages/preferences_page.dart';
 import 'package:surfs_up/pages/safety_page.dart';
 import 'package:surfs_up/pages/surf_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
+import 'package:surfs_up/pages/for_beginners.dart';
 import 'package:surfs_up/services/authentication_service.dart';
 import 'package:surfs_up/pages/beginners_tips.dart';
 import 'package:surfs_up/shared/widgets/language_dialog_button_widget.dart';
@@ -24,6 +28,7 @@ class NavigationAdmin extends StatefulWidget {
 
 class _NavigationAdminState extends State<NavigationAdmin> {
   final AuthenticationService _auth = AuthenticationService();
+  final NotificationService _notificationService = NotificationService();
 
   late int _selectedTab;
   late Widget _selectedPage;
@@ -46,6 +51,7 @@ class _NavigationAdminState extends State<NavigationAdmin> {
     _selectedLocation = locations[0];
     _getWeatherDataList();
     _selectedPage = SurfPage(listOfDayWeatherData: _weatherData);
+    _notificationService.init();
   }
 
   Future<void> _showLogoutConfirmationDialog(Language language) async {
