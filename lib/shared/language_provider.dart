@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:surfs_up/api/app_preferences.dart';
+import 'package:surfs_up/shared/app_preferences.dart';
 
 enum Language { english, swedish }
 

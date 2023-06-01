@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Custom text styles to be used in the app.
 class CustomTextStyle {
   static const TextStyle title1 = TextStyle(
     fontSize: 35.0,

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:surfs_up/services/authentication_service.dart';
 import 'package:surfs_up/services/notification_service.dart';
 import 'package:provider/provider.dart';
-import 'package:surfs_up/all_pages.dart';
-import 'package:surfs_up/api/app_preferences.dart';
-import 'package:surfs_up/api/weather_data.dart';
+import 'package:surfs_up/shared/constants/colors.dart';
+import 'package:surfs_up/shared/app_preferences.dart';
+import 'package:surfs_up/data/weather_data.dart';
 import 'package:surfs_up/data/location_data.dart';
-import 'package:surfs_up/language_provider.dart';
+import 'package:surfs_up/shared/language_provider.dart';
 import 'package:surfs_up/pages/about_us_page.dart';
 import 'package:surfs_up/pages/info_page.dart';
 import 'package:surfs_up/pages/preferences_page.dart';
-import 'package:surfs_up/pages/safety_page.dart';
+import 'package:surfs_up/pages/safety_pages/safety_page.dart';
 import 'package:surfs_up/pages/surf_page.dart';
 import 'package:surfs_up/pages/weather_page.dart';
-import 'package:surfs_up/pages/beginners_tips.dart';
+import 'package:surfs_up/pages/beginners_tips_page.dart';
 import 'package:surfs_up/shared/widgets/language_dialog_button_widget.dart';
 
 class NavigationAdmin extends StatefulWidget {

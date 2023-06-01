@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:surfs_up/api/weather_data.dart';
+import 'package:surfs_up/data/weather_data.dart';
 
 void main() {
   test('test getWeatherData', () {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:surfs_up/data/location_data.dart';
-import 'package:surfs_up/language_provider.dart';
+import 'package:surfs_up/shared/language_provider.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/language_dialog_button_widget.dart';
 import 'package:surfs_up/shared/widgets/link_confirmation_dialog.dart';

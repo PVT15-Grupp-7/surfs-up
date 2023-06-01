@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:surfs_up/language_provider.dart';
+import 'package:surfs_up/shared/language_provider.dart';
 
+/// This class is used to store and retrieve data from the device by utilizing the shared_preferences package.
 class AppPref {
   static late final SharedPreferences preferences;
   static bool _init = false;

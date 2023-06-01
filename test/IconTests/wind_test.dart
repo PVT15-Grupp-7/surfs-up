@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:surfs_up/api/weather_data.dart'; // Replace with the actual file path
+import 'package:surfs_up/data/weather_data.dart';
 
 void main() {
   test('setWindSymbol returns the correct symbol for a given wind direction',
       () {
-    final weatherData = WeatherData(DateTime.parse('2023-05-12'), 25, 10, 180, 15, 1, 0, 0);
+    final weatherData =
+        WeatherData(DateTime.parse('2023-05-12'), 25, 10, 180, 15, 1, 0, 0);
 
     final symbols = {
       0: 'N',
@@ -26,8 +27,8 @@ void main() {
 
   test('setWindSymbolOne returns the correct symbol for a given wind direction',
       () {
-    final weatherData = WeatherData(DateTime.parse('2023-05-12'), 25, 10, 180, 15, 1, 0,
-        0); // Replace with the actual class name if necessary
+    final weatherData =
+        WeatherData(DateTime.parse('2023-05-12'), 25, 10, 180, 15, 1, 0, 0);
 
     final symbols = {
       0: CupertinoIcons.arrow_up,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:surfs_up/language_provider.dart';
+import 'package:surfs_up/shared/language_provider.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/language_dialog_button_widget.dart';
 import '../shared/constants/colors.dart';
@@ -39,7 +39,7 @@ class AboutUsPage extends StatelessWidget {
               ),
               Text(
                 selectedLanguage == Language.english
-                    ? 'The team is a bunch of students studying at Stockholm University'
+                    ? 'The team is a group of students studying at Stockholm University'
                     : 'Vårt team består av studenter som studerar vid Stockholms universitet',
                 style: CustomTextStyle.paragraph1,
                 textAlign: TextAlign.center,

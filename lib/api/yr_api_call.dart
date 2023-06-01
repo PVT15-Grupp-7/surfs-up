@@ -1,11 +1,13 @@
 import 'dart:convert';
-import 'weather_data.dart';
+import 'package:flutter/foundation.dart';
+
+import '../data/weather_data.dart';
 import 'package:http/http.dart' as https;
 
+/// Methods for fetching weather data from YR and transforming it into a list of
+/// [WeatherData] objects.
 Future<List<WeatherData>> getYR(double lat, double lon) async {
   List<WeatherData> yrweatherData = [];
-
-  print('------------------print from yr call------------------');
 
   var headers = {
     'User-Agent': 'acmeweathersite.com support@acmeweathersite.com',
@@ -24,16 +26,10 @@ Future<List<WeatherData>> getYR(double lat, double lon) async {
     final jsonRes = jsonDecode(st);
     yrweatherData = getValues(jsonRes);
   } else {
-    print(response.reasonPhrase);
+    if (kDebugMode) {
+      print(response.reasonPhrase);
+    }
   }
-
-  print('------------------yr call done------------------');
-
-  //final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //print('kom jag hit ens?');
-  //final encodedData = WeatherData.encode(yrweatherData);
-  //await prefs.setString('vaddoData', encodedData);
-
   return yrweatherData;
 }
 

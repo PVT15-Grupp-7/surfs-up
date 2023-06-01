@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:surfs_up/language_provider.dart';
+import 'package:surfs_up/shared/language_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// Shows a dialog that asks the user to confirm if they want to open a link.
 Future<void> openLinkConfirmationDialog(
     BuildContext context, String url, Language language) async {
   return showDialog<void>(

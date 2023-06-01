@@ -2,11 +2,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// Class to store related weather data.
 class WeatherData {
   DateTime date;
   dynamic windDirection, temperature, windSpeed, gust;
-
-  //symbol to display the weather icon and surf conditions 0-3 or 5 depending how we want it
   int weatherSymbol;
   IconData weatherIcon = Icons.wb_sunny_outlined;
   IconData windIcon = Icons.arrow_right_alt_outlined;
@@ -204,10 +203,10 @@ class WeatherData {
   }
 
   String setWindSymbol(dynamic windDirection) {
-    // Adjust the wind direction to be within the range of 0 to 360
+    /// Adjust the wind direction to be within the range of 0 to 360
     windDirection = (windDirection % 360 + 360) % 360;
 
-    // Define the wind direction symbols and their corresponding values
+    /// Define the wind direction symbols and their corresponding values
     final symbols = {
       'N': 0,
       'NE': 45,
@@ -219,7 +218,7 @@ class WeatherData {
       'NW': 315,
     };
 
-    // Calculate the closest symbol
+    /// Calculate the closest symbol
     var closestSymbol = '';
     num minDifference = double.infinity;
 
@@ -238,10 +237,10 @@ class WeatherData {
   }
 
   IconData setWindSymbolOne(dynamic windDirection) {
-    // Adjust the wind direction to be within the range of 0 to 360
+    /// Adjust the wind direction to be within the range of 0 to 360
     windDirection = (windDirection % 360 + 360) % 360;
 
-    // Define the wind direction symbols and their corresponding values
+    /// Define the wind direction symbols and their corresponding values
     final symbols = {
       CupertinoIcons.arrow_down: 0,
       CupertinoIcons.arrow_down_left: 45,
@@ -253,7 +252,7 @@ class WeatherData {
       CupertinoIcons.arrow_down_right: 315,
     };
 
-    // Calculate the closest symbol
+    /// Calculate the closest symbol
     IconData closestSymbolOne = CupertinoIcons.arrow_up;
     num minDifference = double.infinity;
 
@@ -290,6 +289,8 @@ class WeatherData {
         .toList();
   }
 
+  /// Returns a list of days, where each day is a list of weather data and each
+  /// weather data object represents one hour.
   static List<List<WeatherData>> getWeatherData(String text) {
     List<List<WeatherData>> weatherData = [[]];
     List<WeatherData> weatherList = decode(text);
@@ -297,7 +298,6 @@ class WeatherData {
     if (weatherList.isEmpty) {
       return weatherData;
     }
-
     int currentDay = weatherList[0].date.day;
 
     for (int i = 0, j = 0; i < weatherList.length; i++) {
