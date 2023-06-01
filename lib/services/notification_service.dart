@@ -1,6 +1,10 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+/// Service to  handle push notifications through firebase messaging.
+/// Currently only handles Android notifications and only manual testing through
+/// the firebase console works.
 class NotificationService {
   final FirebaseMessaging messaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -66,7 +70,9 @@ class NotificationService {
 
   void getToken() async {
     String? token = await messaging.getToken();
-    print('Token: $token');
+    if (kDebugMode) {
+      print('Token: $token');
+    }
   }
 
   Future<void> setupMessages() async {
@@ -76,7 +82,6 @@ class NotificationService {
     if (message != null) {
       handleNavigation(message);
     }
-
     FirebaseMessaging.onMessageOpenedApp.listen(handleNavigation);
   }
 
@@ -88,22 +93,11 @@ class NotificationService {
     }
   }
 
-  void setupMessage() {
-
-
-    
-  }
-
-
   void createChannel(AndroidNotificationChannel channel) async {
     final FlutterLocalNotificationsPlugin plugin = 
       FlutterLocalNotificationsPlugin();
 
     await plugin.resolvePlatformSpecificImplementation<
       AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
-
   }
-
-
-  
 }

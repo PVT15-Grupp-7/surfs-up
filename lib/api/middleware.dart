@@ -1,13 +1,17 @@
 import 'dart:io';
-
-import 'package:surfs_up/api/weather_data.dart';
+import 'package:flutter/foundation.dart';
+import 'package:surfs_up/data/weather_data.dart';
 import 'get_api_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'surf_conditions_algorithm.dart';
 
+/// The main API class. If there is an internet connection, it will call the APIs,
+/// calculate the surf conditions and store the data in the device.
 Future callAPIs() async {
-  print(
+  if (kDebugMode) {
+    print(
       '------------------------Calling in Middleware----------------------- ');
+  }
 
   List<WeatherData> toroData = [];
   List<WeatherData> vaddoData = [];
@@ -15,26 +19,27 @@ Future callAPIs() async {
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      print('Internet: Connected');
+      if (kDebugMode) {
+        print('Internet: Connected');
 
-      print('----------------Calling in Torö Data API----------------- ');
+        print('----------------Calling in Torö Data API----------------- ');
+      }
       toroData = await getData(58.80, 17.80);
-      print("Torö Data complete, got ${toroData.length} hours of data");
+      if (kDebugMode) {
+        print("Torö Data complete, got ${toroData.length} hours of data");
 
-      print('----------------Calling in Väddö Data API----------------- ');
+        print('----------------Calling in Väddö Data API----------------- ');
+      }
       vaddoData = await getData(59.98, 18.88);
-      print("Veddö Data complete, got ${toroData.length} hours of data");
+      if (kDebugMode) {
+        print("Veddö Data complete, got ${toroData.length} hours of data");
+      }
     }
   } on SocketException catch (e) {
-    print('No internet connection');
+    if (kDebugMode) {
+      print('No internet connection');
+    }
   }
-
-  //print('_______________Print from middleware_______________');
-
-  //print('calling apis');
-
-  //print(toroData.length);
-  //print(vaddoData.length);
 
   await checkSurfConditions(vaddoData, 'vaddo');
   await checkSurfConditions(toroData, 'toro');
@@ -45,7 +50,7 @@ Future callAPIs() async {
   await prefs.setString('toroData', encodedData);
   await prefs.setString('vaddoData', encodedVeddoData);
 
-  //await prefs.setString('testar12345', 'hacker filip');
-
-  print('------------------------Encoded------------------------ ');
+  if (kDebugMode) {
+    print('------------------------Encoded------------------------ ');
+  }
 }

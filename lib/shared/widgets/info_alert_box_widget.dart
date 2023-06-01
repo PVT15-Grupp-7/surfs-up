@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:surfs_up/all_pages.dart';
-import 'package:surfs_up/language_provider.dart';
+import 'package:surfs_up/shared/constants/colors.dart';
+import 'package:surfs_up/shared/language_provider.dart';
 
-class InfoButtonClass extends StatelessWidget {
-  const InfoButtonClass({super.key});
+/// Class to display an button in the bottom right corner of the screen, which
+/// when pressed displays an alert box with information about the different
+/// symbols used in the app.
+class InfoButton extends StatelessWidget {
+  const InfoButton({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:surfs_up/api/weather_data.dart';
+import 'package:surfs_up/data/weather_data.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 
-class RowWidget extends StatelessWidget {
-  RowWidget({Key? key, required this.dayData}) : super(key: key);
+/// Widget that displays the average surf data for a day, displaying it as the top row
+/// in an expanded tile.
+class SurfRowWidget extends StatelessWidget {
+  SurfRowWidget({Key? key, required this.dayData}) : super(key: key);
 
   final List<WeatherData> dayData;
-  Row surfIcon = Row();
+  final Row surfIcon = Row();
 
   @override
   Widget build(BuildContext context) {
@@ -61,16 +63,16 @@ class RowWidget extends StatelessWidget {
   }
 
   String getMostFrequentWindDirectionSymbol(List<WeatherData> dayData) {
-    // Create a map to count the occurrences of each wind direction symbol
+    /// Create a map to count the occurrences of each wind direction symbol
     final symbolCounts = <String, int>{};
 
-    // Count the occurrences of each wind direction symbol
+    /// Count the occurrences of each wind direction symbol
     for (var data in dayData) {
       final symbol = data.windDirectionSymbol;
       symbolCounts[symbol] = (symbolCounts[symbol] ?? 0) + 1;
     }
 
-    // Find the wind direction symbol with the maximum count
+    /// Find the wind direction symbol with the maximum count
     String mostFrequentSymbol = '';
     int maxCount = 0;
 
@@ -87,13 +89,13 @@ class RowWidget extends StatelessWidget {
   IconData getMostFrequentWindArrow(List<WeatherData> dayData) {
     Map<IconData, int> iconCounts = {};
 
-    // Count the occurrences of each arrow icon
+    /// Count the occurrences of each arrow icon
     for (var data in dayData) {
       IconData icon = data.windIcon;
       iconCounts[icon] = (iconCounts[icon] ?? 0) + 1;
     }
 
-    // Find the arrow icon with the highest count
+    /// Find the arrow icon with the highest count
     IconData mostFrequentIcon = Icons.arrow_right_alt_outlined;
     int maxCount = 0;
     iconCounts.forEach((icon, count) {

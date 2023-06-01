@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/shared/constants/colors.dart';
 
-/// Default snack-bar layout with a message parameter.
+/// Default snack bar layout with a message parameter.
 class DefaultSnackBar extends SnackBar {
   DefaultSnackBar({Key? key, required String message})
       : super(

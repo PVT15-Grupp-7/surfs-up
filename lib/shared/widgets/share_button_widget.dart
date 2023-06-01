@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:surfs_up/all_pages.dart';
-import 'package:surfs_up/language_provider.dart';
+import 'package:surfs_up/shared/constants/colors.dart';
+import 'package:surfs_up/shared/language_provider.dart';
 
+/// Custom button to share the app to social media.
 class ShareButtonClass extends StatelessWidget {
   const ShareButtonClass({super.key});
 
@@ -27,19 +28,19 @@ class ShareButtonClass extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _facebookSymbol(dialogContext),
+                Flexible(child: _facebookSymbol(dialogContext)),
                 const SizedBox(
                   width: 8.0,
                 ),
-                _instagramSymbol(dialogContext),
+                Flexible(child: _instagramSymbol(dialogContext)),
                 const SizedBox(
                   width: 8.0,
                 ),
-                _snapchatSymbol(dialogContext),
+                Flexible(child: _snapchatSymbol(dialogContext)),
                 const SizedBox(
                   width: 8.0,
                 ),
-                _whatsappSymbol(dialogContext),
+                Flexible(child: _whatsappSymbol(dialogContext)),
               ],
             ),
           ),
@@ -251,8 +252,6 @@ class ShareButtonClass extends StatelessWidget {
                       )),
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(context,
-                          selectedLanguage == Language ? 'Share' : 'Dela');
                       Navigator.of(context).popUntil((route) => route.isFirst);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

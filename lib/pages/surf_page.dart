@@ -3,13 +3,13 @@ import 'package:flutter_native_splash/cli_commands.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:surfs_up/all_pages.dart';
-import 'package:surfs_up/api/weather_data.dart';
-import 'package:surfs_up/language_provider.dart';
+import 'package:surfs_up/shared/constants/colors.dart';
+import 'package:surfs_up/data/weather_data.dart';
+import 'package:surfs_up/shared/language_provider.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:surfs_up/shared/widgets/expanded_item_widget.dart';
-import 'package:surfs_up/shared/widgets/info_alert_box.dart';
-import 'package:surfs_up/shared/widgets/share_button.dart';
+import 'package:surfs_up/shared/widgets/info_alert_box_widget.dart';
+import 'package:surfs_up/shared/widgets/share_button_widget.dart';
 import 'package:surfs_up/shared/widgets/surf_row_widget.dart';
 
 class SurfPage extends StatelessWidget {
@@ -60,7 +60,7 @@ class SurfPage extends StatelessWidget {
                           style: CustomTextStyle.title3,
                         ),
                         subtitle:
-                            RowWidget(dayData: listOfDayWeatherData[index]),
+                            SurfRowWidget(dayData: listOfDayWeatherData[index]),
                         tilePadding: const EdgeInsets.all(11),
                         textColor: Colors.white,
                         children: item.asMap().entries.map((entry) {
@@ -111,7 +111,7 @@ class SurfPage extends StatelessWidget {
                 Positioned(
                   bottom: 16.0,
                   right: 16.0,
-                  child: InfoButtonClass(),
+                  child: InfoButton(),
                 ),
                 Positioned(
                   bottom: 16.0,

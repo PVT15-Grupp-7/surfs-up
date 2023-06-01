@@ -53,6 +53,7 @@ class AuthenticationService {
     }
   }
 
+  /// Method to sign in with Google through FirebaseAuth.signInWithCredential().
   Future signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn(
         clientId: DefaultFirebaseOptions.currentPlatform.iosClientId,

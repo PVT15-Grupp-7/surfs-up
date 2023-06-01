@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:surfs_up/api/weather_data.dart';
+import 'package:surfs_up/data/weather_data.dart';
 import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sunrise_sunset_calc/sunrise_sunset_calc.dart';
 
+/// Widget that displays the average weather data for a day, displaying it as the top row
+/// in an expanded tile.
 class WeatherRowWidget extends StatelessWidget {
-  final Location location;
   WeatherRowWidget({super.key, required this.dayData, required this.location});
-  final duration = const Duration(
-      hours: 2); // kan behöva ändras till hours: 0 ifall tidszonen är rätt
-  final dateFormat = DateFormat.Hm();
 
+  final Location location;
+  final duration = const Duration(hours: 2);
+  final dateFormat = DateFormat.Hm();
   final List<WeatherData> dayData;
 
   @override
   Widget build(BuildContext context) {
-    var sunriseToro = getSunriseSunset(location.latCoordinate,
+    var locationSunrise = getSunriseSunset(location.latCoordinate,
         location.longCoordinate, duration, dayData[0].date);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -53,10 +54,10 @@ class WeatherRowWidget extends StatelessWidget {
         ),
         Column(
           children: [
-            Text(dateFormat.format(sunriseToro.sunrise).toString(),
+            Text(dateFormat.format(locationSunrise.sunrise).toString(),
                 style: CustomTextStyle.tileTextStyle),
             const SizedBox(height: 18),
-            Text(dateFormat.format(sunriseToro.sunset).toString(),
+            Text(dateFormat.format(locationSunrise.sunset).toString(),
                 style: CustomTextStyle.tileTextStyle),
           ],
         ),
@@ -75,13 +76,12 @@ class WeatherRowWidget extends StatelessWidget {
   IconData getMostFrequentWeatherIcon(List<WeatherData> dayData) {
     Map<IconData, int> iconCounts = {};
 
-    // Count the occurrences of each weather icon
+    /// Count the occurrences of each weather icon
     for (var data in dayData) {
       IconData icon = data.weatherIcon;
       iconCounts[icon] = (iconCounts[icon] ?? 0) + 1;
     }
-
-    // Find the weather icon with the highest count
+    /// Find the weather icon with the highest count
     IconData mostFrequentIcon = Icons.wb_sunny_outlined;
     int maxCount = 0;
     iconCounts.forEach((icon, count) {
@@ -90,7 +90,6 @@ class WeatherRowWidget extends StatelessWidget {
         maxCount = count;
       }
     });
-
     return mostFrequentIcon;
   }
 

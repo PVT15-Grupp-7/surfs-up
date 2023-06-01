@@ -47,8 +47,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 _passwordTextFormField(),
                 const SizedBox(height: 20.0),
                 _signUpButton(),
-                const Text('or', style: TextStyle(color: Colors.white)),
-                _googleSignUpButton(),
                 const SizedBox(height: 50.0),
                 const Text('Already have an account?',
                     style: TextStyle(color: Colors.white)),

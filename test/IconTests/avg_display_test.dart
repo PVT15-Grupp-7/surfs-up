@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:surfs_up/api/weather_data.dart';
-import 'package:surfs_up/shared/widgets/surf_row_widget.dart';
 
 void main() {
   test('Average speed calculation', () {

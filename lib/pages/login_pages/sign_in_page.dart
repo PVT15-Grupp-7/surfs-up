@@ -56,7 +56,7 @@ class _SignInPageState extends State<SignInPage> {
                 const SizedBox(height: 10.0),
                 _signUpButton(),
                 if (kDebugMode) const SizedBox(height: 10.0),
-                _signInAnonymously(),
+                if (kDebugMode) _signInAnonymously(),
               ],
             ),
           ),
@@ -120,11 +120,7 @@ class _SignInPageState extends State<SignInPage> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 10,
       onPressed: () async {
-        dynamic result = await _auth.signInWithGoogle();
-        // if (result == null) {
-        //   setState(() => ScaffoldMessenger.of(context)
-        //       .showSnackBar(DefaultSnackBar(message: 'Could not sign in with google',)));
-        // }
+        await _auth.signInWithGoogle();
       },
     );
   }

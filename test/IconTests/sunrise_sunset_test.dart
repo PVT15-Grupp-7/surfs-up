@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
-import 'package:surfs_up/api/weather_data.dart';
+import 'package:surfs_up/data/weather_data.dart';
 import 'package:surfs_up/data/location_data.dart';
 import 'package:surfs_up/shared/widgets/weather_row_widget.dart';
 

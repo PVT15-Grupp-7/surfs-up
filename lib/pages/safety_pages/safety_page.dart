@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:surfs_up/data/location_data.dart';
-import 'package:surfs_up/language_provider.dart';
-import 'package:surfs_up/pages/safety_page-emergency.dart';
-import 'package:surfs_up/pages/safety_page_defibrillator.dart';
+import 'package:surfs_up/shared/language_provider.dart';
+import 'package:surfs_up/pages/safety_pages/safety_page_emergency.dart';
+import 'package:surfs_up/pages/safety_pages/safety_page_defibrillator.dart';
 
 class SafetyPage extends StatelessWidget {
   final Location location;

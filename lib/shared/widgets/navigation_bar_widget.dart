@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Custom navigation bar to be used in the app.
 class NavigationBarCustom extends StatefulWidget {
   const NavigationBarCustom({super.key});
 

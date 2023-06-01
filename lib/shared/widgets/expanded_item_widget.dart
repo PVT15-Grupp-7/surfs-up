@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 
+/// Custom widget to display different attributes of a WeatherData object within a ListTile.
 class ExpandedItem extends StatelessWidget {
   final IconData itemIcon;
   final String itemText;

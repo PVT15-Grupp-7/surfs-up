@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:surfs_up/language_provider.dart';
+import 'package:surfs_up/shared/language_provider.dart';
 import 'package:surfs_up/shared/constants/custom_text_style.dart';
 import 'package:circle_flags/circle_flags.dart';
 
+/// Button to open a dialog to select language.
 class LanguageDialogButton extends StatelessWidget {
   const LanguageDialogButton({super.key});
 
