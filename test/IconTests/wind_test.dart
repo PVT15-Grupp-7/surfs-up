@@ -31,14 +31,14 @@ void main() {
         WeatherData(DateTime.parse('2023-05-12'), 25, 10, 180, 15, 1, 0, 0);
 
     final symbols = {
-      0: CupertinoIcons.arrow_up,
-      45: CupertinoIcons.arrow_up_right,
-      90: CupertinoIcons.arrow_right,
-      135: CupertinoIcons.arrow_down_right,
-      180: CupertinoIcons.arrow_down,
-      225: CupertinoIcons.arrow_down_left,
-      270: CupertinoIcons.arrow_left,
-      315: CupertinoIcons.arrow_up_left,
+      0: CupertinoIcons.arrow_down,
+      45: CupertinoIcons.arrow_down_left,
+      90: CupertinoIcons.arrow_left,
+      135: CupertinoIcons.arrow_up_left,
+      180: CupertinoIcons.arrow_up,
+      225: CupertinoIcons.arrow_up_right,
+      270: CupertinoIcons.arrow_right,
+      315: CupertinoIcons.arrow_down_right,
     };
 
     symbols.forEach((windDirection, expectedSymbol) {
